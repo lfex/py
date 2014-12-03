@@ -1,0 +1,11 @@
+language: erlang
+before_script: "make get-lfetool"
+script: "make check"
+notifications:
+  #irc: "irc.freenode.org#YOUR-PROJECT-CHANNEL"
+  recipients:
+    #- YOU@YOUR.DOMAIN
+otp_release:
+  - 17.1
+  - R16B03
+  - R15B03
