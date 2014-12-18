@@ -88,12 +88,12 @@ repl-no-deps: proj-compile-no-deps
 shell: proj-compile
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an Erlang shell ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl -s lsci
 
 shell-no-deps: proj-compile-no-deps
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an Erlang shell ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl -s lsci
 
 clean: clean-ebin clean-eunit
 	@which rebar.cmd >/dev/null 2>&1 && rebar.cmd clean || rebar clean
