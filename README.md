@@ -21,9 +21,9 @@ For the latest thoughts on interface, archiecture, etc., see the [project Wiki](
 For now, just run it from a git clone:
 
 ```bash
-    $ git clone git@github.com:oubiwann/lsci.git
-    $ cd lsci
-    $ make
+$ git clone git@github.com:oubiwann/lsci.git
+$ cd lsci
+$ make
 ```
 
 
@@ -34,13 +34,12 @@ the LFE REPL:
 
 ```bash
 $ . ./python/.venv/bin/activate
-$ export PATH=./deps/lfe/bin:$PATH
 $ make repl-no-deps
 ```
 
 Note that the ``repl`` and ``repl-no-deps`` targets automatically start up
-the lsci (and thus ErlPort) Erlang Python server. If you run the REPL with
-lfetool, you'll need to manually start things:
+the lsci (and thus ErlPort) Erlang Python server. If you run the REPL without
+these ``make`` targets, you'll need to manually start things:
 
 ```bash
 $ lfetool repl lfe -s lsci
