@@ -130,7 +130,7 @@ Of couse, this is just as usable from Erlang:
 ```bash
 $ make shell-no-deps
 Starting an Erlang shell ...
-Erlang/OTP 17 [erts-6.2] [source] [64-bit] [smp:4:4] [async-threads:10] [hipe] [kernel-poll:false]
+Erlang/OTP 17 [erts-6.2] [source] [64-bit] [smp:4:4] [async-threads:10] ...
 
 Eshell V6.2  (abort with ^G)
 1>
