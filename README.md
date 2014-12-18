@@ -1,5 +1,7 @@
 # lsci
 
+<img src="resources/images/WelcomeHomeElsie.jpg"/>
+
 *An LFE Wrapper Library for SciPy, NumPy, and matplotlib*
 
 ## Introduction
