@@ -2,6 +2,14 @@ ifeq ($(shell which erl),)
 $(error Can't find Erlang executable 'erl')
 exit 1
 endif
+OS := $(shell uname -s)
+ifeq ($(OS),Linux)
+HOST=$(HOSTNAME)
+endif
+ifeq ($(OS),Darwin)
+HOST = $(shell scutil --get ComputerName)
+endif
+
 PROJECT = lsci
 LIB = $(PROJECT)
 DEPS = ./deps
@@ -17,14 +25,7 @@ LFETOOL=$(BIN_DIR)/lfetool
 else
 LFETOOL=lfetool
 endif
-ERL_LIBS=.:..:../lsci:$(shell $(LFETOOL) info erllibs)
-OS := $(shell uname -s)
-ifeq ($(OS),Linux)
-        HOST=$(HOSTNAME)
-endif
-ifeq ($(OS),Darwin)
-        HOST = $(shell scutil --get ComputerName)
-endif
+ERL_LIBS=..:../$(PROJECT):$(shell $(LFETOOL) info erllibs)
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
@@ -57,13 +58,14 @@ clean-ebin:
 clean-eunit:
 	-@PATH=$(SCRIPT_PATH) $(LFETOOL) tests clean
 
-compile: get-deps clean-ebin
+proj-compile: get-deps clean-ebin
 	@echo "Compiling project code and dependencies ..."
+	@cp src/$(PROJECT).app.src $(OUT_DIR)/$(PROJECT).app
 	@which rebar.cmd >/dev/null 2>&1 && \
 	PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) rebar.cmd compile || \
 	PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) rebar compile
 
-compile-no-deps: clean-ebin
+proj-compile-no-deps: clean-ebin
 	@echo "Compiling only project code ..."
 	@which rebar.cmd >/dev/null 2>&1 && \
 	PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) \
@@ -73,22 +75,22 @@ compile-no-deps: clean-ebin
 compile-tests: clean-eunit
 	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) tests build
 
-repl: compile
+repl: proj-compile
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an LFE REPL ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl lfe -s lsci
 
-repl-no-deps: compile-no-deps
+repl-no-deps: proj-compile-no-deps
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an LFE REPL ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl lfe -s lsci
 
-shell: compile
+shell: proj-compile
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an Erlang shell ..."
 	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl
 
-shell-no-deps: compile-no-deps
+shell-no-deps: proj-compile-no-deps
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an Erlang shell ..."
 	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl
@@ -105,37 +107,15 @@ check-integration-only:
 check-system-only:
 	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) tests system
 
-check-unit-with-deps: get-deps compile compile-tests check-unit-only
-check-unit: clean-eunit compile-no-deps check-unit-only
-check-integration: clean-eunit compile check-integration-only
-check-system: clean-eunit compile check-system-only
-check-all-with-deps: clean-eunit compile check-unit-only \
+check-unit-with-deps: get-deps proj-compile proj-compile-tests check-unit-only
+check-unit: clean-eunit proj-compile-no-deps check-unit-only
+check-integration: clean-eunit proj-compile check-integration-only
+check-system: clean-eunit proj-compile check-system-only
+check-all-with-deps: clean-eunit proj-compile check-unit-only \
 	check-integration-only check-system-only clean-eunit
-check-all: get-deps clean-eunit compile-no-deps
+check-all: get-deps clean-eunit proj-compile-no-deps
 	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) tests all
 
 check: check-unit-with-deps
 
 check-travis: $(LFETOOL) check
-
-push-all:
-	@echo "Pusing code to github ..."
-	git push --all
-	git push upstream --all
-	git push --tags
-	git push upstream --tags
-
-install: compile
-	@echo "Installing lsci ..."
-	@PATH=$(SCRIPT_PATH) lfetool install lfe
-
-upload: $(EXPM) get-version
-	@echo "Preparing to upload lsci ..."
-	@echo
-	@echo "Package file:"
-	@echo
-	@cat package.exs
-	@echo
-	@echo "Continue with upload? "
-	@read
-	$(EXPM) publish
