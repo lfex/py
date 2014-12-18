@@ -7,5 +7,5 @@
 ;;;===================================================================
 
 (defun init ()
-  (e2_log:info "TODO: configure top-level processes for your app")
-  #(ok ()))
+  (e2_log:info "Setting up lsci ...")
+    `#(ok (#(lsci-python py-start ()))))
