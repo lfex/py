@@ -4,9 +4,24 @@
 
 ## Introduction
 
-This project is currently more of a thought experiment than anything else,
-and will require several other (infrastructure) libraries to be created
-before becoming a reality. But you've got to start somewhere :-)
+This project has the lofty goal of making numerical processing an efficient and
+easy thing to do in LFE/Erlang. The engine behind this work is
+[ErlPort](http://erlport.org/docs/python.html).
+
+Right now, the following Python modules have been wrapped:
+
+ * [math](https://docs.python.org/3/library/math.html)
+ * [cmath](https://docs.python.org/3/library/cmath.html)
+
+These also include some builtins and operators in each, provided for
+convenience.
+
+In the future, we plan on supporting as many of the following as possible:
+ * [NumPy](http://www.numpy.org/)
+ * [SciPy](http://www.scipy.org/scipylib/index.html)
+ * [Pandas](http://pandas.pydata.org/)
+ * [matplotlib](http://matplotlib.org/)
+ * [SymPy](http://www.sympy.org/en/index.html)
 
 And it's pronounced "Elsie".
 
