@@ -28,9 +28,18 @@ In the future, we plan on supporting as many of the following as possible:
 And it's pronounced "Elsie".
 
 
+## Requirements
+
+To use lsci, you need the following:
+
+* [lfetool](http://docs.lfe.io/quick-start/1.html)
+* [Python 3](https://www.python.org/downloads/)
+
+
 ## Development
 
-For the latest thoughts on interface, archiecture, etc., see the [project Wiki](https://github.com/oubiwann/lsci/wiki).
+For the latest thoughts on interface, archiecture, etc., see the
+[project Wiki](https://github.com/oubiwann/lsci/wiki).
 
 
 ## Installation
