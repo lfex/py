@@ -55,8 +55,7 @@ $ make
 
 ## Usage
 
-Activate your Python virtualenv, update your ``$PATH``, and then start up
-the LFE REPL:
+Activate your Python virtualenv and then start up the LFE REPL:
 
 ```bash
 $ . ./python/.venv/bin/activate
