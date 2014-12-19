@@ -15,19 +15,19 @@ Here is a list of the Python packages lsci aims to wrap, annotated with
 the current development status:
 
  * [math](https://docs.python.org/3/library/math.html) -
-   <strong color="#00ff00">complete</strong>
+   <strong>complete</strong>
  * [cmath](https://docs.python.org/3/library/cmath.html) -
-   <strong color="#00ff00">complete</strong>
+   <strong>complete</strong>
  * [NumPy](http://www.numpy.org/) -
-   <strong color="yellow">in progress</strong>
+   <strong>in progress</strong>
  * [SciPy](http://www.scipy.org/scipylib/index.html) -
-   <em color="red">not started</em>
+   <em>not started</em>
  * [Pandas](http://pandas.pydata.org/) -
-   <em color="red">not started</em>
+   <em>not started</em>
  * [matplotlib](http://matplotlib.org/) -
-   <em color="red">not started</em>
+   <em>not started</em>
  * [SymPy](http://www.sympy.org/en/index.html) -
-   <em color="red">not started</em>
+   <em>not started</em>
 
 And it's pronounced "Elsie".
 
