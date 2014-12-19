@@ -14,13 +14,20 @@ easy thing to do in LFE/Erlang. The engine behind this work is
 Here is a list of the Python packages lsci aims to wrap, annotated with
 the current development status:
 
- * [math](https://docs.python.org/3/library/math.html) - complete
- * [cmath](https://docs.python.org/3/library/cmath.html) - complete
- * [NumPy](http://www.numpy.org/) - in progress
- * [SciPy](http://www.scipy.org/scipylib/index.html) - not started
- * [Pandas](http://pandas.pydata.org/) - not started
- * [matplotlib](http://matplotlib.org/) - not started
- * [SymPy](http://www.sympy.org/en/index.html) - not started
+ * [math](https://docs.python.org/3/library/math.html) -
+   <span style="color: green">complete</span>
+ * [cmath](https://docs.python.org/3/library/cmath.html) -
+   <span style="color: green">complete</span>
+ * [NumPy](http://www.numpy.org/) -
+   <span style="color: yellow">in progress</span>
+ * [SciPy](http://www.scipy.org/scipylib/index.html) -
+   <span style="color: red">not started</span>
+ * [Pandas](http://pandas.pydata.org/) -
+   <span style="color: red">not started</span>
+ * [matplotlib](http://matplotlib.org/) -
+   <span style="color: red">not started</span>
+ * [SymPy](http://www.sympy.org/en/index.html) -
+   <span style="color: red">not started</span>
 
 And it's pronounced "Elsie".
 
