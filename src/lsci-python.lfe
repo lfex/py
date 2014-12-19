@@ -2,19 +2,21 @@
   (behaviour e2_task_supervisor)
   (export all))
 
-(defun py-start ()
-  (let ((`#(ok ,pid) (python:start)))
-    (erlang:register (lsci-config:get-server-pid-name) pid)))
+(defun start ()
+  (let ((`#(ok ,pid) (python:start '(#(python_path "./python")))))
+    (erlang:register (lsci-config:get-server-pid-name) pid)
+    'ok))
 
-(defun py-stop ()
-  (python:stop (py-pid))
-  (erlang:unregister (lsci-config:get-server-pid-name)))
+(defun stop ()
+  (python:stop (pid))
+  (erlang:unregister (lsci-config:get-server-pid-name))
+  'ok)
 
-(defun py-restart ()
-  (py-stop)
-  (py-start))
+(defun restart ()
+  (stop)
+  (start))
 
-(defun py-pid ()
+(defun pid ()
   (erlang:whereis (lsci-config:get-server-pid-name)))
 
 (defun start_link ()
