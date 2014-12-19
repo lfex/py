@@ -45,7 +45,7 @@ To use lsci, you need the following:
 For now, just run it from a git clone:
 
 ```bash
-$ git clone git@github.com:oubiwann/lsci.git
+$ git clone git@github.com:lfex/lsci.git
 $ cd lsci
 $ make
 ```
