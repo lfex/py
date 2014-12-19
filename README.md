@@ -93,7 +93,7 @@ of things -- in particular, let's confirm that you're running Python 3:
 ```cl
 > (lsci-util:get-versions)
 (#(erlang "17")
- #(emulator "6.2")
+ #(emulator "6.3")
  #(driver-version "3.1")
  #(lfe "0.9.0")
  #(lsci "0.0.1")
@@ -126,7 +126,7 @@ $ make shell-no-deps
 ```erlang
 1> 'lsci-util':'get-versions'().
 [{erlang,"17"},
- {emulator,"6.2"},
+ {emulator,"6.3"},
  {'driver-version',"3.1"},
  {lfe,"0.9.0"},
  {lsci,"0.0.1"},
