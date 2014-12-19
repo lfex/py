@@ -134,7 +134,7 @@ $ make shell-no-deps
           "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"]},
  {numpy,"1.9.1"}]
 2> lsci:py(os, getcwd).
-"/Users/oubiwann/Dropbox/lab/erlang/lsci"
+"/Users/yourname/lab/erlang/lsci"
 ```
 
 
