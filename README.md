@@ -81,9 +81,9 @@ libraries.
 Start up the LFE REPL:
 
 ```cl
-Erlang/OTP 17 [erts-6.2] [source] [64-bit] [smp:4:4] [async-threads:10] ...
+Erlang/OTP 17 [erts-6.3] [source] [64-bit] [smp:4:4] [async-threads:10] ...
 
-LFE Shell V6.2 (abort with ^G)
+LFE Shell V6.3 (abort with ^G)
 >
 ```
 
