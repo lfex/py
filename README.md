@@ -161,5 +161,5 @@ To understand how the wrapping is done in lsci, check out the
 [some](https://github.com/billosys/kanin)
 [libraries](https://github.com/billosys/lric) that use it.
 
-For insight on how Erlang can interface with Python, see the
+For insight on how lsci, LFE, and Erlang can interface with Python, see the
 [ErlPort docs](http://erlport.org/docs/python.html).
