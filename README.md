@@ -74,8 +74,12 @@ $ lfetool repl lfe -s lsci
 
 ### Basic Usage
 
-Below we show some basic usage of lsci but provide. In a separate section
-a list of docs are linked showing detailed usage of wrapped libraries.
+Below we show some basic usage of lsci from both LFE and Erlang. In a
+separate section a list of docs are linked showing detailed usage of wrapped
+libraries.
+
+
+#### LFE
 
 Start up the LFE REPL:
 
@@ -112,6 +116,29 @@ lsci provides a wrapper for the ErlPort ``(python:call pid ...)`` form:
 
 lsci can do this because it starts up a Python server and registers the pid
 with a name.
+
+
+#### Erlang
+
+We can, of course, do the same thing from Erlang:
+
+```bash
+$ make shell-no-deps
+```
+
+```erlang
+1> 'lsci-util':'get-versions'().
+[{erlang,"17"},
+ {emulator,"6.2"},
+ {'driver-version',"3.1"},
+ {lfe,"0.9.0"},
+ {lsci,"0.0.1"},
+ {python,["3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)",
+          "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"]},
+ {numpy,"1.9.1"}]
+2> lsci:py(os, getcwd).
+"/Users/oubiwann/Dropbox/lab/erlang/lsci"
+```
 
 
 ### Wrapped Library Docs
