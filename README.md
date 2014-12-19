@@ -145,6 +145,10 @@ More detailed usage information in separate docs, per-wrapped library:
 * [lsci-math & lsci-cmath](doc/math.md) - ``math`` and ``cmath`` Python
   Standard library modules in LFE
 * [lsci-np](doc/numpy.md) - NumPy in LFE
+* lsci-sp - SciPy in LFE (TBD)
+* lsci-pd - Pandas in LFE (TBD)
+* lsci-mpl - matplotlib in LFE (TBD)
+* lsci-sym - SymPy in LFE (TBD)
 
 
 ## Development

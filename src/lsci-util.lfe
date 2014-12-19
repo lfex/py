@@ -27,3 +27,11 @@
     (lambda (x)
       (make-func x mod))
     func-list))
+
+(defun proplist-to-binary (proplist)
+  "Convert all the keys to binary."
+  (lists:map
+    (match-lambda
+      ((`#(,key ,value))
+        `(,(atom_to_binary key 'latin1) ,value)))
+    proplist))
