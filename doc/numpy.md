@@ -2,16 +2,34 @@
 
 ## Array attributes
 
+```cl
+> (set array (lsci-np:array '((1 2 3) (4 5 6) (7 8 9))))
+#($erlport.opaque python
+  #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
+> (lsci-np:size array)
+9
+> (lsci-np:shape array)
+#(3 3)
+> (lsci-np:strides array)
+#(24 8)
+> (lsci-np:ndim array)
+2
+> (lsci-np:data array)
+#($erlport.opaque python
+  #B(128 2 99 95 95 98 117 105 108 116 105 110 95 95 10 109 101 109 ...))
+> (lsci-np:size array)
+9
+> (lsci-np:itemsize array)
+8
+> (lsci-np:nbytes array)
+72
+```
+
 ## Array methods
 
 ```cl
 > (include-lib "lutil/include/compose.lfe")
 loaded
-> (set array (lsci-np:array '((1 2 3) (4 5 6) (7 8 9))))
-#($erlport.opaque python
-  #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci:py-type array)
-numpy.ndarray
 > (lsci-np:tolist array)
 ((1 2 3) (4 5 6) (7 8 9))
 (->> array
@@ -21,9 +39,9 @@ numpy.ndarray
 ```
 
 ```cl
-> (lsci-np:tostring array "C")
-#B(1 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 4 0 0 0 0 0 ...)
 > (lsci-np:tostring array)
+#B(1 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 4 0 0 0 0 0 ...)
+> (lsci-np:tostring array "C")
 #B(1 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 4 0 0 0 0 0 ...)
 > (lsci-np:tostring array "F")
 #B(1 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 7 0 0 0 0 0 0 0 2 0 0 0 0 0 ...)
@@ -42,10 +60,6 @@ ok
 > (set array (lsci-np:ones '#(4 2)))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:size array)
-8
-> (lsci-np:shape array)
-#(4 2)
 > (lsci-np:tolist array)
 ((1.0 1.0) (1.0 1.0) (1.0 1.0) (1.0 1.0))
 ```

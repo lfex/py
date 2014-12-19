@@ -7,14 +7,51 @@
   (lsci:py-const 'numpy 'version.version 'str))
 
 ;;; Array Attributes
+;;;
+;; Memory layout
+;;
+(defun flags (array)
+  (lsci:py-attr array 'flags))
+
 (defun shape (array)
   (lsci:py-attr array 'shape))
+
+(defun strides (array)
+  (lsci:py-attr array 'strides))
+
+(defun ndim (array)
+  (lsci:py-attr array 'ndim))
+
+(defun data (array)
+  (lsci:py-attr array 'data))
 
 (defun size (array)
   (lsci:py-attr array 'size))
 
-;;; Array Methods
+(defun itemsize (array)
+  (lsci:py-attr array 'itemsize))
+
+(defun nbytes (array)
+  (lsci:py-attr array 'nbytes))
+
+(defun base (array)
+  (lsci:py-attr array 'base))
+
+;; Data type
 ;;
+(defun dtype (array)
+  (lsci:py-attr array 'dtype))
+
+;; Other attributes
+;;
+(defun real (array)
+  (lsci:py-attr array 'real))
+
+(defun imag (array)
+  (lsci:py-attr array 'imag))
+
+;;; Array Methods
+;;;
 ;; Array conversion
 ;;
 (defun item (array args)
