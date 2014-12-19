@@ -9,3 +9,4 @@ bin/expm
 *.dump
 .rebar
 python/.venv
+__pycache__
