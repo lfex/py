@@ -15,9 +15,9 @@ Here is a list of the Python packages lsci aims to wrap, annotated with
 the current development status:
 
  * [math](https://docs.python.org/3/library/math.html) -
-   <strong color="green">complete</strong>
+   <strong color="#00ff00">complete</strong>
  * [cmath](https://docs.python.org/3/library/cmath.html) -
-   <strong color="green">complete</strong>
+   <strong color="#00ff00">complete</strong>
  * [NumPy](http://www.numpy.org/) -
    <strong color="yellow">in progress</strong>
  * [SciPy](http://www.scipy.org/scipylib/index.html) -
