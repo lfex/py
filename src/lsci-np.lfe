@@ -6,6 +6,8 @@
 (defun version ()
   (lsci:py-const 'numpy 'version.version 'str))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Array Attributes
 ;;;
 ;; Memory layout
@@ -50,6 +52,8 @@
 (defun imag (array)
   (lsci:py-attr array 'imag))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Array Methods
 ;;;
 ;; Array conversion
