@@ -35,7 +35,10 @@
       ;; Array creation routines - Numerical ranges
       ;; Array creation routines - Building matrices
       ;; Array creation routines - The Matrix class
-      ;; Array manipulation routines - Changing array shape
+      ))
+
+  (defun get-np-manip-funcs ()
+    '(;; Array manipulation routines - Changing array shape
       ;; Array manipulation routines - Transpose-like operations
       ;; Array manipulation routines - Changing number of dimensions
       ;; Array manipulation routines - Changing kind of array
@@ -44,12 +47,49 @@
       ;; Array manipulation routines - Tiling arrays
       ;; Array manipulation routines - Adding and removing elements
       ;; Array manipulation routines - Rearranging elements
+      ))
+
+  (defun get-np-other-funcs ()
+    '(;; Binary operations
+      ;; String operations
+      ;; C-Types Foreign Function Interface
+      ;; Datetime Support Functions
+      ;; Data type routines
+      ;; Optionally Scipy-accelerated routines (numpy.dual)
+      ;; Mathematical functions with automatic domain (numpy.emath)
+      ;; Floating point error handling
+      ;; Discrete Fourier Transform (numpy.fft)
+      ;; Financial functions
+      ;; Functional programming
+      ;; Numpy-specific help functions
+      ;; Indexing routines
+      ;; Input and output
+      ;; Linear algebra (numpy.linalg)
+      ;; Logic functions
+      ;; Masked array operations
+      ;; Mathematical functions
+      ;; Matrix library (numpy.matlib)
+      ;; Miscellaneous routines
+      ;; Padding Arrays
+      ;; Polynomials
+      ;; Random sampling (numpy.random)
+      ;; Set routines
+      ;; Sorting, searching, and counting
+      ;; Statistics
       )))
 
 (defmacro generate-np-create-api ()
   `(progn ,@(lsci-util:make-funcs (get-np-create-funcs) 'numpy)))
 
+(defmacro generate-np-manip-api ()
+  `(progn ,@(lsci-util:make-funcs (get-np-manip-funcs) 'numpy)))
+
+(defmacro generate-np-other-api ()
+  `(progn ,@(lsci-util:make-funcs (get-np-other-funcs) 'numpy)))
+
 (generate-np-create-api)
+(generate-np-manip-api)
+(generate-np-other-api)
 
 (defun loaded ()
   "This is just a dummy function for display purposes when including from the
