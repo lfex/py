@@ -145,6 +145,6 @@ $ make shell-no-deps
 
 More detailed usage information in separate docs, per-wrapped library:
 
-* [lsci-math & lsci-cmath](doc/math.md) - `math`` and ``cmath`` Python
+* [lsci-math & lsci-cmath](doc/math.md) - ``math`` and ``cmath`` Python
   Standard library modules in LFE
 * [lsci-np](doc/numpy.md) - NumPy in LFE
