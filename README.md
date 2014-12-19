@@ -11,20 +11,16 @@ This project has the lofty goal of making numerical processing an efficient and
 easy thing to do in LFE/Erlang. The engine behind this work is
 [ErlPort](http://erlport.org/docs/python.html).
 
-Right now, the following Python modules have been wrapped:
+Here is a list of the Python packages lsci aims to wrap, annotated with
+the current development status:
 
- * [math](https://docs.python.org/3/library/math.html)
- * [cmath](https://docs.python.org/3/library/cmath.html)
-
-These also include some builtins and operators in each, provided for
-convenience.
-
-In the future, we plan on supporting as many of the following as possible:
- * [NumPy](http://www.numpy.org/)
- * [SciPy](http://www.scipy.org/scipylib/index.html)
- * [Pandas](http://pandas.pydata.org/)
- * [matplotlib](http://matplotlib.org/)
- * [SymPy](http://www.sympy.org/en/index.html)
+ * [math](https://docs.python.org/3/library/math.html) - complete
+ * [cmath](https://docs.python.org/3/library/cmath.html) - complete
+ * [NumPy](http://www.numpy.org/) - in progress
+ * [SciPy](http://www.scipy.org/scipylib/index.html) - not started
+ * [Pandas](http://pandas.pydata.org/) - not started
+ * [matplotlib](http://matplotlib.org/) - not started
+ * [SymPy](http://www.sympy.org/en/index.html) - not started
 
 And it's pronounced "Elsie".
 
@@ -35,12 +31,6 @@ To use lsci, you need the following:
 
 * [lfetool](http://docs.lfe.io/quick-start/1.html)
 * [Python 3](https://www.python.org/downloads/)
-
-
-## Development
-
-For the latest thoughts on interface, archiecture, etc., see the
-[project Wiki](https://github.com/oubiwann/lsci/wiki).
 
 
 ## Installation
@@ -148,3 +138,14 @@ More detailed usage information in separate docs, per-wrapped library:
 * [lsci-math & lsci-cmath](doc/math.md) - ``math`` and ``cmath`` Python
   Standard library modules in LFE
 * [lsci-np](doc/numpy.md) - NumPy in LFE
+
+
+## Development
+
+For the latest thoughts on interface, archiecture, etc., see the
+[project Wiki](https://github.com/oubiwann/lsci/wiki).
+
+To understand how the wrapping is done in lsci, check out the
+[kla project](https://github.com/billosys/kla) and
+[some](https://github.com/billosys/kanin)
+[libraries](https://github.com/billosys/lric) that use it.
