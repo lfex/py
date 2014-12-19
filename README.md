@@ -71,6 +71,13 @@ these ``make`` targets, you'll need to manually start things:
 $ lfetool repl lfe -s lsci
 ```
 
+Below are given some examples from the
+[math](https://docs.python.org/3/library/math.html) and
+[cmath](https://docs.python.org/3/library/cmath.html) Python modules. For
+usage examples of the other wrapped libraries, there are separate documents:
+
+* [lsci-np](doc/numpy.md) - NumPy in LFE
+
 ```cl
 Erlang/OTP 17 [erts-6.2] [source] [64-bit] [smp:4:4] [async-threads:10] ...
 
@@ -90,7 +97,8 @@ of things -- in particular, let's confirm that you're running Python 3:
  #(lsci "0.0.1")
  #(python
    ("3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)"
-    "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]")))
+    "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"))
+ #(numpy "1.9.1"))
 >
 ```
 
