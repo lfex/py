@@ -21,7 +21,7 @@ the current development status:
  * [NumPy](http://www.numpy.org/) -
    <strong>in progress</strong>
  * [SciPy](http://www.scipy.org/scipylib/index.html) -
-   <em>in progress</em>
+   <strong>in progress</strong>
  * [Pandas](http://pandas.pydata.org/) -
    <em>not started</em>
  * [matplotlib](http://matplotlib.org/) -
