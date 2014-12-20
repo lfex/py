@@ -13,7 +13,8 @@
   (++ (lutil:get-version)
       `(#(lsci ,(get-lsci-version))
         #(python ,(get-py-version))
-        #(numpy ,(lsci-np:version)))))
+        #(numpy ,(lsci-np:version))
+        #(scipy ,(lsci-sp:version)))))
 
 (defun make-func
   ((`(,lfe-func-name ,func-arity) mod)
