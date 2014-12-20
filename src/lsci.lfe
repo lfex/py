@@ -31,19 +31,38 @@
       (py 'lsci 'obj.attr `(,obj ,attr)))))
 
 (defun py-call (obj attr-name)
-  (py-call obj attr-name '() '()))
+  (py-method-call obj attr-name '() '()))
 
 (defun py-call (obj attr-name args)
-  (py-call obj attr-name args '()))
+  (py-method-call obj attr-name args '()))
 
-(defun py-call
-  ((obj attr-name args kwargs) (when (is_list attr-name))
-    (py-call obj (list_to_atom attr-name) args kwargs))
-  ((obj attr-name args raw-kwargs) (when (is_atom attr-name))
+(defun py-call (obj attr-name args kwargs)
+  (py-method-call obj attr-name args kwargs))
+
+(defun py-method-call (obj attr-name args kwargs)
+  (py-general-call obj attr-name args kwargs 'obj.call_method))
+
+(defun py-func-call (module func-name)
+  (py-func-call module func-name '() '()))
+
+(defun py-func-call (module func-name args)
+  (py-func-call module func-name args '()))
+
+(defun py-func-call (module func-name args kwargs)
+  (py-general-call (atom_to_binary module 'latin1)
+                   func-name
+                   args
+                   kwargs
+                   'obj.call_func))
+
+(defun py-general-call
+  ((obj attr-name args kwargs type) (when (is_list attr-name))
+    (py-general-call obj (list_to_atom attr-name) args kwargs type))
+  ((obj attr-name args raw-kwargs type) (when (is_atom attr-name))
     (let* ((pid (lsci-python:pid))
            (attr (atom_to_binary attr-name 'latin1))
            (kwargs (lsci-util:proplist-to-binary raw-kwargs)))
-      (py 'lsci 'obj.call `(,obj ,attr ,args ,kwargs)))))
+      (py 'lsci type `(,obj ,attr ,args ,kwargs)))))
 
 (defun py-dir (obj)
   (lfe_io:format "~p~n"
