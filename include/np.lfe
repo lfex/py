@@ -1,7 +1,7 @@
-;;;; The functions wrapped in this inlcude are from the following sources:
+;;;; The functions wrapped in this inlcude are from the following source:
 ;;;;
-;;;;  * http://docs.scipy.org/doc/numpy/reference/routines.array-creation.html
-;;;;  *
+;;;;  * http://docs.scipy.org/doc/numpy/reference/routines.html
+;;;;
 (eval-when-compile
 
   (defun get-np-create-funcs ()
@@ -31,6 +31,8 @@
       ;; Array creation routines - Creating record arrays
       ;; Array creation routines - Creating character arrays
       ;; Array creation routines - Numerical ranges
+      (arange 1) (arange 2) (arange 3) (arange 4)
+      (linspace 2)
       ;; Array creation routines - Building matrices
       ;; Array creation routines - The Matrix class
       ))
@@ -97,4 +99,4 @@
   "This is just a dummy function for display purposes when including from the
   REPL (the last function loaded has its name printed in stdout).
   This function needs to be the last one in this include."
-  'loaded)
+  'ok)

@@ -101,16 +101,32 @@
 
 ;; Shape manipulation
 ;;
+;; TBD
+
 ;; Item selection and manipulation
 ;;
+;; TBD
+
 ;; Calculation
 ;;
+;; TBD
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Wrappers - the following functions couldn't be simply wrapped with the
 ;;;            same macros that wrap most of the other NumPy functions due to
 ;;;            the fact that these needed some sort of special handling.
 ;;;
+;; Numerical ranges
+;;
+(defun linspace (start stop kwargs)
+  (lsci:py-func-call 'numpy 'linspace `(,start ,stop) kwargs))
+
+(defun meshgrid (coords)
+  (lsci:py-func-call 'numpy 'meshgrid coords))
+
+(defun meshgrid (coords kwargs)
+  (lsci:py-func-call 'numpy 'meshgrid coords kwargs))
+
 ;; I/O
 ;;
 (defun genfromtxt (filename)
