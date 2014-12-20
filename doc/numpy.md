@@ -100,3 +100,57 @@ numpy.matrixlib.defmatrix.matrix
 ### Building matrices
 
 ### The Matrix class
+
+## Array manipulation routines
+
+## Binary operations
+
+## String operations
+
+## C-Types Foreign Function Interface
+
+## Datetime Support Functions
+
+## Data type routines
+
+## Optionally Scipy-accelerated routines (numpy.dual)
+
+## Mathematical functions with automatic domain (numpy.emath)
+
+## Floating point error handling
+
+## Discrete Fourier Transform (numpy.fft)
+
+## Financial functions
+
+## Functional programming
+
+## Numpy-specific help functions
+
+## Indexing routines
+
+## Input and output
+
+## Linear algebra (numpy.linalg)
+
+## Logic functions
+
+## Masked array operations
+
+## Mathematical functions
+
+## Matrix library (numpy.matlib)
+
+## Miscellaneous routines
+
+## Padding Arrays
+
+## Polynomials
+
+## Random sampling (numpy.random)
+
+## Set routines
+
+## Sorting, searching, and counting
+
+## Statistics
