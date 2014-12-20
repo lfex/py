@@ -29,6 +29,12 @@ the current development status:
  * [SymPy](http://www.sympy.org/en/index.html) -
    <em>not started</em>
 
+Quick sample:
+
+```cl
+
+```
+
 And it's pronounced "Elsie".
 
 
