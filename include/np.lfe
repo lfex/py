@@ -28,8 +28,6 @@
       (fromfunction 2) (fromfunction 3)
       (fromiter 2) (fromiter 3)
       (fromstring 1) (fromstring 2) (fromstring 3) (fromstring 4)
-      (loadtxt 1) (loadtxt 2) (loadtxt 3) (loadtxt 4) (loadtxt 5) (loadtxt 6)
-      (loadtxt 7) (loadtxt 8) (loadtxt 9)
       ;; Array creation routines - Creating record arrays
       ;; Array creation routines - Creating character arrays
       ;; Array creation routines - Numerical ranges
@@ -64,6 +62,10 @@
       ;; Numpy-specific help functions
       ;; Indexing routines
       ;; Input and output
+      (load 1) (load 2)
+      (save 2)
+      (loadtxt 1) (loadtxt 2)
+      (savetxt 2) (savetxt 3)
       ;; Linear algebra (numpy.linalg)
       ;; Logic functions
       ;; Masked array operations
