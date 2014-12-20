@@ -139,7 +139,8 @@ $ make shell-no-deps
  {lsci,"0.0.1"},
  {python,["3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)",
           "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"]},
- {numpy,"1.9.1"}]
+ {numpy,"1.9.1"},
+ {scipy,"0.14.0"}]
 2> lsci:py(os, getcwd).
 "/Users/yourname/lab/erlang/lsci"
 ```
@@ -152,7 +153,7 @@ More detailed usage information in separate docs, per-wrapped library:
 * [lsci-math & lsci-cmath](doc/math.md) - ``math`` and ``cmath`` Python
   Standard library modules in LFE
 * [lsci-np](doc/numpy.md) - NumPy in LFE
-* [lsci-sp](doc/scipy.md) - SciPy in LFE (TBD)
+* [lsci-sp](doc/scipy.md) - SciPy in LFE
 * lsci-pd - Pandas in LFE (TBD)
 * lsci-mpl - matplotlib in LFE (TBD)
 * lsci-sym - SymPy in LFE (TBD)
