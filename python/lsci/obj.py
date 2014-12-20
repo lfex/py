@@ -29,3 +29,7 @@ def call_method(obj, funcname, args=[], kwarg_list=None):
 def call_func(modname, funcname, args=[], kwarg_list=None):
     module = importlib.import_module(modname.decode("utf-8"))
     return call_method(module, funcname, args, kwarg_list)
+
+
+def call_callable(func, args=[], kwarg_list=None):
+    return call_method(func, "__call__", args, kwarg_list)

@@ -4,11 +4,17 @@
 (defun start ()
   ;;(ec_application:start_with_dependencies 'lsci))
   (lsci-python:start)
+  ;; Later, we can add things like the following:
+  ;;(lsci-julia:start)
+  ;;(lsci-clojure:start)
   'ok)
 
 (defun stop ()
   (application:stop 'lsci))
 
+;; XXX Provide aliases here for raw-call so that (lsci:py ...) will work
+
+;; XXX Rename these to raw-call and move into lsci-py
 (defun py (mod func)
   (py mod func '()))
 
@@ -42,11 +48,21 @@
 (defun py-method-call (obj attr-name args kwargs)
   (py-general-call obj attr-name args kwargs 'obj.call_method))
 
-(defun py-func-call (module func-name)
-  (py-func-call module func-name '() '()))
+(defun py-func-call (func-name)
+    (py-func-call func-name '() '()))
 
-(defun py-func-call (module func-name args)
-  (py-func-call module func-name args '()))
+(defun py-func-call
+  ((module func-name) (when (is_atom module))
+    (py-func-call module func-name '() '()))
+  ((func-name args) (when (is_list args))
+    (py-func-call func-name args '())))
+
+(defun py-func-call
+  ((module func-name args) (when (is_atom module))
+    (py-func-call module func-name args '()))
+  ((func-name args raw-kwargs) (when (is_list args))
+    (let ((kwargs (lsci-util:proplist->binary raw-kwargs)))
+      (py 'lsci 'obj.call_callable `(,func-name ,args ,kwargs)))))
 
 (defun py-func-call (module func-name args kwargs)
   (py-general-call (atom_to_binary module 'latin1)
@@ -55,14 +71,10 @@
                    kwargs
                    'obj.call_func))
 
-(defun py-general-call
-  ((obj attr-name args kwargs type) (when (is_list attr-name))
-    (py-general-call obj (list_to_atom attr-name) args kwargs type))
-  ((obj attr-name args raw-kwargs type) (when (is_atom attr-name))
-    (let* ((pid (lsci-python:pid))
-           (attr (atom_to_binary attr-name 'latin1))
-           (kwargs (lsci-util:proplist-to-binary raw-kwargs)))
-      (py 'lsci type `(,obj ,attr ,args ,kwargs)))))
+(defun py-general-call (obj attr-name args raw-kwargs type)
+  (let* ((attr (atom_to_binary attr-name 'latin1))
+         (kwargs (lsci-util:proplist->binary raw-kwargs)))
+    (py 'lsci type `(,obj ,attr ,args ,kwargs))))
 
 (defun py-dir (obj)
   (lfe_io:format "~p~n"
