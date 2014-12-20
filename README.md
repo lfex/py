@@ -1,6 +1,6 @@
 # lsci
 
-*An LFE Wrapper Library for SciPy, NumPy, and matplotlib*
+*Scientific Computing on the Erlang VM - An LFE Wrapper Library for SciPy, NumPy, and matplotlib*
 
 <img src="resources/images/WelcomeHomeElsie.jpg"/>
 
@@ -51,7 +51,7 @@ To use lsci, you need the following:
 For now, just run it from a git clone:
 
 ```bash
-$ git clone git@github.com:oubiwann/lsci.git
+$ git clone git@github.com:lfex/lsci.git
 $ cd lsci
 $ make
 ```
