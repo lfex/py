@@ -106,3 +106,15 @@
 ;; Calculation
 ;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Wrappers - the following functions couldn't be simply wrapped with the
+;;;            same macros that wrap most of the other NumPy functions due to
+;;;            the fact that these needed some sort of special handling.
+;;;
+;; I/O
+;;
+(defun genfromtxt (filename)
+  (genfromtxt filename '()))
+
+(defun genfromtxt (filename kwargs)
+  (lsci:py-func-call 'numpy 'genfromtxt `(,(list_to_binary filename)) kwargs))
