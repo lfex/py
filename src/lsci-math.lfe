@@ -17,3 +17,12 @@
 
 (defun div (a b)
   (truediv a b))
+
+(defun mult (a b)
+  (mul a b))
+
+(defun minus (a b)
+  (sub a b))
+
+(defun plus (a b)
+  (add a b))
