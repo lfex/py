@@ -39,11 +39,11 @@ loaded
 ```
 
 ```cl
-> (lsci-np:tostring array)
+> (lsci-np:->string array)
 #B(1 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 4 0 0 0 0 0 ...)
-> (lsci-np:tostring array "C")
+> (lsci-np:->string array "C")
 #B(1 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 4 0 0 0 0 0 ...)
-> (lsci-np:tostring array "F")
+> (lsci-np:->string array "F")
 #B(1 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 7 0 0 0 0 0 0 0 2 0 0 0 0 0 ...)
 ```
 
@@ -60,7 +60,7 @@ ok
 > (set array (lsci-np:ones '#(4 2)))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist array)
+> (lsci-np:->list array)
 ((1.0 1.0) (1.0 1.0) (1.0 1.0) (1.0 1.0))
 ```
 
@@ -68,7 +68,7 @@ ok
 > (set array (lsci-np:zeros '#(4 4)))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist array)
+> (lsci-np:->list array)
 ((0.0 0.0 0.0 0.0) (0.0 0.0 0.0 0.0) (0.0 0.0 0.0 0.0) (0.0 0.0 0.0 0.0))
 ```
 
@@ -101,24 +101,24 @@ numpy.matrixlib.defmatrix.matrix
 > (set a (lsci-np:arange 4))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (0 1 2 3)
 > (set a (lsci-np:arange 4.0))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (0.0 1.0 2.0 3.0)
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (0.0 1.0 2.0 3.0)
 > (set a (lsci-np:arange 4 12))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (4 5 6 7 8 9 10 11)
 > (set a (lsci-np:arange 4 24 2))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (4 6 8 10 12 14 16 18 20 22)
 ```
 
@@ -126,7 +126,7 @@ numpy.matrixlib.defmatrix.matrix
 > (set a (lsci-np:linspace 2.0 3.0))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (2.0 2.020408163265306 2.0408163265306123 2.061224489795918
  2.0816326530612246 2.1020408163265305 2.122448979591837
  2.142857142857143 2.163265306122449 2.183673469387755
@@ -142,18 +142,18 @@ numpy.matrixlib.defmatrix.matrix
 > (set a (lsci-np:linspace 2.0 3.0 `(#(num 5))))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (2.0 2.25 2.5 2.75 3.0)
 > (set a (lsci-np:linspace 2.0 3.0 `(#(num 5) #(endpoint false))))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108...))
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (2.0 2.2 2.4 2.6 2.8)
 > (set `#(,a ,spacing) (lsci-np:linspace 2.0 3.0 `(#(num 5) #(retstep true))))
 #(#($erlport.opaque python
     #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
   0.25)
-> (lsci-np:tolist a)
+> (lsci-np:->list a)
 (2.0 2.25 2.5 2.75 3.0)
 > spacing
 0.25
@@ -176,9 +176,9 @@ numpy.matrixlib.defmatrix.matrix
    #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
  #($erlport.opaque python
    #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...)))
-> (lsci-np:tolist xv)
+> (lsci-np:->list xv)
 ((0.0 0.5 1.0) (0.0 0.5 1.0))
-> (lsci-np:tolist yv)
+> (lsci-np:->list yv)
 ((0.0 0.0 0.0) (1.0 1.0 1.0))
 ```
 
@@ -188,9 +188,9 @@ numpy.matrixlib.defmatrix.matrix
    #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
  #($erlport.opaque python
    #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...)))
-> (lsci-np:tolist xv)
+> (lsci-np:->list xv)
 ((0.0 0.5 1.0))
-> (lsci-np:tolist yv)
+> (lsci-np:->list yv)
 ((0.0) (1.0))
 ```
 

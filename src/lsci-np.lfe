@@ -4,7 +4,7 @@
 (include-lib "lsci/include/np.lfe")
 
 (defun version ()
-  (lsci:py-const 'numpy 'version.version 'str))
+  (lsci-py:const 'numpy 'version.version 'str))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -14,44 +14,44 @@
 ;; Memory layout
 ;;
 (defun flags (array)
-  (lsci:py-attr array 'flags))
+  (lsci-py:attr array 'flags))
 
 (defun shape (array)
-  (lsci:py-attr array 'shape))
+  (lsci-py:attr array 'shape))
 
 (defun strides (array)
-  (lsci:py-attr array 'strides))
+  (lsci-py:attr array 'strides))
 
 (defun ndim (array)
-  (lsci:py-attr array 'ndim))
+  (lsci-py:attr array 'ndim))
 
 (defun data (array)
-  (lsci:py-attr array 'data))
+  (lsci-py:attr array 'data))
 
 (defun size (array)
-  (lsci:py-attr array 'size))
+  (lsci-py:attr array 'size))
 
 (defun itemsize (array)
-  (lsci:py-attr array 'itemsize))
+  (lsci-py:attr array 'itemsize))
 
 (defun nbytes (array)
-  (lsci:py-attr array 'nbytes))
+  (lsci-py:attr array 'nbytes))
 
 (defun base (array)
-  (lsci:py-attr array 'base))
+  (lsci-py:attr array 'base))
 
 ;; Data type
 ;;
 (defun dtype (array)
-  (lsci:py-attr array 'dtype))
+  (lsci-py:attr array 'dtype))
 
 ;; Other attributes
 ;;
 (defun real (array)
-  (lsci:py-attr array 'real))
+  (lsci-py:attr array 'real))
 
 (defun imag (array)
-  (lsci:py-attr array 'imag))
+  (lsci-py:attr array 'imag))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -61,13 +61,13 @@
 ;; Array conversion
 ;;
 (defun item (array args)
-  (lsci:py-call array 'item args))
+  (lsci-py:method-call array 'item args))
 
 (defun tolist (array)
-  (lsci:py-call array 'tolist))
+  (lsci-py:method-call array 'tolist))
 
 (defun ->list (array)
-  (lsci:py-call array 'tolist))
+  (lsci-py:method-call array 'tolist))
 
 (defun tostring (array)
   (tobytes array))
@@ -83,11 +83,11 @@
   (tobytes array order))
 
 (defun tobytes (array)
-  (lsci:py-call array 'tobytes))
+  (lsci-py:method-call array 'tobytes))
 
 (defun tobytes (array order)
   "order may be either the string C or F."
-  (lsci:py-call
+  (lsci-py:method-call
     array
     'tostring
     '()
@@ -97,24 +97,24 @@
   (lsci:py-call array 'tobytes))
 
 (defun ->bytes (array order)
-  (lsci:py-call
+  (lsci-py:method-call
     array
     'tostring
     '()
     `(#(order ,(list_to_binary order)))))
 
 (defun dump (array filename)
-  (lsci:py-call array 'dump `(,(list_to_binary filename)))
+  (lsci-py:method-call array 'dump `(,(list_to_binary filename)))
   'ok)
 
 (defun dumps (array)
-  (lsci:py-call array 'dumps))
+  (lsci-py:method-call array 'dumps))
 
 (defun getfield (array dtype)
-  (lsci:py-call array 'getfield `(,(list_to_binary dtype))))
+  (lsci-py:method-call array 'getfield `(,(list_to_binary dtype))))
 
 (defun getfield (array dtype offset)
-  (lsci:py-call
+  (lsci-py:method-call
     array
     'tostring
     `(,(list_to_binary dtype))
@@ -141,13 +141,13 @@
 ;; Numerical ranges
 ;;
 (defun linspace (start stop kwargs)
-  (lsci:py-func-call 'numpy 'linspace `(,start ,stop) kwargs))
+  (lsci-py:func-call 'numpy 'linspace `(,start ,stop) kwargs))
 
 (defun meshgrid (coords)
-  (lsci:py-func-call 'numpy 'meshgrid coords))
+  (lsci-py:func-call 'numpy 'meshgrid coords))
 
 (defun meshgrid (coords kwargs)
-  (lsci:py-func-call 'numpy 'meshgrid coords kwargs))
+  (lsci-py:func-call 'numpy 'meshgrid coords kwargs))
 
 ;; I/O
 ;;
