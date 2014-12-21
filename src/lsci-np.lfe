@@ -10,6 +10,7 @@
 ;;;
 ;;; Array Attributes
 ;;;
+
 ;; Memory layout
 ;;
 (defun flags (array)
@@ -56,12 +57,16 @@
 ;;;
 ;;; Array Methods
 ;;;
+
 ;; Array conversion
 ;;
 (defun item (array args)
   (lsci:py-call array 'item args))
 
 (defun tolist (array)
+  (lsci:py-call array 'tolist))
+
+(defun ->list (array)
   (lsci:py-call array 'tolist))
 
 (defun tostring (array)
@@ -71,11 +76,27 @@
   "order may be either the string C or F."
   (tobytes array order))
 
+(defun ->str (array)
+  (tobytes array))
+
+(defun ->str (array order)
+  (tobytes array order))
+
 (defun tobytes (array)
   (lsci:py-call array 'tobytes))
 
 (defun tobytes (array order)
   "order may be either the string C or F."
+  (lsci:py-call
+    array
+    'tostring
+    '()
+    `(#(order ,(list_to_binary order)))))
+
+(defun ->bytes (array)
+  (lsci:py-call array 'tobytes))
+
+(defun ->bytes (array order)
   (lsci:py-call
     array
     'tostring
@@ -116,6 +137,7 @@
 ;;;            same macros that wrap most of the other NumPy functions due to
 ;;;            the fact that these needed some sort of special handling.
 ;;;
+
 ;; Numerical ranges
 ;;
 (defun linspace (start stop kwargs)
