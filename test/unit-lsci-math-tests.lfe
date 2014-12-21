@@ -10,6 +10,25 @@
       (is-equal 2.718281828459045 (lsci-math:e))
       (is-equal 3.141592653589793 (lsci-math:pi)))))
 
+(defun phi_test_case (_)
+  (list
+    (lambda ()
+      (is-equal 0.15865525393145702 (lsci-math:phi -1))
+      (is-equal 0.5 (lsci-math:phi 0))
+      (is-equal 0.841344746068543 (lsci-math:phi 1))
+      (is-equal 0.9772498680518207 (lsci-math:phi 2))
+      (is-equal 0.9999997133484282 (lsci-math:phi 5))
+      (is-equal 1.0 (lsci-math:phi 10))
+      (is-equal 1.0 (lsci-math:phi 100)))))
+
+(defun div_test_case (_)
+  (list
+    (lambda ()
+      (is-equal 1.0 (lsci-math:div 1 1))
+      (is-equal 0.5 (lsci-math:div 1 2))
+      (is-equal 2.0 (lsci-math:div 2 1))
+      (is-equal 0.01 (lsci-math:div 1 100)))))
+
 (defun rounding_test_case (_)
   (list
     (lambda ()
@@ -33,4 +52,6 @@
     (lambda (_) (tear-down '()))
     (list
       (lambda (_) (constants_test_case '()))
+      (lambda (_) (phi_test_case '()))
+      (lambda (_) (div_test_case '()))
       (lambda (_) (rounding_test_case '())))))
