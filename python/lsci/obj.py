@@ -1,5 +1,15 @@
 import importlib
 
+from lsci import logger
+
+
+def init():
+    "Set up module in ErlPort Python namespace."
+
+def echo(*args, **kwargs):
+    "Useful for debugging module-level issues."
+    return (args, kwargs)
+
 
 def attr(obj, attr):
     return getattr(obj, attr.decode("utf-8"))
