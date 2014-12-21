@@ -122,7 +122,35 @@
 
 ;; Shape manipulation
 ;;
-;; TBD
+(defun reshape (array shape)
+  (lsci-py:method-call array 'reshape `(,shape)))
+
+(defun reshape (array shape kwargs)
+  (lsci-py:method-call array 'reshape `(,shape) kwargs))
+
+(defun resize (array shape)
+  (lsci-py:method-call array 'resize `(,shape)))
+
+(defun resize (array shape kwargs)
+  (lsci-py:method-call array 'resize `(,shape) kwargs))
+
+(defun transpose (array)
+  (lsci-py:method-call array 'transpose))
+
+(defun transpose (array axes)
+  (lsci-py:method-call array 'transpose axes))
+
+(defun swapaxes (array axis-1 axis-2)
+  (lsci-py:method-call array 'swapaxes `(,axis-1 ,axis-2)))
+
+(defun flatten (array kwargs)
+  (lsci-py:method-call array 'flatten '() kwargs))
+
+(defun ravel (array order)
+  (lsci-py:method-call array 'ravel `(,order)))
+
+(defun squeeze (array kwargs)
+  (lsci-py:method-call array 'squeeze '() kwargs))
 
 ;; Item selection and manipulation
 ;;
