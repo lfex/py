@@ -94,7 +94,7 @@
     `(#(order ,(list_to_binary order)))))
 
 (defun ->bytes (array)
-  (lsci:py-call array 'tobytes))
+  (lsci-py:method-call array 'tobytes))
 
 (defun ->bytes (array order)
   (lsci-py:method-call
@@ -130,7 +130,110 @@
 
 ;; Calculation
 ;;
-;; TBD
+(defun max (array)
+  (lsci-py:method-call array 'max))
+
+(defun max (array kwargs)
+  (lsci-py:method-call array 'max '() kwargs))
+
+(defun argmax (array)
+  (lsci-py:method-call array 'argmax))
+
+(defun argmax (array kwargs)
+  (lsci-py:method-call array 'argmax '() kwargs))
+
+(defun min (array)
+  (lsci-py:method-call array 'min))
+
+(defun min (array kwargs)
+  (lsci-py:method-call array 'min '() kwargs))
+
+(defun argmin (array)
+  (lsci-py:method-call array 'argmin))
+
+(defun argmin (array kwargs)
+  (lsci-py:method-call array 'argmin '() kwargs))
+
+(defun ptp (array)
+  (lsci-py:method-call array 'ptp))
+
+(defun ptp (array kwargs)
+  (lsci-py:method-call array 'ptp '() kwargs))
+
+(defun clip (array min max)
+  (lsci-py:method-call array 'clip `(,min ,max)))
+
+(defun clip (array min max kwargs)
+  (lsci-py:method-call array 'clip `(,min ,max) kwargs))
+
+(defun conj (array)
+  (lsci-py:method-call array 'conj))
+
+(defun round (array)
+  (lsci-py:method-call array 'round))
+
+(defun round (array kwargs)
+  (lsci-py:method-call array 'round '() kwargs))
+
+(defun trace (array)
+  (lsci-py:method-call array 'trace))
+
+(defun trace (array kwargs)
+  (lsci-py:method-call array 'trace '() kwargs))
+
+(defun sum (array)
+  (lsci-py:method-call array 'sum))
+
+(defun sum (array kwargs)
+  (lsci-py:method-call array 'sum '() kwargs))
+
+(defun cumsum (array)
+  (lsci-py:method-call array 'cumsum))
+
+(defun cumsum (array kwargs)
+  (lsci-py:method-call array 'cumsum '() kwargs))
+
+(defun prod (array)
+  (lsci-py:method-call array 'prod))
+
+(defun prod (array kwargs)
+  (lsci-py:method-call array 'prod '() kwargs))
+
+(defun cumprod (array)
+  (lsci-py:method-call array 'cumprod))
+
+(defun cumprod (array kwargs)
+  (lsci-py:method-call array 'cumprod '() kwargs))
+
+(defun mean (array)
+  (lsci-py:method-call array 'mean))
+
+(defun mean (array kwargs)
+  (lsci-py:method-call array 'mean '() kwargs))
+
+(defun var (array)
+  (lsci-py:method-call array 'var))
+
+(defun var (array kwargs)
+  (lsci-py:method-call array 'var '() kwargs))
+
+(defun std (array)
+  (lsci-py:method-call array 'std))
+
+(defun std (array kwargs)
+  (lsci-py:method-call array 'std '() kwargs))
+
+(defun all (array)
+  (lsci-py:method-call array 'all))
+
+(defun all (array kwargs)
+  (lsci-py:method-call array 'all '() kwargs))
+
+(defun any (array)
+  (lsci-py:method-call array 'any))
+
+(defun any (array kwargs)
+  (lsci-py:method-call array 'any '() kwargs))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Wrappers - the following functions couldn't be simply wrapped with the
@@ -155,4 +258,4 @@
   (genfromtxt filename '()))
 
 (defun genfromtxt (filename kwargs)
-  (lsci:py-func-call 'numpy 'genfromtxt `(,(list_to_binary filename)) kwargs))
+  (lsci-py:func-call 'numpy 'genfromtxt `(,(list_to_binary filename)) kwargs))
