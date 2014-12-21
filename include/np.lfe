@@ -49,6 +49,56 @@
       ;; Array manipulation routines - Rearranging elements
       ))
 
+  (defun get-np-math-funcs ()
+    '(;; Mathematical functions - Trigonometric functions
+      (sin 1) (sin 2)
+      (cos 1) (cos 2)
+      (tan 1) (tan 2)
+      (arcsin 1) (arcsin 2)
+      (arccos 1) (arccos 2)
+      (arctan 1) (arctan 2)
+      (arctan2 2) (arctan2 3)
+      (hypot 2) (hypot 3)
+      (degrees 1) (degrees 2)
+      (radians 1) (radians 2)
+      (unwrap 1) (unwrap 2) (unwrap 3)
+      (deg2rad 1) (deg2rad 2)
+      (rad2deg 1) (rad2deg 2)
+      ;; Mathematical functions - Hyperbolic functions
+      ;; Mathematical functions - Rounding
+      ;; Mathematical functions - Sums, products, differences
+      ;; Mathematical functions - Exponents and logarithms
+      (exp 1) (exp 2)
+      (expm1 1) (expm1 2)
+      (exp2 1) (exp2 2)
+      (log 1) (log 2)
+      (log10 1) (log10 2)
+      (log2 1) (log2 2)
+      (log1p 1) (log1p 2)
+      (logaddexp 2) (logaddexp 3)
+      (logaddexp2 2) (logaddexp2 3)
+      ;; Mathematical functions - Other special functions
+      (i0 1)
+      (sinc 1)
+      ;; Mathematical functions - Floating point routines
+      ;; Mathematical functions - Arithmetic operations
+      (add 2) (add 3)
+      (reciprocal 1) (reciprocal 2)
+      (negative 1) (negative 2)
+      (multiply 2) (multiply 3)
+      (divide 2) (divide 3)
+      (power 2) (power 3)
+      (subtract 2) (subtract 3)
+      (true_divide 2) (true_divide 3)
+      (floor_divide 2) (floor_divide 3)
+      (fmod 2) (fmod 3)
+      (mod 2) (mod 3)
+      (modf 1) (modf 3)
+      (remainder 2) (remainder 3)
+      ;; Mathematical functions - Handling complex numbers
+      ;; Mathematical functions - Miscellaneous
+      ))
+
   (defun get-np-other-funcs ()
     '(;; Binary operations
       ;; String operations
@@ -71,8 +121,6 @@
       ;; Linear algebra (numpy.linalg)
       ;; Logic functions
       ;; Masked array operations
-      ;; Mathematical functions
-      (exp 1) (exp 2)
       ;; Matrix library (numpy.matlib)
       ;; Miscellaneous routines
       ;; Padding Arrays
@@ -89,11 +137,15 @@
 (defmacro generate-np-manip-api ()
   `(progn ,@(lsci-util:make-funcs (get-np-manip-funcs) 'numpy)))
 
+(defmacro generate-np-math-api ()
+  `(progn ,@(lsci-util:make-funcs (get-np-math-funcs) 'numpy)))
+
 (defmacro generate-np-other-api ()
   `(progn ,@(lsci-util:make-funcs (get-np-other-funcs) 'numpy)))
 
 (generate-np-create-api)
 (generate-np-manip-api)
+(generate-np-math-api)
 (generate-np-other-api)
 
 (defun loaded ()
