@@ -72,6 +72,7 @@
       ;; Logic functions
       ;; Masked array operations
       ;; Mathematical functions
+      (exp 1) (exp 2)
       ;; Matrix library (numpy.matlib)
       ;; Miscellaneous routines
       ;; Padding Arrays
