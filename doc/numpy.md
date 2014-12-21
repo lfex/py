@@ -79,7 +79,7 @@ ok
 > (set array (lsci-np:array '((1 2 3) (4 5 6) (7 8 9))))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci:py-type array)
+> (lsci-py:type array)
 numpy.ndarray
 ```
 
@@ -87,7 +87,7 @@ numpy.ndarray
 > (set matrix (lsci-np:asmatrix '((1 2 3) (4 5 6) (7 8 9))))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108 ...))
-> (lsci:py-type matrix)
+> (lsci-py:type matrix)
 numpy.matrixlib.defmatrix.matrix
 ```
 
