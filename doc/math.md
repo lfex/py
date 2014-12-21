@@ -65,16 +65,20 @@ to them:
 ```
 
 ```cl
-(lsci-cmath:->str cmplx1)
-(lsci-cmath:->str (lsci-cmath:conj cmplx1))
-(lsci-cmath:->str cmplx2)
-(lsci-cmath:->str (lsci-cmath:conj cmplx2))
+> (lsci-cmath:->str cmplx1)
+"(-1+2j)"
+> (lsci-cmath:->str (lsci-cmath:conj cmplx1))
+"(-1-2j)"
+> (lsci-cmath:->str cmplx2)
+"(-1-2j)"
+> (lsci-cmath:->str (lsci-cmath:conj cmplx2))
+"(-1+2j)"
 ```
 
 ```cl
-> (lsci-cmath:phase cmplx1)
+> (lsci-cmath:phase (lsci-cmath:complex -1.0 0.0))
 3.141592653589793
-> (lsci-cmath:phase cmplx2)
+> (lsci-cmath:phase (lsci-cmath:complex -1.0 -0.0))
 -3.141592653589793
 ```
 
