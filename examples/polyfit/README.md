@@ -91,7 +91,7 @@ Let's look at the *x* and *y* values separately:
 Now let's plot our data in the terminal:
 
 ```cl
-(lsci-asciiplot:scatter xs ys)
+> (lsci-asciiplot:scatter xs ys)
 ```
 
 Which will give tou something like this:
@@ -139,4 +139,96 @@ ok
 
 ## Curve Fitting
 
+The [NIST data set](http://www.itl.nist.gov/div898/strd/lls/data/LINKS/DATA/Filip.dat)
+provided a polynomial describing this data:
+
+```
+y = B0 + B1*x + B2*(x**2) + ... + B9*(x**9) + B10*(x**10) + e
+```
+
+Or, if you prefer LaTeX:
+
+\begin{equation}
+y = B_0 + B_1{x} + B_2{x^2} + ... + B_9{x^9} + B_{10}{x^{10}} + e
+\end{equation}
+
+Using NumPy, we can easily fit an 10th-degree polynomial curve to this data.
+We will use ``numpy.polyfit`` for finding a least squares polynomial fit,
+passing it the $x$ and $y$ values for the data to fit as well as the degree
+of our polynomial:
+
+
+```cl
+(set coeffs (lsci-np:polyfit xs ys 10))
+#($erlport.opaque python ...)
+```
+
+Let's peek at the data:
+
+```cl
+> (lsci-np:->list coeffs)
+(-4.029625205186532e-5 -0.0024678107546401437 -0.06701911469215643
+ -1.0622149736864719 -10.875317910262362 -75.12420087227511
+ -354.47822960532113 -1127.973927925715 -2316.371054759451
+ -2772.1795597594755 -1467.4895971641686)
+```
+
+``np.polyplot`` can return more data, if you are so inclined:
+
+```cl
+> (set `#(,coeffs
+          ,residuals
+          ,rank
+          ,singular-values
+          ,rcond) (lsci-np:polyfit xs ys 10 '(#(full true))))
+#($erlport.opaque python ...)
+> (lsci-np:->list coeffs)
+(-4.029625205186532e-5 -0.0024678107546401437 -0.06701911469215643
+ -1.0622149736864719 -10.875317910262362 -75.12420087227511
+ -354.47822960532113 -1127.973927925715 -2316.371054759451
+ -2772.1795597594755 -1467.4895971641686)
+> (lsci-np:->list residuals)
+(7.958513839371895e-4)
+> rank
+11
+> (lsci-np:->list singular-values)
+(3.128894711145785 1.064548669029962 0.27180324022363517
+ 0.05296821542551952 0.008387108325776571 0.0010157565988992792
+ 9.583030547029836e-5 7.605115790256685e-6 4.6491044714423815e-7
+ 1.9871421381342612e-8 6.009222284310632e-10)
+> (lsci-np:->list rcond)
+1.8207657603852567e-14
+```
+
+There is a conveience class in NumPy ``numpy.poly1d`` that, once instantiated
+with our fit data, we can use to evaluate at any given point. Let's try it
+out:
+
+```cl
+> (set model (lsci-np:poly1d coeffs))
+#($erlport.opaque python ...)
+```
+
+Let's call this function against several values as a sanity check:
+
+```cl
+> (lsci-np:->list (lsci-py:func-call model '(-9)))
+0.7766886098502255
+> (lsci-np:->list (lsci-py:func-call model '(-7)))
+0.7990591787051926
+> (lsci-np:->list (lsci-py:func-call model '(-6)))
+0.8860483219018533
+> (lsci-np:->list (lsci-py:func-call model '(-5)))
+0.8926343904781788
+> (lsci-np:->list (lsci-py:func-call model '(-4)))
+0.9094348679923314
+> (lsci-np:->list (lsci-py:func-call model '(-3)))
+0.8893022773313533
+```
+
+Looking back at our graph, we can see that these check out fine.
+
+## Polynomial Linear Regression
+
 TBD
+
