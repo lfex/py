@@ -8,6 +8,7 @@
   (let ((`#(ok ,pid) (python:start '(#(python_path "./python")))))
     (erlang:register (lsci-config:get-server-pid-name) pid)
     (raw-call 'lsci 'init.setup)
+    (encurses:initscr)
     #(ok started)))
 
 (defun stop ()
