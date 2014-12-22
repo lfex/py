@@ -125,3 +125,12 @@
   (let* ((attr (atom_to_binary attr-name 'latin1))
          (kwargs (lsci-util:proplist->binary raw-kwargs)))
     (raw-call 'lsci type `(,obj ,attr ,args ,kwargs))))
+
+(defun instantiate (module class)
+  (instantiate module class '() '()))
+
+(defun instantiate (module class args)
+  (instantiate module class args '()))
+
+(defun instantiate (module class args kwargs)
+  (func-call module class args kwargs))
