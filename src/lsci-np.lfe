@@ -64,6 +64,12 @@
   "This provides LFE support for the Python syntax `array[key]`."
   (lsci-py:method-call array '__getitem__ `(,key)))
 
+(defun ->float (np-float)
+  (lsci-py:func-call 'builtins 'float `(,np-float) '()))
+
+(defun ->int (np-int)
+  (lsci-py:func-call 'builtins 'int `(,np-int) '()))
+
 (defun norm1d (array)
   (lsci-py:func-call 'lsci.numpysupl 'norm1d `(,array) '()))
 
