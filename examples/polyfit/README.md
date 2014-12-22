@@ -442,19 +442,18 @@ to generate the y values:
 Now we're ready to put them together:
 
 ```cl
-#($erlport.opaque python ...)
-> (defun plot ()
+> (defun plot-both ()
     (lsci-asciiplot:scatter xs ys)
-    (lsci-asciiplot:scatter
+    (lsci-asciiplot:line
       xs-fitted ys-fitted
-      '(#(hold true) #(marker "-"))))
-plot
+      '(#(hold true))))
+plot-both
 ```
 
 When we call our plot function:
 
 ```
-> (plot)
+> (plot-both)
 ```
 
 We get the following, which shows the scatter plot of the original data

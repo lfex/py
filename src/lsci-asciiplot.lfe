@@ -55,12 +55,12 @@
 ;; #($erlport.opaque python ...)
 ;; > (scatter xs ys "o")
 ;;
-(defun scatter (xs ys)
+(defun plot (xs ys)
   (scatter xs ys '()))
 
-(defun scatter (xs ys options)
+(defun plot (xs ys options)
   (encurses:initscr)
-  (let* ((marker (proplists:get_value 'marker options "o"))
+  (let* ((marker (proplists:get_value 'marker options "."))
          (y-top-buff (proplists:get_value 'y-top-buff options 3))
          (y-bot-buff (proplists:get_value 'y-bot-buff options 1))
          (hold (proplists:get_value 'hold options 'false))
@@ -78,3 +78,18 @@
             (lsci-np:->list ys)
             marker)
     (finish y-max)))
+
+(defun scatter (xs ys)
+  (scatter xs ys '()))
+
+(defun scatter (xs ys options)
+  (let ((marker (proplists:get_value 'marker options "o")))
+    (plot xs ys (++ options `(#(marker ,marker))))))
+
+(defun line (xs ys)
+  (line xs ys '()))
+
+(defun line (xs ys options)
+  (let ((marker (proplists:get_value 'marker options "-")))
+    (plot xs ys (++ options `(#(marker ,marker))))))
+
