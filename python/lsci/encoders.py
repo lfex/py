@@ -7,6 +7,12 @@ from cytoolz.functoolz import compose
 from lsci import logger
 
 
+def dicts(value):
+    if isinstance(value, dict):
+        value = [x for x in value.items()]
+    return value
+
+
 def interp1d(value):
     if isinstance(value, interpolate.interp1d):
         logger.debug(value)
@@ -17,5 +23,6 @@ def interp1d(value):
     return value
 
 
-def all(value):
-    return compose(interp1d)(value)
+def get_all(value):
+    return compose(dicts,
+                   interp1d)(value)

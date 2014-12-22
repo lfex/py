@@ -22,19 +22,28 @@ def ints(value):
     return value
 
 
+def dicts(value):
+    if (isinstance(value, list)
+        and all([isinstance(x, tuple) for x in value])
+        and all([len(x) == 2 for x in value])):
+        value = dict(value)
+    return value
+
 def interp1d(value):
-    if isinstance(value, tuple) and len(value) == 2:
-        if value[0] == b"interp1d":
-            logger.debug(value)
-            (x, y, kind, axis, copy, bounds_error) = value[1]
-            kind = kind.decode("utf-8")
-            value = interpolate.interp1d(
-                x, y, kind=kind, axis=axis, copy=copy,
-                bounds_error=bounds_error)
+    if (isinstance(value, tuple)
+        and len(value) == 2
+        and value[0] == b"interp1d"):
+        logger.debug(value)
+        (x, y, kind, axis, copy, bounds_error) = value[1]
+        kind = kind.decode("utf-8")
+        value = interpolate.interp1d(
+            x, y, kind=kind, axis=axis, copy=copy,
+            bounds_error=bounds_error)
     return value
 
 
-def all(value):
-    return compose(#floats,
+def get_all(value):
+    return compose(dicts,
+                   #floats,
                    #ints,
                    interp1d)(value)
