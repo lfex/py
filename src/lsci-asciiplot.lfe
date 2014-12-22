@@ -59,17 +59,21 @@
   (scatter xs ys '()))
 
 (defun scatter (xs ys options)
-  (encurses:erase)
-  (encurses:refresh)
+  (encurses:initscr)
   (let* ((marker (proplists:get_value 'marker options "o"))
          (y-top-buff (proplists:get_value 'y-top-buff options 3))
          (y-bot-buff (proplists:get_value 'y-bot-buff options 1))
+         (hold (proplists:get_value 'hold options 'false))
          (`#(,x-max ,y-max) (get-maxs))
          (`#(,xs ,ys) (scale-data xs ys
                                   0 (- x-max 1)
                                   y-top-buff (- y-max y-top-buff)))
          (ys (cartesian->ncurses ys
                                  (+ (- y-max (+ y-bot-buff 1)) y-top-buff))))
+    (if (not hold)
+      (progn
+        (encurses:erase)
+        (encurses:refresh)))
     (points (lsci-np:->list xs)
             (lsci-np:->list ys)
             marker)
