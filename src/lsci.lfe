@@ -3,6 +3,7 @@
 
 (defun start ()
   ;;(ec_application:start_with_dependencies 'lsci))
+  (encurses:initscr)
   (lsci-py:start)
   ;; Later, we can add things like the following:
   ;;(lsci-jl:start)
