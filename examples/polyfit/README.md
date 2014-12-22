@@ -156,7 +156,7 @@ of our polynomial:
 
 
 ```cl
-(set coeffs (lsci-np:polyfit xs ys 10))
+> (set coeffs (lsci-np:polyfit xs ys 10))
 #($erlport.opaque python ...)
 ```
 
@@ -234,7 +234,20 @@ or $R^2$, a value that indicates how well a statistical model fits with
 measured data. We'll start by feeding our $x$ values into our model:
 
 ```cl
-(set y-predicted (lsci-py:func-call model `(,xs)))
+> (set y-predicted (lsci-py:func-call model `(,xs)))
+#($erlport.opaque python ...)
+> (lsci-np:->list y-predicted)
+> (lsci-np:->list y-predicted)
+(0.8115567059126079 0.9058214190752096 0.9051532611576931
+ 0.9051572417567968 0.8027951904375641 0.8316306323870322
+ 0.8619032382121077 0.8798465345066688 0.7904039687107343
+ 0.8159121506946576 0.8461646108687546 0.8741409704916805
+ 0.8911095569417284 0.880361461470784 0.8923272580695993
+ 0.8938414797164569 0.8922115816051246 0.8943421465901338
+ 0.9015888194142008 0.908406582014095 0.9117908062162314
+ 0.9177642755723809 0.8666215053945052 0.8879651108427424
+ 0.8940117353472488 0.8924367760930636 0.897684962889798
+ 0.9057141589178173 0.9097792825882607 0.7667388250863496 ...)
 ```
 
 We will also need several other values in order to calculate $R^2$, per the
@@ -285,10 +298,6 @@ Now we're ready to get the $R^2$ value for our model:
 #($erlport.opaque python ...)
 > (lsci-np:->float r-squared)
 0.9967274161723995
-```
-
-```cl
-rsquared
 ```
 
 If we compare this to the value from the original NIST data file,
@@ -402,9 +411,9 @@ lsci.numpysupl.PolynomialLinearModel
 We can also extract only what we need:
 
 ```cl
-> (lsci-py:attr model 'r-squared)
+> (set r-squared (lsci-py:attr model 'r-squared))
 #($erlport.opaque python ...)
-> (lsci-np:->float (lsci-py:attr model 'r-squared))
+> (lsci-np:->float r-squared)
 0.9967274161723995
 ```
 
