@@ -307,49 +307,111 @@ That's a pretty tiny difference!
 
 ## A Linear Model Class
 
-This is great for an IPython notebook, but kind of awkward for reuse. So let's
-create a linear model class that gives us everything we need in one shot:
+The linear model code above is a bit cumbersome; it would be much more
+convenient for multiple-use if there was a Python class for it. So that's
+what we created:
 
 ```python
+class PolynomialLinearModel:
+    "A convenience class for creating polynomial linear models."
+    def __init__(self, xs, ys, degree):
+        (self.xs, self.ys) = (xs, ys)
+        self.degree = degree
+        self.y_mean = self.get_y_mean()
+        (self.results, self.model, self.ys_predicted,
+         self.ss_tot, self.ss_reg, self.ss_res,
+         self.r_squared) = (None, None, None, None, None, None, None)
+        (self.coeffs, self.residuals, self.rank,
+         self.singular_values, self.rcond) = (None, None, None, None, None)
+        self.polyfit()
 
+    def polyfit(self):
+        (self.coeffs, self.residuals, self.rank,
+        self.singular_values, self.rcond) = np.polyfit(
+            self.xs, self.ys, self.degree, full=True)
+        self.model = np.poly1d(self.coeffs)
+        self.ys_predicted = self.model(self.xs)
+        self.r_squared = self.get_r_squared()
+        self.results = {
+            "coeffs": self.coeffs.tolist(),
+            "residuals": self.residuals.tolist(),
+            "rank": self.rank,
+            "singular-values": self.singular_values.tolist(),
+            "rcond": float(self.rcond),
+            "y-mean": float(self.y_mean),
+            "ss-tot": float(self.ss_tot),
+            "ss-reg": float(self.ss_reg),
+            "ss-res": float(self.ss_res),
+            "r-squared": float(self.r_squared)}
+
+    def predict(self, xs):
+        return self.model(xs)
+
+    def get_y_mean(self):
+        return self.ys.sum() / self.ys.size
+
+    def get_ss_tot(self):
+        return ((self.ys - self.get_y_mean()) ** 2).sum()
+
+    def get_ss_reg(self):
+        return ((self.ys_predicted - self.get_y_mean()) ** 2).sum()
+
+    def get_ss_res(self):
+        return ((self.ys - self.ys_predicted) ** 2).sum()
+
+    def get_r_squared(self):
+        return 1 - self.get_ss_res() / self.get_ss_tot()
+
+    def __str__(self):
+        return str(self.results)
+
+    def __repr__(self):
+        return self.__str__()
 ```
 
-This has been saved to the Python module ``lsci.numpysupl`` with the following
-``lsci-np`` wrapper functions added:
+This has been saved to the Python module ``lsci.numpysupl`` with the
+``lsci-np`` wrapper function ``lsci-np:poly-linear-model`` added. Now we can
+easily create a linear model which provides everything needed in one go:
 
-* ````
-* ````
-* ````
-* ````
-* ````
-* ````
-* ````
-* ````
+```cl
+> (set model (lsci-np:poly-linear-model xs ys 10))
+#($erlport.opaque python ...)
+> (lsci-py:attr model 'results)
+(#("rank" 11)
+ #("r-squared" 0.9967274161723995)
+ #("residuals" (7.958513839371895e-4))
+ #("ss-reg" 0.24239162093851477)
+ #("rcond" 1.8207657603852567e-14)
+ #("ss-tot" 0.2431874712195122)
+ #("singular-values"
+   (3.128894711145785 1.064548669029962 0.27180324022363517
+    0.05296821542551952 0.008387108325776571 0.0010157565988992792
+    9.583030547029836e-5 7.605115790256685e-6 4.6491044714423815e-7
+    1.9871421381342612e-8 6.009222284310632e-10))
+ #("coeffs"
+   (-4.029625205186532e-5 -0.0024678107546401437
+    -0.06701911469215643 -1.0622149736864719 -10.875317910262362
+    -75.12420087227511 -354.47822960532113 -1127.973927925715
+    -2316.371054759451 -2772.1795597594755 -1467.4895971641686))
+ #("ss-res" 7.958513853880548e-4)
+ #("y-mean" 0.8495756097560976))
+```
+
+We can also extract only what we need:
+
+```cl
+> (lsci-py:attr model 'r-squared)
+#($erlport.opaque python ...)
+> (lsci-np:->float (lsci-py:attr model 'r-squared))
+0.9967274161723995
+```
 
 When we created our first model, we ran it against several values to see if
 the outputs fit our measured data. Of of those was the value ``-9`` which
 returned ``0.77668860985022548``. Let's try that again with our new object:
 
 ```cl
-(set model (lsci-np:poly-linear-model xs ys 10))
+> (lsci-np:->float (lsci-py:method-call model 'predict '(-9)))
+0.7766886098502255
 ```
 
-Scratchpad:
-
-```
-(set data (lsci-np:genfromtxt
-              "examples/polyfit/filip.csv"
-              `(#(delimiter ,(list_to_binary ","))
-                #(names true))))
-(set xs (lsci-np:get data 'x))
-(set ys (lsci-np:get data 'y))
-(lsci-asciiplot:scatter xs ys)
-(set coeffs (lsci-np:polyfit xs ys 10))
-(set `#(,coeffs
-        ,residuals
-        ,rank
-        ,singular-values
-        ,rcond) (lsci-np:polyfit xs ys 10 '(#(full true))))
-(lsci-np:->list coeffs)
-(set model (lsci-np:poly1d coeffs))
-```
