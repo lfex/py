@@ -58,6 +58,12 @@
 ;;; Array Methods
 ;;;
 
+;; LFE-only
+;;
+(defun get (array key)
+  "This provides LFE support for the Python syntax `array[key]`."
+  (lsci-py:method-call array '__getitem__ `(,key)))
+
 ;; Array conversion
 ;;
 (defun item (array args)
@@ -232,6 +238,12 @@
 
 (defun cumprod (array kwargs)
   (lsci-py:method-call array 'cumprod '() kwargs))
+
+(defun dot (array other-array)
+  (lsci-py:method-call array 'dot `(,other-array)))
+
+(defun dot (array other-array kwargs)
+  (lsci-py:method-call array 'dot `(,other-array) kwargs))
 
 (defun mean (array)
   (lsci-py:method-call array 'mean))
