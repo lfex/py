@@ -11,8 +11,8 @@ def setup():
 
 
 def setup_encoders():
-    set_encoder(encoders.interp1d)
+    set_encoder(encoders.all)
 
 
 def setup_decoders():
-    set_decoder(decoders.interp1d)
+    set_decoder(decoders.all)
