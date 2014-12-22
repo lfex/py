@@ -33,6 +33,9 @@ class PolynomialLinearModel:
             self.xs, self.ys, self.degree, full=True)
         self.model = np.poly1d(self.coeffs)
         self.ys_predicted = self.model(self.xs)
+        self.ss_tot = self.get_ss_tot()
+        self.ss_reg = self.get_ss_reg()
+        self.ss_res = self.get_ss_res()
         self.r_squared = self.get_r_squared()
         self.results = {
             "coeffs": self.coeffs.tolist(),
