@@ -126,6 +126,8 @@
          (kwargs (lsci-util:proplist->binary raw-kwargs)))
     (raw-call 'lsci type `(,obj ,attr ,args ,kwargs))))
 
+;; Creating Python class instances
+;;
 (defun instantiate (module class)
   (instantiate module class '() '()))
 
