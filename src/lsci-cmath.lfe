@@ -16,7 +16,7 @@
   (lsci-py:attr complex-number 'imag))
 
 (defun conjugate (complex-number)
-  (lsci-py:method-call complex-number 'conjugate))
+  (lsci-py:method complex-number 'conjugate))
 
 (defun conj (complex-number)
   (conjugate complex-number))

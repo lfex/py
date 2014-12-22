@@ -413,7 +413,7 @@ the outputs fit our measured data. Of of those was the value ``-9`` which
 returned ``0.77668860985022548``. Let's try that again with our new object:
 
 ```cl
-> (lsci-np:->float (lsci-py:method-call model 'predict '(-9)))
+> (lsci-np:->float (lsci-py:method model 'predict '(-9)))
 0.7766886098502255
 ```
 
@@ -431,12 +431,12 @@ to generate the y values:
 ```cl
 > (set xs-fitted
     (lsci-np:linspace
-      (lsci-py:method-call xs 'min)
-      (lsci-py:method-call xs 'max)
+      (lsci-py:method xs 'min)
+      (lsci-py:method xs 'max)
       `(#(num 200))))
 #($erlport.opaque python ...)
 > (set ys-fitted
-    (lsci-py:method-call model 'predict `(,xs-fitted)))
+    (lsci-py:method model 'predict `(,xs-fitted)))
 ```
 
 Now we're ready to put them together:

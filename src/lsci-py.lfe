@@ -59,7 +59,7 @@
 ;; Python object and module constants
 ;;
 (defun const (obj type)
-  (method-call obj (list_to_atom (++ "__"
+  (method obj (list_to_atom (++ "__"
                                      (atom_to_list type)
                                      "__"))))
 
@@ -83,13 +83,13 @@
 
 ;; Python method calls
 ;;
-(defun method-call (obj method-name)
-  (method-call obj method-name '() '()))
+(defun method (obj method-name)
+  (method obj method-name '() '()))
 
-(defun method-call (obj method-name args)
-  (method-call obj method-name args '()))
+(defun method (obj method-name args)
+  (method obj method-name args '()))
 
-(defun method-call (obj method-name args kwargs)
+(defun method (obj method-name args kwargs)
   (general-call obj method-name args kwargs 'obj.call_method))
 
 ;; Python module function and function object calls
