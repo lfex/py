@@ -125,6 +125,8 @@
       ;; Miscellaneous routines
       ;; Padding Arrays
       ;; Polynomials
+      (polyfit 3)
+      (poly1d 1)
       ;; Random sampling (numpy.random)
       ;; Set routines
       ;; Sorting, searching, and counting

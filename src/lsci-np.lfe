@@ -308,3 +308,11 @@
 
 (defun genfromtxt (filename kwargs)
   (lsci-py:func-call 'numpy 'genfromtxt `(,(list_to_binary filename)) kwargs))
+
+;; Polynomials
+;;
+(defun polyfit (x y degree kwargs)
+  (lsci-py:func-call 'numpy 'polyfit `(,x ,y ,degree) kwargs))
+
+(defun poly1d (c-or-r kwargs)
+  (lsci-py:func-call 'numpy 'poly1d `(,c-or-r) kwargs))
