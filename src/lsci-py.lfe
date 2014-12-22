@@ -56,6 +56,17 @@
 (defun raw-call (mod func args)
   (python:call (pid) mod func args))
 
+;; Creating Python class instances
+;;
+(defun instantiate (module class)
+  (instantiate module class '() '()))
+
+(defun instantiate (module class args)
+  (instantiate module class args '()))
+
+(defun instantiate (module class args kwargs)
+  (func module class args kwargs))
+
 ;; Python object and module constants
 ;;
 (defun const (obj type)
@@ -124,14 +135,3 @@
   (let* ((attr (atom_to_binary attr-name 'latin1))
          (kwargs (lsci-util:proplist->binary raw-kwargs)))
     (raw-call 'lsci type `(,obj ,attr ,args ,kwargs))))
-
-;; Creating Python class instances
-;;
-(defun instantiate (module class)
-  (instantiate module class '() '()))
-
-(defun instantiate (module class args)
-  (instantiate module class args '()))
-
-(defun instantiate (module class args kwargs)
-  (func module class args kwargs))
