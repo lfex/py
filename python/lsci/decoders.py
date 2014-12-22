@@ -1,6 +1,25 @@
 from scipy.interpolate import interpolate
 
+import numpy as np
+
+from cytoolz.functoolz import compose
+
 from lsci import logger
+
+
+def floats(value):
+    float_types = [np.float16, np.float32, np.float64, np.float128, np.float]
+    if any([isinstance(value, type) for type in float_types]):
+        value = float(value)
+    return value
+
+
+def ints(value):
+    int_types = [np.int8, np.int16, np.int32, np.int64,
+                 np.uint8, np.uint16, np.uint32, np.uint64]
+    if any([isinstance(value, type) for type in int_types]):
+        value = int(value)
+    return value
 
 
 def interp1d(value):
@@ -14,3 +33,8 @@ def interp1d(value):
                 bounds_error=bounds_error)
     return value
 
+
+def all(value):
+    return compose(#floats,
+                   #ints,
+                   interp1d)(value)
