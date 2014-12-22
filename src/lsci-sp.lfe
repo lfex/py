@@ -15,13 +15,13 @@
 ;; Interpolation
 ;;
 (defun interpolate.interp1d (x y)
-  (lsci-py:func-call 'scipy.interpolate
+  (lsci-py:func 'scipy.interpolate
                      'interp1d
                      `(,x ,y)
                      '()))
 
 (defun interpolate.interp1d (x y kwargs)
-  (lsci-py:func-call 'scipy.interpolate
+  (lsci-py:func 'scipy.interpolate
                      'interp1d
                      `(,x ,y)
                      kwargs))

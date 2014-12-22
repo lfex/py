@@ -65,19 +65,19 @@
   (lsci-py:method array '__getitem__ `(,key)))
 
 (defun ->float (np-float)
-  (lsci-py:func-call 'builtins 'float `(,np-float) '()))
+  (lsci-py:func 'builtins 'float `(,np-float) '()))
 
 (defun ->int (np-int)
-  (lsci-py:func-call 'builtins 'int `(,np-int) '()))
+  (lsci-py:func 'builtins 'int `(,np-int) '()))
 
 (defun norm1d (array)
-  (lsci-py:func-call 'lsci.numpysupl 'norm1d `(,array) '()))
+  (lsci-py:func 'lsci.numpysupl 'norm1d `(,array) '()))
 
 (defun scale1d (array)
-  (lsci-py:func-call 'lsci.numpysupl 'scale1d `(,array) '()))
+  (lsci-py:func 'lsci.numpysupl 'scale1d `(,array) '()))
 
 (defun scale1d (array kwargs)
-  (lsci-py:func-call 'lsci.numpysupl 'scale1d `(,array) kwargs))
+  (lsci-py:func 'lsci.numpysupl 'scale1d `(,array) kwargs))
 
 (defun poly-linear-model (xs ys degree)
   (lsci-py:instantiate
@@ -305,13 +305,13 @@
 ;; Numerical ranges
 ;;
 (defun linspace (start stop kwargs)
-  (lsci-py:func-call 'numpy 'linspace `(,start ,stop) kwargs))
+  (lsci-py:func 'numpy 'linspace `(,start ,stop) kwargs))
 
 (defun meshgrid (coords)
-  (lsci-py:func-call 'numpy 'meshgrid coords))
+  (lsci-py:func 'numpy 'meshgrid coords))
 
 (defun meshgrid (coords kwargs)
-  (lsci-py:func-call 'numpy 'meshgrid coords kwargs))
+  (lsci-py:func 'numpy 'meshgrid coords kwargs))
 
 ;; I/O
 ;;
@@ -319,12 +319,12 @@
   (genfromtxt filename '()))
 
 (defun genfromtxt (filename kwargs)
-  (lsci-py:func-call 'numpy 'genfromtxt `(,(list_to_binary filename)) kwargs))
+  (lsci-py:func 'numpy 'genfromtxt `(,(list_to_binary filename)) kwargs))
 
 ;; Polynomials
 ;;
 (defun polyfit (x y degree kwargs)
-  (lsci-py:func-call 'numpy 'polyfit `(,x ,y ,degree) kwargs))
+  (lsci-py:func 'numpy 'polyfit `(,x ,y ,degree) kwargs))
 
 (defun poly1d (c-or-r kwargs)
-  (lsci-py:func-call 'numpy 'poly1d `(,c-or-r) kwargs))
+  (lsci-py:func 'numpy 'poly1d `(,c-or-r) kwargs))

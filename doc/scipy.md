@@ -34,7 +34,7 @@
 > (lsci-np:->list x-smaller)
 (0.0 0.1 0.2 0.30000000000000004 0.4 0.5 0.6000000000000001
  0.7000000000000001 0.8 0.9)
-> (set y-smaller (lsci-py:func-call interp `(,x-smaller)))
+> (set y-smaller (lsci-py:func interp `(,x-smaller)))
 #($erlport.opaque python
   #B(128 2 99 110 117 109 112 121 46 99 111 114 101 46 109 117 108  ...))
 > (lsci-np:->list y-smaller)

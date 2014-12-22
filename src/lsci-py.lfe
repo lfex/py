@@ -94,25 +94,25 @@
 
 ;; Python module function and function object calls
 ;;
-(defun func-call (func-name)
-    (func-call func-name '() '()))
+(defun func (func-name)
+    (func func-name '() '()))
 
-(defun func-call
+(defun func
   ((module func-name) (when (is_atom module))
-    (func-call module func-name '() '()))
+    (func module func-name '() '()))
   ((func-name args) (when (is_list args))
-    (func-call func-name args '())))
+    (func func-name args '())))
 
-(defun func-call
+(defun func
   ((module func-name args) (when (is_atom module))
-    (func-call module func-name args '()))
+    (func module func-name args '()))
   ((func-name args raw-kwargs) (when (is_list args))
     (let ((kwargs (lsci-util:proplist->binary raw-kwargs)))
       ;; Now call to the 'call_callable' function in the Python
       ;; module 'lsci.obj'
       (raw-call 'lsci 'obj.call_callable `(,func-name ,args ,kwargs)))))
 
-(defun func-call (module func-name args kwargs)
+(defun func (module func-name args kwargs)
   ;; Now call to the 'call_func' function in the Python module 'lsci.obj'
   (general-call (atom_to_binary module 'latin1)
                    func-name
@@ -134,4 +134,4 @@
   (instantiate module class args '()))
 
 (defun instantiate (module class args kwargs)
-  (func-call module class args kwargs))
+  (func module class args kwargs))

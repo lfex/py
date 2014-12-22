@@ -209,17 +209,17 @@ out:
 Let's call this function against several values as a sanity check:
 
 ```cl
-> (lsci-np:->list (lsci-py:func-call model '(-9)))
+> (lsci-np:->list (lsci-py:func model '(-9)))
 0.7766886098502255
-> (lsci-np:->list (lsci-py:func-call model '(-7)))
+> (lsci-np:->list (lsci-py:func model '(-7)))
 0.7990591787051926
-> (lsci-np:->list (lsci-py:func-call model '(-6)))
+> (lsci-np:->list (lsci-py:func model '(-6)))
 0.8860483219018533
-> (lsci-np:->list (lsci-py:func-call model '(-5)))
+> (lsci-np:->list (lsci-py:func model '(-5)))
 0.8926343904781788
-> (lsci-np:->list (lsci-py:func-call model '(-4)))
+> (lsci-np:->list (lsci-py:func model '(-4)))
 0.9094348679923314
-> (lsci-np:->list (lsci-py:func-call model '(-3)))
+> (lsci-np:->list (lsci-py:func model '(-3)))
 0.8893022773313533
 ```
 
@@ -234,7 +234,7 @@ or $R^2$, a value that indicates how well a statistical model fits with
 measured data. We'll start by feeding our $x$ values into our model:
 
 ```cl
-> (set y-predicted (lsci-py:func-call model `(,xs)))
+> (set y-predicted (lsci-py:func model `(,xs)))
 #($erlport.opaque python ...)
 > (lsci-np:->list y-predicted)
 > (lsci-np:->list y-predicted)
