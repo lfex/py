@@ -1,4 +1,4 @@
-# Examples: Polynomial Curve Fitting with ``lsci-np``
+# Examples: Polynomial Curve Fitting
 
 
 ## Introdcution
