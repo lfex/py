@@ -457,7 +457,8 @@ When we call our plot function:
 > (plot)
 ```
 
-We get the following:
+We get the following, which shows the scatter plot of the original data
+in ``o``s) with the polynomial curve fit overlayed (the ``-`` markers):
 
 ```
                                                                            o-----o
