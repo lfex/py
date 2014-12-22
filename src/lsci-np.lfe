@@ -79,6 +79,12 @@
 (defun scale1d (array kwargs)
   (lsci-py:func-call 'lsci.numpysupl 'scale1d `(,array) kwargs))
 
+(defun poly-linear-model (xs ys degree)
+  (lsci-py:instantiate
+    'lsci.numpysupl
+    'PolynomialLinearModel
+    `(,xs ,ys ,degree)))
+
 ;; Array conversion
 ;;
 (defun item (array args)
