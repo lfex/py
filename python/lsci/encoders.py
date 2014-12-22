@@ -2,6 +2,8 @@ from erlport.erlterms import Atom
 
 from scipy.interpolate import interpolate
 
+from cytoolz.functoolz import compose
+
 from lsci import logger
 
 
@@ -13,3 +15,7 @@ def interp1d(value):
                 value.bounds_error)
         value = (b"interp1d", data)
     return value
+
+
+def all(value):
+    return compose(interp1d)(value)
