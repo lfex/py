@@ -2,9 +2,18 @@
   (export all))
 
 (defun point (x y marker)
+  "Plot a point at the given coordinate."
   (encurses:mvaddstr (trunc (- x 1))
                      (trunc (- y 1))
                      marker))
+
+(defun points (xs ys marker)
+  "Plot points at coordinates constructed from given x and y values."
+  (lists:zipwith
+    (lambda (x y)
+      (point x y marker))
+    xs
+    ys))
 
 (defun finish (y-max)
   (finish 0 (- y-max 1)))
@@ -57,12 +66,11 @@
          (y-bot-buff (proplists:get_value 'y-bot-buff options 1))
          (`#(,x-max ,y-max) (get-maxs))
          (`#(,xs ,ys) (scale-data xs ys
-                                  0 x-max
+                                  0 (- x-max 1)
                                   y-top-buff (- y-max y-top-buff)))
          (ys (cartesian->ncurses ys
                                  (+ (- y-max (+ y-bot-buff 1)) y-top-buff))))
-    (lists:zipwith (lambda (x y)
-                     (point x y marker))
-                   (lsci-np:->list xs)
-                   (lsci-np:->list ys))
+    (points (lsci-np:->list xs)
+            (lsci-np:->list ys)
+            marker)
     (finish y-max)))
