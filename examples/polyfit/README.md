@@ -97,41 +97,38 @@ Now let's plot our data in the terminal:
 Which will give tou something like this:
 
 ```
-                                                                            o  oo  o
-                                                                   o   o  o
-                                                                    o   o
-                                                                   oo o
-                                                                oo
-                                                                  o
-                                                              o
-                                                            ooo
-                                                            o
+                                                                           oo  o o
+                                                                      o o
+                                                                  o  o   o
+                                                               oo
+                                                        o o o
+                                          o      o o  o o  o
+                                        ooo ooo      o
+                                     oo o
+                                    oooo
+                                    oo
+                                 ooo
+                                  o
+                                 o
+                               o
+                               oo
 
+                             o
+                              o
+                             o
 
-                                                         oo
-                                                        o
+                           o
+                          o o
+                         o o
 
-                                                     o
-
-                                                    o o
-
-                                                    o
-
-                                                 o
-                                                o o
-
-                                             o  o
-
-                                         o    o
-                                            o
-                                          o
-
-                                       o
-                           o o o   o o
-o               o      o
- o  o o  o  o o    o o
-     o
-  o
+                       oo o
+                       o
+                     o
+                   oo
+o           o  ooo
+     oooo oo
+o oo
+o
 
 ok
 ```
@@ -331,6 +328,9 @@ class PolynomialLinearModel:
             self.xs, self.ys, self.degree, full=True)
         self.model = np.poly1d(self.coeffs)
         self.ys_predicted = self.model(self.xs)
+        self.ss_tot = self.get_ss_tot()
+        self.ss_reg = self.get_ss_reg()
+        self.ss_res = self.get_ss_res()
         self.r_squared = self.get_r_squared()
         self.results = {
             "coeffs": self.coeffs.tolist(),
@@ -376,6 +376,8 @@ easily create a linear model which provides everything needed in one go:
 ```cl
 > (set model (lsci-np:poly-linear-model xs ys 10))
 #($erlport.opaque python ...)
+> (lsci-py:type model)
+lsci.numpysupl.PolynomialLinearModel
 > (lsci-py:attr model 'results)
 (#("rank" 11)
  #("r-squared" 0.9967274161723995)
@@ -415,3 +417,81 @@ returned ``0.77668860985022548``. Let's try that again with our new object:
 0.7766886098502255
 ```
 
+
+## Plotting the Model with the Observed Data
+
+We're going to need some data to feed to our fitted-poly function so that it
+can create the smooth polynomial curve that we will overlay on our scatter
+plot. Let's create a linear space between our minimum and maximum x values
+(200 points should give us a nice, smooth curve). Then let's use fitted-poly
+to generate the y values:
+
+
+
+```cl
+> (set xs-fitted
+    (lsci-np:linspace
+      (lsci-py:method-call xs 'min)
+      (lsci-py:method-call xs 'max)
+      `(#(num 200))))
+#($erlport.opaque python ...)
+> (set ys-fitted
+    (lsci-py:method-call model 'predict `(,xs-fitted)))
+```
+
+Now we're ready to put them together:
+
+```cl
+#($erlport.opaque python ...)
+> (defun plot ()
+    (lsci-asciiplot:scatter xs ys)
+    (lsci-asciiplot:scatter
+      xs-fitted ys-fitted
+      '(#(hold true) #(marker "-"))))
+plot
+```
+
+When we call our plot function:
+
+```
+> (plot)
+```
+
+We get the following:
+
+```
+                                                                           o-----o
+                                                                      o o  --    -
+                                                                  o  o ----
+                                                               ---------
+                                                        o o ----
+                                          o      o o  o o---
+                                        o----------------
+                                     oo--
+                                    o--o
+                                    --
+                                 oo--
+                                  --
+                                 o-
+                               o -
+                               o-
+                               -
+                             o -
+                              -
+                             -
+                            --
+                           o-
+                          o-o
+                         o--
+                         --
+                       o--o
+                       --
+                     o--
+                   oo--
+o           o  ooo --
+     ooo------------
+---------
+o-
+
+ok
+```
