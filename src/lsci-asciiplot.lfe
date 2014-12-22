@@ -61,7 +61,7 @@
 (defun plot (xs ys options)
   (encurses:initscr)
   (let* ((marker (proplists:get_value 'marker options "."))
-         (y-top-buff (proplists:get_value 'y-top-buff options 3))
+         (y-top-buff (proplists:get_value 'y-top-buff options 4))
          (y-bot-buff (proplists:get_value 'y-bot-buff options 1))
          (hold (proplists:get_value 'hold options 'false))
          (`#(,x-max ,y-max) (get-maxs))
