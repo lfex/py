@@ -1,4 +1,4 @@
-(defmodule lsci-plot
+(defmodule lsci-asciiplot
   (export all))
 
 (defun point (x y marker)
@@ -6,7 +6,7 @@
                      (trunc (- y 1))
                      marker))
 
-(defun finish ()
+(defun finish (y-max)
   (finish 0 (- y-max 1)))
 
 (defun finish (x y)
@@ -64,5 +64,5 @@
     (lists:zipwith (lambda (x y)
                      (point x y marker))
                    (lsci-np:->list xs)
-                   (lsci-np:->list ys)))
-  (finish))
+                   (lsci-np:->list ys))
+    (finish y-max)))
