@@ -12,7 +12,7 @@ def echo(*args, **kwargs):
 
 
 def attr(obj, attr):
-    return getattr(obj, attr.decode("utf-8"))
+    return getattr(obj, attr.decode("utf-8").replace("-", "_"))
 
 
 def kwargs_keys_to_strings(kwargs):
