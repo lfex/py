@@ -5,7 +5,8 @@
 ;;; Application functions
 ;;;
 (defun start ()
-  (let ((`#(ok ,pid) (python:start '(#(python_path "./python")))))
+  (let* ((python-path (py-config:get-python-path))
+         (`#(ok ,pid) (python:start `(#(python_path ,python-path)))))
     (erlang:register (py-config:get-server-pid-name) pid)
     (module 'lfe 'init.setup)
     #(ok started)))

@@ -28,3 +28,5 @@
 (defun get-server-pid-name ()
   (get 'server-pid-name))
 
+(defun get-python-path ()
+  (get 'python-path))

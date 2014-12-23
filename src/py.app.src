@@ -11,7 +11,7 @@
   {modules,
    [
     'py',
-    'py-sup',
+    'py-sup'
    ]},
 
   %% All of the registered names the application uses. This can be ignored.
@@ -29,6 +29,7 @@
 
   %% configuration parameters similar to those in the config file specified
   %% on the command line. can be fetched with gas:get_env
-  {env, [{'server-pid-name', 'erlport-server'}]}
+  {env, [{'server-pid-name', 'erlport-server'},
+         {'python-path', "./python:./deps/erlport/priv/python3"}]}
  ]
 }.
