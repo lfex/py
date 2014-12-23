@@ -39,7 +39,7 @@ $ make repl-no-deps
 ```
 
 Note that the ``repl`` and ``repl-no-deps`` targets automatically start up
-the lsci (and thus ErlPort) Erlang Python server. If you run the REPL without
+the py (and thus ErlPort) Erlang Python server. If you run the REPL without
 these ``make`` targets, you'll need to manually start things:
 
 ```bash
@@ -49,7 +49,7 @@ $ lfetool repl lfe -s py
 
 ## Usage
 
-Below we show some basic usage of lsci from both LFE and Erlang. In a
+Below we show some basic usage of py from both LFE and Erlang. In a
 separate section a list of docs are linked showing detailed usage of wrapped
 libraries.
 
@@ -60,12 +60,12 @@ First things first: let's make sure that you have the appropriate versions
 of things -- in particular, let's confirm that you're running Python 3:
 
 ```cl
-> (lsci-util:get-versions)
+> (py-util:get-versions)
 (#(erlang "17")
  #(emulator "6.3")
  #(driver-version "3.1")
  #(lfe "0.9.0")
- #(lsci "0.0.1")
+ #(py "0.0.1")
  #(python
    ("3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)"
     "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]")))
@@ -80,7 +80,7 @@ of things -- in particular, let's confirm that you're running Python 3:
 
 ```cl
 > (py:call 'os 'getcwd)
-"/Users/yourname/lab/erlang/lsci"
+"/Users/yourname/lab/erlang/py"
 ```
 
 
@@ -101,17 +101,17 @@ $ make shell-no-deps
 ```
 
 ```erlang
-1> 'lsci-util':'get-versions'().
+1> 'py-util':'get-versions'().
 [{erlang,"17"},
  {emulator,"6.3"},
  {'driver-version',"3.1"},
  {lfe,"0.9.0"},
- {lsci,"0.0.1"},
+ {py,"0.0.1"},
  {python,["3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)",
           "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"]},
  {numpy,"1.9.1"},
  {scipy,"0.14.0"}]
-2> lsci:py(os, getcwd).
-"/Users/yourname/lab/erlang/lsci"
+2> py:py(os, getcwd).
+"/Users/yourname/lab/erlang/py"
 ```
 
