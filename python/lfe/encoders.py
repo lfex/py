@@ -1,3 +1,4 @@
+import collections
 from datetime import date, datetime, time, timedelta
 
 from cytoolz.functoolz import compose
@@ -6,8 +7,10 @@ from lfe import logger
 
 
 def dicts(value):
-    if isinstance(value, dict):
-        value = [x for x in value.items()]
+    dict_types = [dict, collections.UserDict, collections.OrderedDict,
+                  collections.defaultdict, collections.ChainMap]
+    if any([isinstance(value, x) for x in dict_types]):
+        value = (type(value).__name__, [x for x in value.items()])
     return value
 
 

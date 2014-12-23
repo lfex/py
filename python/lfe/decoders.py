@@ -6,10 +6,14 @@ from lfe import logger, erlang
 
 
 def dicts(value):
+    dict_names = ["dict", "UserDict", "OrderedDict", "defaultdict", "ChainMap"]
+    dict_types = [dict, collections.UserDict, collections.OrderedDict,
+                  collections.defaultdict, collections.ChainMap]
     if (isinstance(value, list)
-        and all([isinstance(x, tuple) for x in value])
-        and all([len(x) == 2 for x in value])):
-        value = dict(value)
+        and len(value) == 2
+        and any([value[0] == x for x in dict_types])):
+        index = dict_names.index(value[0])
+        value = dict_types[index](*value[1])
     return value
 
 
