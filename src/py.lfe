@@ -59,13 +59,13 @@
 
 ;; Creating Python class instances
 ;;
-(defun instantiate (module class)
-  (instantiate module class '() '()))
+(defun init (module class)
+  (init module class '() '()))
 
-(defun instantiate (module class args)
-  (instantiate module class args '()))
+(defun init (module class args)
+  (init module class args '()))
 
-(defun instantiate (module class args kwargs)
+(defun init (module class args kwargs)
   (func module class args kwargs))
 
 ;; Python object and module constants
