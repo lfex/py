@@ -10,7 +10,7 @@ ifeq ($(OS),Darwin)
 HOST = $(shell scutil --get ComputerName)
 endif
 
-PROJECT = lsci
+PROJECT = py
 LIB = $(PROJECT)
 DEPS = ./deps
 BIN_DIR = ./bin
@@ -39,7 +39,7 @@ get-version:
 	@PATH=$(SCRIPT_PATH) $(LFETOOL) info version
 	@echo "Erlang/OTP, LFE, & library versions:"
 	@ERL_LIBS=$(ERL_LIBS) PATH=$(SCRIPT_PATH) erl \
-	-eval "lfe_io:format(\"~p~n\",['lsci-util':'get-versions'()])." \
+	-eval "lfe_io:format(\"~p~n\",['$(PROJECT)-util':'get-versions'()])." \
 	-noshell -s erlang halt
 
 $(EXPM): $(BIN_DIR)
@@ -78,22 +78,22 @@ compile-tests: clean-eunit
 repl: proj-compile
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an LFE REPL ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl lfe -s lsci
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl lfe -s $(PROJECT)
 
 repl-no-deps: proj-compile-no-deps
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an LFE REPL ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl lfe -s lsci
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) $(LFETOOL) repl lfe -s $(PROJECT)
 
 shell: proj-compile
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an Erlang shell ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl -s lsci
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl -s $(PROJECT)
 
 shell-no-deps: proj-compile-no-deps
 	@which clear >/dev/null 2>&1 && clear || printf "\033c"
 	@echo "Starting an Erlang shell ..."
-	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl -s lsci
+	@PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) erl -s $(PROJECT)
 
 clean: clean-ebin clean-eunit
 	@which rebar.cmd >/dev/null 2>&1 && rebar.cmd clean || rebar clean

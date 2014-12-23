@@ -1,63 +1,35 @@
-# lsci
+# py
 
-*Scientific Computing on the Erlang VM - An LFE Wrapper Library for SciPy, NumPy, and matplotlib*
+*Python from Erlang/LFE: A Wrapper for ErlPort with Convenience Functions*
 
-<img src="resources/images/WelcomeHomeElsie.jpg"/>
+<img src="resources/images/Python-logo-notext.png"/>
 
 
 ## Introduction
 
-This project has the lofty goal of making numerical processing an efficient and
-easy thing to do in LFE/Erlang. The engine behind this work is
-[ErlPort](http://erlport.org/docs/python.html).
-
-Here is a list of the Python packages lsci aims to wrap, annotated with
-the current development status:
-
- * [math](https://docs.python.org/3/library/math.html) -
-   <strong>complete</strong>
- * [cmath](https://docs.python.org/3/library/cmath.html) -
-   <strong>complete</strong>
- * [NumPy](http://www.numpy.org/) -
-   <strong>in progress</strong>
- * [SciPy](http://www.scipy.org/scipylib/index.html) -
-   <strong>in progress</strong>
- * [Pandas](http://pandas.pydata.org/) -
-   <em>not started</em>
- * [matplotlib](http://matplotlib.org/) -
-   <em>not started</em>
- * [SymPy](http://www.sympy.org/en/index.html) -
-   <em>not started</em>
-
-Quick sample:
-
-```cl
-
-```
-
-And it's pronounced "Elsie".
+This project provides an easier interface to Python, wrapping
+[ErlPort](http://erlport.org/docs/python.html) calls. It was originally part of
+the [lsci project](git@github.com:lfex/lsci.git), but was split out due to it
+being generally useful.
 
 
 ## Requirements
 
-To use lsci, you need the following:
+To use py, you need the following:
 
 * [lfetool](http://docs.lfe.io/quick-start/1.html)
 * [Python 3](https://www.python.org/downloads/)
 
 
-## Installation
+## Setup
 
 For now, just run it from a git clone:
 
 ```bash
-$ git clone git@github.com:lfex/lsci.git
-$ cd lsci
+$ git clone git@github.com:lfex/py.git
+$ cd py
 $ make
 ```
-
-
-## Usage
 
 Activate your Python virtualenv and then start up the LFE REPL:
 
@@ -71,27 +43,18 @@ the lsci (and thus ErlPort) Erlang Python server. If you run the REPL without
 these ``make`` targets, you'll need to manually start things:
 
 ```bash
-$ lfetool repl lfe -s lsci
+$ lfetool repl lfe -s py
 ```
 
 
-### Basic Usage
+## Usage
 
 Below we show some basic usage of lsci from both LFE and Erlang. In a
 separate section a list of docs are linked showing detailed usage of wrapped
 libraries.
 
 
-#### LFE
-
-Start up the LFE REPL:
-
-```cl
-Erlang/OTP 17 [erts-6.3] [source] [64-bit] [smp:4:4] [async-threads:10] ...
-
-LFE Shell V6.3 (abort with ^G)
->
-```
+### Meta Data
 
 First things first: let's make sure that you have the appropriate versions
 of things -- in particular, let's confirm that you're running Python 3:
@@ -105,26 +68,33 @@ of things -- in particular, let's confirm that you're running Python 3:
  #(lsci "0.0.1")
  #(python
    ("3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)"
-    "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"))
- #(numpy "1.9.1")
- #(scipy "0.14.0"))
+    "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]")))
 >
 ```
 
-lsci provides a wrapper for the ErlPort ``(python:call pid ...)`` form:
+
+### Module Level
+
+
+#### Calling Functions
 
 ```cl
-> (lsci:py 'os 'getcwd)
+> (py:call 'os 'getcwd)
 "/Users/yourname/lab/erlang/lsci"
 ```
 
-lsci can do this because it starts up a Python server and registers the pid
-with a name.
+
+#### Module Constants
+
+### Objects
+#### Instantiation
+#### Calling Methods
+#### Attribute Values
 
 
 #### Erlang
 
-We can, of course, do the same thing from Erlang:
+We can, of course, do all of this from Erlang:
 
 ```bash
 $ make shell-no-deps
@@ -145,29 +115,3 @@ $ make shell-no-deps
 "/Users/yourname/lab/erlang/lsci"
 ```
 
-
-### Wrapped Library Docs
-
-More detailed usage information in separate docs, per-wrapped library:
-
-* [lsci-math & lsci-cmath](doc/math.md) - ``math`` and ``cmath`` Python
-  Standard library modules in LFE
-* [lsci-np](doc/numpy.md) - NumPy in LFE
-* [lsci-sp](doc/scipy.md) - SciPy in LFE
-* lsci-pd - Pandas in LFE (TBD)
-* lsci-mpl - matplotlib in LFE (TBD)
-* lsci-sym - SymPy in LFE (TBD)
-
-
-## Development
-
-For the latest thoughts on interface, archiecture, etc., see the
-[project Wiki](https://github.com/oubiwann/lsci/wiki).
-
-To understand how the wrapping is done in lsci, check out the
-[kla project](https://github.com/billosys/kla) and
-[some](https://github.com/billosys/kanin)
-[libraries](https://github.com/billosys/lric) that use it.
-
-For insight on how lsci, LFE, and Erlang can interface with Python, see the
-[ErlPort docs](http://erlport.org/docs/python.html).
