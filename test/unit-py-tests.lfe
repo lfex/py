@@ -1,4 +1,4 @@
-(defmodule unit-lsci-tests
+(defmodule unit-py-tests
   (behaviour ltest-unit)
   (export all))
 

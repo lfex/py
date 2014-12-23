@@ -1,4 +1,4 @@
-NODENAME=$(shell echo "lsci"|sed -e 's/-//g')
+NODENAME=$(shell echo "$(PROJECT)"|sed -e 's/-//g')
 RUN_DIR=./run
 LOG_DIR=./log
 
@@ -14,18 +14,18 @@ log-dir:
 run:
 	@@ERL_LIBS=$(ERL_LIBS) PATH=$(SCRIPT_PATH) \
 	run_erl -daemon ./run/ ./log/ \
-	"erl -pa ebin -config ${config-./dev} -s \'lsci\'"
+	"erl -pa ebin -config ${config-./dev} -s \'$(PROJECT)\'"
 
 dev:
 	@echo "Running OTP app in the foreground ..."
 	@ERL_LIBS=$(ERL_LIBS) PATH=$(SCRIPT_PATH) lfe \
-	-eval "application:start('lsci')"
+	-eval "application:start('$(PROJECT)')"
 
 dev-named:
 	@echo "Running OTP app in the foreground ..."
 	@ERL_LIBS=$(ERL_LIBS) PATH=$(SCRIPT_PATH) lfe \
 	-sname repl@${HOST} -setcookie `cat ~/.erlang.cookie` \
-	-eval "application:start('lsci')"
+	-eval "application:start('$(PROJECT)')"
 
 run-named: dev-named
 
@@ -33,7 +33,7 @@ prod:
 	@echo "Running OTP app in the background ..."
 	@ERL_LIBS=$(ERL_LIBS) PATH=$(SCRIPT_PATH) lfe \
 	-sname ${NODENAME}@${HOST} -setcookie `cat ~/.erlang.cookie` \
-	-eval "application:start('lsci')" \
+	-eval "application:start('$(PROJECT)')" \
 	-noshell -detached
 
 daemon: prod

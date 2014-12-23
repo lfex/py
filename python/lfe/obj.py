@@ -1,6 +1,6 @@
 import importlib
 
-from lsci import logger
+from lfe import logger
 
 
 def init():

@@ -1,7 +1,7 @@
-(defmodule lsci-config
+(defmodule py-config
   (export all))
 
-(defun app-name () "" 'lsci)
+(defun app-name () "" 'py)
 
 (defun get-loaded-apps ()
   (proplists:get_keys

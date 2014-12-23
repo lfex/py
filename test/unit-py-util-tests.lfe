@@ -1,4 +1,4 @@
-(defmodule unit-lsci-util-tests
+(defmodule unit-py-util-tests
   (behaviour ltest-unit)
   (export all))
 
@@ -9,4 +9,4 @@
         (expected '((#b(97) 1) (#b(98) 2) (#b(99) 3))))
     (is-equal
       expected
-      (lsci-util:proplist->binary data))))
+      (py-util:proplist->binary data))))

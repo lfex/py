@@ -1,4 +1,4 @@
-(defmodule lsci-py
+(defmodule py
   (export all))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,13 +6,13 @@
 ;;;
 (defun start ()
   (let ((`#(ok ,pid) (python:start '(#(python_path "./python")))))
-    (erlang:register (lsci-config:get-server-pid-name) pid)
-    (raw-call 'lsci 'init.setup)
+    (erlang:register (py-config:get-server-pid-name) pid)
+    (module 'lfe 'init.setup)
     #(ok started)))
 
 (defun stop ()
   (python:stop (pid))
-  (erlang:unregister (lsci-config:get-server-pid-name))
+  (erlang:unregister (py-config:get-server-pid-name))
   #(ok stopped))
 
 (defun restart ()
@@ -21,22 +21,22 @@
   #(ok restarted))
 
 (defun pid ()
-  (erlang:whereis (lsci-config:get-server-pid-name)))
+  (erlang:whereis (py-config:get-server-pid-name)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; REPL functions
 ;;;
 (defun dir (obj)
   (lfe_io:format "~p~n"
-                 `(,(raw-call 'builtins 'dir `(,obj)))))
+                 `(,(module 'builtins 'dir `(,obj)))))
 
 (defun vars (obj)
   (lfe_io:format "~p~n"
-                 `(,(raw-call 'builtins 'vars `(,obj)))))
+                 `(,(module 'builtins 'vars `(,obj)))))
 
 (defun type (obj)
   (let* ((class (attr obj '__class__))
-         (repr (raw-call 'builtins 'repr `(,class))))
+         (repr (module 'builtins 'repr `(,class))))
     (list_to_atom (cadr (string:tokens repr "'")))))
 
 (defun repr
@@ -50,10 +50,10 @@
 
 ;; ErlPort Calls
 ;;
-(defun raw-call (mod func)
-  (raw-call mod func '()))
+(defun module (mod func)
+  (module mod func '()))
 
-(defun raw-call (mod func args)
+(defun module (mod func args)
   (python:call (pid) mod func args))
 
 ;; Creating Python class instances
@@ -75,7 +75,7 @@
                                      "__"))))
 
 (defun const (mod func type)
-  (raw-call mod (list_to_atom (++ (atom_to_list func)
+  (module mod (list_to_atom (++ (atom_to_list func)
                                   "."
                                   "__"
                                   (atom_to_list type)
@@ -89,8 +89,8 @@
   ((obj attr-name) (when (is_atom attr-name))
     (let* ((pid (pid))
            (attr (atom_to_binary attr-name 'latin1)))
-      ;; Now call to the 'attr' function in the Python module 'lsci.obj'
-      (raw-call 'lsci 'obj.attr `(,obj ,attr)))))
+      ;; Now call to the 'attr' function in the Python module 'lfe.obj'
+      (module 'lfe 'obj.attr `(,obj ,attr)))))
 
 ;; Python method calls
 ;;
@@ -118,13 +118,13 @@
   ((module func-name args) (when (is_atom module))
     (func module func-name args '()))
   ((func-name args raw-kwargs) (when (is_list args))
-    (let ((kwargs (lsci-util:proplist->binary raw-kwargs)))
+    (let ((kwargs (py-util:proplist->binary raw-kwargs)))
       ;; Now call to the 'call_callable' function in the Python
-      ;; module 'lsci.obj'
-      (raw-call 'lsci 'obj.call_callable `(,func-name ,args ,kwargs)))))
+      ;; module 'lfe.obj'
+      (module 'lfe 'obj.call_callable `(,func-name ,args ,kwargs)))))
 
 (defun func (module func-name args kwargs)
-  ;; Now call to the 'call_func' function in the Python module 'lsci.obj'
+  ;; Now call to the 'call_func' function in the Python module 'lfe.obj'
   (general-call (atom_to_binary module 'latin1)
                    func-name
                    args
@@ -133,5 +133,5 @@
 
 (defun general-call (obj attr-name args raw-kwargs type)
   (let* ((attr (atom_to_binary attr-name 'latin1))
-         (kwargs (lsci-util:proplist->binary raw-kwargs)))
-    (raw-call 'lsci type `(,obj ,attr ,args ,kwargs))))
+         (kwargs (py-util:proplist->binary raw-kwargs)))
+    (module 'lfe type `(,obj ,attr ,args ,kwargs))))

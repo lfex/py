@@ -1,3 +1,5 @@
+PROJECT=py
+
 all: compile python
 
 include resources/make/common.mk

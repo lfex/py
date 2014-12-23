@@ -1,4 +1,4 @@
-(defmodule lsci-py-sup
+(defmodule py-sup
   (behaviour e2_task_supervisor)
   (export all))
 

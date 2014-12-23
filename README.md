@@ -2,7 +2,7 @@
 
 *Python from Erlang/LFE: A Wrapper for ErlPort with Convenience Functions*
 
-<img src="resources/images/Python-logo-notext.png"/>
+<img src="resources/images/Python-logo-notext-small.png"/>
 
 
 ## Introduction
