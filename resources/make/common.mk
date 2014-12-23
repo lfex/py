@@ -48,7 +48,6 @@ $(EXPM): $(BIN_DIR)
 get-deps:
 	@echo "Getting dependencies ..."
 	@which rebar.cmd >/dev/null 2>&1 && rebar.cmd get-deps || rebar get-deps
-	@PATH=$(SCRIPT_PATH) $(LFETOOL) update deps
 
 clean-ebin:
 	@echo "Cleaning ebin dir ..."
@@ -59,6 +58,7 @@ clean-eunit:
 
 proj-compile: get-deps clean-ebin
 	@echo "Compiling project code and dependencies ..."
+	@mkdir ebin
 	@cp src/$(PROJECT).app.src $(OUT_DIR)/$(PROJECT).app
 	@which rebar.cmd >/dev/null 2>&1 && \
 	PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) rebar.cmd compile || \
