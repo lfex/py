@@ -11,8 +11,8 @@ def setup():
 
 
 def setup_encoders():
-    set_encoder(encoders.get_all)
+    set_encoder(encoders.encode)
 
 
 def setup_decoders():
-    set_decoder(decoders.get_all)
+    set_decoder(decoders.decode)
