@@ -37,11 +37,11 @@ def times(value):
 
 def timedeltas(value):
     if isinstance(value, timedelta):
-        value = ("timedelta", value.days, value.seconds, value.microseconds)
+        value = ("timedelta", (value.days, value.seconds, value.microseconds))
     return value
 
 
-def get_all(value):
+def encode(value):
     return compose(dicts,
                    dates,
                    datetimes,
