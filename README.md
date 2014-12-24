@@ -209,7 +209,7 @@ Let's use the two objects in a calculation:
 408
 ```
 
-Let's get that min minutes:
+Let's get that in minutes:
 
 ```cl
 > (/ (py:attr diff 'seconds) 60)
