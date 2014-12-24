@@ -57,6 +57,9 @@
 (defun module (mod func args)
   (python:call (pid) mod func args))
 
+(defun module (mod func args kwargs)
+  (python:call (pid) mod func args kwargs))
+
 ;; Creating Python class instances
 ;;
 (defun init (module class)
@@ -70,17 +73,24 @@
 
 ;; Python object and module constants
 ;;
-(defun const (obj type)
-  (method obj (list_to_atom (++ "__"
-                                     (atom_to_list type)
-                                     "__"))))
+(defun const
+  ((mod attr-name) (when (is_atom mod))
+    (let* ((pid (pid))
+           (attr (atom_to_binary attr-name 'latin1)))
+      ;; Now call to the 'const' function in the Python module 'lfe.obj'
+      (module 'lfe 'obj.const `(,mod ,attr))))
+  ((obj type)
+    (method obj (list_to_atom (++ "__"
+                                  (atom_to_list type)
+                                  "__")))))
+
 
 (defun const (mod func type)
   (module mod (list_to_atom (++ (atom_to_list func)
-                                  "."
-                                  "__"
-                                  (atom_to_list type)
-                                  "__"))))
+                                "."
+                                "__"
+                                (atom_to_list type)
+                                "__"))))
 
 ;; Python object attributes
 ;;
