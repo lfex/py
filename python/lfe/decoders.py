@@ -1,8 +1,9 @@
+import collections
 from datetime import date, datetime, time, timedelta
 
 from cytoolz.functoolz import compose
 
-from lfe import logger, erlang
+from lfe import erlang, logger
 
 
 def dicts(value):
@@ -21,7 +22,8 @@ def dates(value):
     if (isinstance(value, tuple)
         and len(value) == 2
         and value[0] == erlang.List("date")):
-        value = date(*list(value[1]))
+        (year, month, day) = value[1]
+        value = date(year, month, day)
     return value
 
 
@@ -38,7 +40,8 @@ def times(value):
     if (isinstance(value, tuple)
         and len(value) == 2
         and value[0] == erlang.List("time")):
-        value = time(*list(value[1]))
+        (hour, minute, second, micro, tz) = value[1]
+        value = time(hour, minute, second, micro, tz)
     return value
 
 
@@ -46,11 +49,12 @@ def timedeltas(value):
     if (isinstance(value, tuple)
         and len(value) == 2
         and value[0] == erlang.List("timedelta")):
-        value = timedelta(*list(value[1]))
+        (days, seconds, micros) = value[1]
+        value = timedelta(days, seconds, micros)
     return value
 
 
-def get_all(value):
+def decode(value):
     return compose(dicts,
                    dates,
                    datetimes,
