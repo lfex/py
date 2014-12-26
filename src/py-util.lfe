@@ -6,7 +6,7 @@
 
 (defun get-python-version ()
   (lists:map #'string:strip/1
-             (string:tokens (py:module 'sys 'version.__str__ '())
+             (string:tokens (py:pycall 'sys 'version.__str__ '())
                             "\n")))
 
 (defun get-versions ()
