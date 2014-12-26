@@ -58,7 +58,7 @@ clean-eunit:
 
 proj-compile: get-deps clean-ebin
 	@echo "Compiling project code and dependencies ..."
-	@mkdir ebin
+	@mkdir -p ebin
 	@cp src/$(PROJECT).app.src $(OUT_DIR)/$(PROJECT).app
 	@which rebar.cmd >/dev/null 2>&1 && \
 	PATH=$(SCRIPT_PATH) ERL_LIBS=$(ERL_LIBS) rebar.cmd compile || \
