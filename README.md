@@ -68,7 +68,7 @@ $ lfetool repl lfe -s py
 ```
 
 
-## Usage [&#x21A0](#table-of-contents)
+## Usage [&uarr;](#table-of-contents)
 
 Below we show some basic usage of py from both LFE and Erlang. In a
 separate section a list of docs are linked showing detailed usage of wrapped
