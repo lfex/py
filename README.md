@@ -7,8 +7,6 @@
 
 ## Table of Contents
 
-This is a long README, so we've added a ToC ;-)
-
 * [Introduction](#introduction-)
 * [Requirements](#requirements-)
 * [Setup](#setup-)
