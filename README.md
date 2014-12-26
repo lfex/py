@@ -68,7 +68,7 @@ $ lfetool repl lfe -s py
 ```
 
 
-## Usage [&uarr;](#table-of-contents)
+## Usage [&#x219F;](#table-of-contents)
 
 Below we show some basic usage of py from both LFE and Erlang. In a
 separate section a list of docs are linked showing detailed usage of wrapped
@@ -94,12 +94,12 @@ of things -- in particular, let's confirm that you're running Python 3:
 ```
 
 
-### Module Level
+### Module Level [&#x219F;](#table-of-contents)
 
 The following sections describe module-level operations.
 
 
-#### Calling Functions
+#### Calling Functions [&#x219F;](#table-of-contents)
 
 ```cl
 > (py:func 'os 'getcwd)
@@ -128,7 +128,7 @@ a binary) which represents a binary number. We'll give ``int`` the keyword of
 ```
 
 
-#### Module Constants
+#### Module Constants [&#x219F;](#table-of-contents)
 
 ```cl
 > (py:const 'math 'pi)
@@ -147,12 +147,12 @@ Optionaly, you may provide a type:
 ```
 
 
-### Objects
+### Objects [&#x219F;](#table-of-contents)
 
 The following sections describe how to work with Python objects.
 
 
-#### Instantiation
+#### Instantiation [&#x219F;](#table-of-contents)
 
 With no arguments passed to the constructor:
 
@@ -171,7 +171,7 @@ With args:
 ```
 
 
-#### Calling Methods
+#### Calling Methods [&#x219F;](#table-of-contents)
 
 To call a method, we need an object. Let's return to the date example
 above:
@@ -189,7 +189,7 @@ variable in the REPL. Let's call some methods:
 "2014.12.d 23:14:37"
 ```
 
-#### Attribute Values
+#### Attribute Values [&#x219F;](#table-of-contents)
 
 Continuing with that same object:
 
@@ -201,7 +201,7 @@ Continuing with that same object:
 ```
 
 
-#### Operations on Objects
+#### Operations on Objects [&#x219F;](#table-of-contents)
 
 Let's get another time ... and give our other variable a better name:
 
@@ -229,7 +229,7 @@ Let's get that in minutes:
 ```
 
 
-#### ErlPort Pass-Through
+#### ErlPort Pass-Through [&#x219F;](#table-of-contents)
 
 If for any reason you would like to skip the LFE py wrappers and call directly
 to ErlPort, you may do so:
@@ -294,7 +294,7 @@ true
 ```
 
 
-### Operators
+### Operators [&#x219F;](#table-of-contents)
 
 It will often be the case that you want to operate on the Python data
 structures obtained via the LFE py calls directly in Python, without
@@ -345,7 +345,7 @@ Bitwise operations:
 ```
 
 
-#### Non-Python Additions
+#### Non-Python Additions [&#x219F;](#table-of-contents)
 
 So as not to stomp on the LFE function ``(list ...)``, the Python ``list``
 builtin has been aliased to the ``pylist`` function, e.g.:
@@ -366,14 +366,14 @@ like to see a representation of the pickeled Python data in LFE, you may use
 the ``(py:prepr)`` function.
 
 
-### Missing Functions
+### Missing Functions [&#x219F;](#table-of-contents)
 
 Any Python function that does in-place modification of objects is not included.
 LFE py will eventually provide analogs for in-place functions that return a new
 data set or object.
 
 
-### Erlang
+### Erlang [&#x219F;](#table-of-contents)
 
 We can, of course, do all of this from Erlang:
 
