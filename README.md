@@ -297,7 +297,7 @@ Examples:
 42
 > (py:mul 7 6)
 42
-> (py:sub 108 66)
+> (py:sub -108 -150)
 42
 > (py:truediv 462 11)
 42.0
