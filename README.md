@@ -108,7 +108,7 @@ of things -- in particular, let's confirm that you're running Python 3:
 
 ### Module Level [&#x219F;](#table-of-contents)
 
-The following sections describe module-level operations.
+The following sub-sections describe module-level operations.
 
 
 #### Calling Functions [&#x219F;](#table-of-contents)
@@ -227,13 +227,13 @@ Let's get another time ... and give our other variable a better name:
 Let's use the two objects in a calculation:
 
 ```cl
-> (set diff (py:func 'operator 'sub `(,later ,earlier)))
+> (set diff (py:sub later earlier))
 #("timedelta" 0 408 37011)
 > (py:attr diff 'seconds)
 408
 ```
 
-Let's get that in minutes:
+We can get that in minutes in LFE/Erlang:
 
 ```cl
 > (/ (py:attr diff 'seconds) 60)
