@@ -14,6 +14,20 @@ This is a long README, so we've added a ToC ;-)
 * [Setup](#setup-)
 * [Usage](#usage-)
   * [Metadata](#metadata-)
+  * [Module Level](#module-level-)
+    * [Calling Functions](#calling-functions-)
+    * [Module Constants](#module-constants-)
+  * [Objects](#objects-)
+    * [Instantiation](#instantiation-)
+    * [Calling Methods](#calling-methods-)
+    * [Attribute Values](#attribute-values-)
+    * [Operations on Objects](#operations-on-bjects-)
+  * [ErlPort Pass-Through](#erlport-pass-through-)
+  * [Builtins](#builtins-)
+  * [Operators](#operators-)
+  * [Non-Python Additions](#non-python-additions-)
+  * [Missing Functions](#missing-functions-)
+  * [Erlang](#erlang-)
 
 
 ## Introduction [&#x219F;](#table-of-contents)
@@ -229,7 +243,7 @@ Let's get that in minutes:
 ```
 
 
-#### ErlPort Pass-Through [&#x219F;](#table-of-contents)
+### ErlPort Pass-Through [&#x219F;](#table-of-contents)
 
 If for any reason you would like to skip the LFE py wrappers and call directly
 to ErlPort, you may do so:
@@ -245,7 +259,7 @@ These make direct calls to ErlPort's ``python:call`` function, but supply the
 required Python server ``pid`` behind the scenes.
 
 
-### Builtins
+### Builtins [&#x219F;](#table-of-contents)
 
 In several of the examples above, we made calls to the ``builtins`` module
 like so:
