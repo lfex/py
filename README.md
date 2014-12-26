@@ -16,7 +16,7 @@ This is a long README, so we've added a ToC ;-)
   * [Metadata](#metadata)
 
 
-## Introduction
+## Introduction [&#x21A0](#table-of-contents)
 
 This project provides an easier interface to Python, wrapping
 [ErlPort](http://erlport.org/docs/python.html) calls. It was originally part of
@@ -34,7 +34,7 @@ This project lets you do the following very easily:
 It also provides easy access to Python builtins and operators.
 
 
-## Requirements
+## Requirements [&#x21A0](#table-of-contents)
 
 To use py, you need the following:
 
@@ -42,7 +42,7 @@ To use py, you need the following:
 * [Python 3](https://www.python.org/downloads/)
 
 
-## Setup
+## Setup [&#x21A0](#table-of-contents)
 
 For now, just run it from a git clone:
 
@@ -68,14 +68,14 @@ $ lfetool repl lfe -s py
 ```
 
 
-## Usage
+## Usage [&#x21A0](#table-of-contents)
 
 Below we show some basic usage of py from both LFE and Erlang. In a
 separate section a list of docs are linked showing detailed usage of wrapped
 libraries.
 
 
-### Metadata
+### Metadata [&#x21A0](#table-of-contents)
 
 First things first: let's make sure that you have the appropriate versions
 of things -- in particular, let's confirm that you're running Python 3:
