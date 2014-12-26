@@ -18,8 +18,10 @@
   "Convert all the keys to binary."
   (lists:map
     (match-lambda
-      ((`#(,key ,value))
-        `(,(atom_to_binary key 'latin1) ,value)))
+      ((`#(,key ,value)) (when (is_atom key))
+        `(,(atom_to_binary key 'latin1) ,value))
+      ((`#(,key ,value)) (when (is_list key))
+        `(,(list_to_binary key) ,value)))
     proplist))
 
 (defun make-func
