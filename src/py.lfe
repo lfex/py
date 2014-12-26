@@ -8,7 +8,7 @@
   (let* ((python-path (py-config:get-python-path))
          (`#(ok ,pid) (python:start `(#(python_path ,python-path)))))
     (erlang:register (py-config:get-server-pid-name) pid)
-    (module 'lfe 'init.setup)
+    (pycall 'lfe 'init.setup)
     #(ok started)))
 
 (defun stop ()
@@ -29,15 +29,15 @@
 ;;;
 (defun dir (obj)
   (lfe_io:format "~p~n"
-                 `(,(module 'builtins 'dir `(,obj)))))
+                 `(,(pycall 'builtins 'dir `(,obj)))))
 
 (defun vars (obj)
   (lfe_io:format "~p~n"
-                 `(,(module 'builtins 'vars `(,obj)))))
+                 `(,(pycall 'builtins 'vars `(,obj)))))
 
 (defun type (obj)
   (let* ((class (attr obj '__class__))
-         (repr (module 'builtins 'repr `(,class))))
+         (repr (pycall 'builtins 'repr `(,class))))
     (list_to_atom (cadr (string:tokens repr "'")))))
 
 (defun repr
@@ -51,14 +51,11 @@
 
 ;; ErlPort Calls
 ;;
-(defun module (mod func)
-  (module mod func '()))
+(defun pycall (mod func)
+  (pycall mod func '()))
 
-(defun module (mod func args)
+(defun pycall (mod func args)
   (python:call (pid) mod func args))
-
-(defun module (mod func args kwargs)
-  (python:call (pid) mod func args kwargs))
 
 ;; Creating Python class instances
 ;;
@@ -78,7 +75,7 @@
     (let* ((pid (pid))
            (attr (atom_to_binary attr-name 'latin1)))
       ;; Now call to the 'const' function in the Python module 'lfe.obj'
-      (module 'lfe 'obj.const `(,mod ,attr))))
+      (pycall 'lfe 'obj.const `(,mod ,attr))))
   ((obj type)
     (method obj (list_to_atom (++ "__"
                                   (atom_to_list type)
@@ -86,7 +83,7 @@
 
 
 (defun const (mod func type)
-  (module mod (list_to_atom (++ (atom_to_list func)
+  (pycall mod (list_to_atom (++ (atom_to_list func)
                                 "."
                                 "__"
                                 (atom_to_list type)
@@ -101,7 +98,7 @@
     (let* ((pid (pid))
            (attr (atom_to_binary attr-name 'latin1)))
       ;; Now call to the 'attr' function in the Python module 'lfe.obj'
-      (module 'lfe 'obj.attr `(,obj ,attr)))))
+      (pycall 'lfe 'obj.attr `(,obj ,attr)))))
 
 ;; Python method calls
 ;;
@@ -132,7 +129,7 @@
     (let ((kwargs (py-util:proplist->binary raw-kwargs)))
       ;; Now call to the 'call_callable' function in the Python
       ;; module 'lfe.obj'
-      (module 'lfe 'obj.call_callable `(,func-name ,args ,kwargs)))))
+      (pycall 'lfe 'obj.call_callable `(,func-name ,args ,kwargs)))))
 
 (defun func (module func-name args kwargs)
   ;; Now call to the 'call_func' function in the Python module 'lfe.obj'
@@ -145,4 +142,4 @@
 (defun general-call (obj attr-name args raw-kwargs type)
   (let* ((attr (atom_to_binary attr-name 'latin1))
          (kwargs (py-util:proplist->binary raw-kwargs)))
-    (module 'lfe type `(,obj ,attr ,args ,kwargs))))
+    (pycall 'lfe type `(,obj ,attr ,args ,kwargs))))
