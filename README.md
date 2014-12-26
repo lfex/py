@@ -236,11 +236,8 @@ required Python server ``pid`` behind the scenes.
 
 ### Builtins
 
-In several of the examples above, we made calls to the ``builtins`` module.
-LFE py actually provides wrappers for these, making such calls much easier.
-
-In the sections above, we saw usage like the following, which called to
-the builtin module:
+In several of the examples above, we made calls to the ``builtins`` module
+like so:
 
 ```cl
 > (py:init 'builtins 'dict)
@@ -249,8 +246,7 @@ the builtin module:
 42
 ```
 
-These same calls can be more easily made via the wrapper functions provided
-in the LFE ``py`` module:
+LFE py actually provides wrappers for these, making such calls much easier.
 
 ```cl
 > (py:dict)
