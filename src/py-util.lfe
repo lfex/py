@@ -21,3 +21,16 @@
       ((`#(,key ,value))
         `(,(atom_to_binary key 'latin1) ,value)))
     proplist))
+
+(defun make-func
+  ((`(,lfe-func-name ,func-arity) mod)
+    (let ((py-func-name (kla:replace-dash lfe-func-name))
+          (func-args (kla:make-args func-arity)))
+      `(defun ,lfe-func-name ,func-args
+        (py:pycall ',mod ',py-func-name (list ,@func-args))))))
+
+(defun make-funcs (func-list mod)
+  (lists:map
+    (lambda (x)
+      (make-func x mod))
+    func-list))
