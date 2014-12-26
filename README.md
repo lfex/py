@@ -217,11 +217,41 @@ Let's get that in minutes:
 ```
 
 
+#### ErlPort Pass-Through
+
+If for any reason you would like to skip the LFE py wrappers and call directly
+to ErlPort, you may do so:
+
+```cl
+> (py:pycall 'datetime 'datetime.now)
+("datetime" #(2014 12 25 20 44 4 673150 undefined))
+> (py:pycall 'datetime 'datetime '(1923 4 2 0 0 0))
+#("datetime" #(1923 4 2 0 0 0 0 undefined))
+```
+
+These make direct calls to ErlPort's ``python:call`` function, but supply the required Python server ``pid`` behind the scenes.
+
+
 ### Builtins
 
 In several of the examples above, we made calls to the ``builtins`` module.
 LFE py actually provides wrappers for these, making such calls much easier.
-For example:
+
+Examples:
+
+```cl
+
+```
+
+
+### Operators
+
+It will often be the case that you want to operate on the Python data
+structures obtained via the LFE py calls directly in Python, without
+translating them into LFE/Erlang. The Python ``operator`` module is wrapped
+for your convenience in these cases.
+
+Examples:
 
 ```cl
 
@@ -247,7 +277,7 @@ $ make shell-no-deps
           "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"]},
  {numpy,"1.9.1"},
  {scipy,"0.14.0"}]
-2> py:py(os, getcwd).
+2> py:func(os, getcwd).
 "/Users/yourname/lab/erlang/py"
 ```
 
