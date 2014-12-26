@@ -1,6 +1,9 @@
 (defmodule py
   (export all))
 
+(include-lib "py/include/builtins.lfe")
+(include-lib "py/include/operators.lfe")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Application functions
 ;;;
@@ -23,27 +26,6 @@
 
 (defun pid ()
   (erlang:whereis (py-config:get-server-pid-name)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; REPL functions
-;;;
-(defun dir (obj)
-  (lfe_io:format "~p~n"
-                 `(,(pycall 'builtins 'dir `(,obj)))))
-
-(defun vars (obj)
-  (lfe_io:format "~p~n"
-                 `(,(pycall 'builtins 'vars `(,obj)))))
-
-(defun type (obj)
-  (let* ((class (attr obj '__class__))
-         (repr (pycall 'builtins 'repr `(,class))))
-    (list_to_atom (cadr (string:tokens repr "'")))))
-
-(defun repr
-  ((`#(,opaque ,lang ,data))
-    (io:format "#(~s ~s~n  #B(~ts))~n"
-               `(,opaque ,lang ,data))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Call functions
@@ -143,3 +125,54 @@
   (let* ((attr (atom_to_binary attr-name 'latin1))
          (kwargs (py-util:proplist->binary raw-kwargs)))
     (pycall 'lfe type `(,obj ,attr ,args ,kwargs))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Wrappers for Builtins
+;;;
+(defun compile (source filename mode kwargs)
+  (func 'builtins 'compile `(,source ,filename ,mode) kwargs))
+
+(defun dict (proplist)
+  (func 'builtins 'dict '() proplist))
+
+(defun int (integer kwargs)
+  (func 'builtins 'int `(,integer) kwargs))
+
+(defun open (file kwargs)
+  (func 'builtins 'open `(,file) kwargs))
+
+(defun print (objects kwargs)
+  (func 'builtins 'open `(,objects) kwargs))
+
+(defun property (kwargs)
+  (func 'builtins 'property '() kwargs))
+
+(defun pylist ()
+  (pycall 'builtins 'list '()))
+
+(defun pylist (data)
+  (pycall 'builtins 'list `(,data)))
+
+(defun str (object kwargs)
+  (func 'builtins 'str `(,object) kwargs))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Convenience Functions
+;;;
+(defun pdir (obj)
+  (lfe_io:format "~p~n"
+                 `(,(pycall 'builtins 'dir `(,obj)))))
+
+(defun pvars (obj)
+  (lfe_io:format "~p~n"
+                 `(,(pycall 'builtins 'vars `(,obj)))))
+
+(defun ptype (obj)
+  (let* ((class (attr obj '__class__))
+         (repr (pycall 'builtins 'repr `(,class))))
+    (list_to_atom (cadr (string:tokens repr "'")))))
+
+(defun prepr
+  ((`#(,opaque ,lang ,data))
+    (io:format "#(~s ~s~n  #B(~ts))~n"
+               `(,opaque ,lang ,data))))
