@@ -299,7 +299,9 @@ Examples:
 42
 > (py:sub 108 66)
 42
-> (py:add 108 -66)
+> (py:truediv 462 11)
+42.0
+> (py:floordiv 462 11)
 42
 ```
 
