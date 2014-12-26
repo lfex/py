@@ -371,15 +371,132 @@ $ make shell-no-deps
 ```erlang
 1> 'py-util':'get-versions'().
 [{erlang,"17"},
- {emulator,"6.3"},
+ {emulator,"6.2"},
  {'driver-version',"3.1"},
  {lfe,"0.9.0"},
- {py,"0.0.1"},
+ {'lfe-py',"0.0.1"},
  {python,["3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)",
-          "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"]},
- {numpy,"1.9.1"},
- {scipy,"0.14.0"}]
+          "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]"]}]
 2> py:func(os, getcwd).
-"/Users/yourname/lab/erlang/py"
+"/Users/oubiwann/Dropbox/lab/erlang/py"
+3> py:func('datetime.datetime', now).
+{"datetime",{2014,12,25,23,16,14,979696,undefined}}
+4> py:func('os.path', isfile, [<<"/tmp">>]).
+false
+5> py:func('os.path', isdir, [<<"/tmp">>]).
+true
+6> py:func(builtins, int, [<<"101010">>], [{base, 2}]).
+42
+7> py:const(math, pi).
+3.141592653589793
+8> py:const(math, pi, float).
+3.141592653589793
+9> py:const(math, pi, int).
+3
+10> py:const(math, pi, str).
+"3.141592653589793"
+11> py:init(builtins, dict).
+{"dict",[]}
+12> py:init(collections, 'UserDict').
+{"UserDict",[]}
+13> py:init(datetime, date, [1923, 4, 2]).
+{"date",{1923,4,2}}
 ```
 
+```erlang
+14> Now = py:func('datetime.datetime', now).
+{"datetime",{2014,12,25,23,16,57,146812,undefined}}
+15> py:method(Now, strftime, [<<"%Y.%m.d %H:%M:%S">>]).
+"2014.12.d 23:16:57"
+16> py:attr(Now, year).
+2014
+17> py:attr(Now, microsecond).
+146812
+```
+
+```erlang
+18> Later = py:func('datetime.datetime', now).
+{"datetime",{2014,12,25,23,19,51,934212,undefined}}
+19> Earlier = Now.
+{"datetime",{2014,12,25,23,16,57,146812,undefined}}
+20> Diff = py:sub(Later, Earlier).
+{"timedelta",{0,174,787400}}
+21> py:attr(Diff, seconds).
+174
+22> py:attr(Diff, seconds) / 60.
+2.9
+```
+
+```erlang
+23> py:pycall(datetime, 'datetime.now').
+{"datetime",{2014,12,25,23,24,46,525495,undefined}}
+24> py:pycall(datetime, datetime, [1923, 4, 2, 0, 0, 0]).
+{"datetime",{1923,4,2,0,0,0,0,undefined}}
+```
+
+```erlang
+25> py:dict().
+{"dict",[]}
+26> py:dict([{"a", 1}, {"b", 2}]).
+{"dict",[{"b",2},{"a",1}]}
+27> py:int(<<"101010">>, [{base, 2}]).
+42
+28> py:any([true, true, false, false, false, true]).
+true
+29> py:all([true, true, false, false, false, true]).
+false
+30> py:all([true, true, true]).
+true
+31> py:pow(6, 42).
+481229803398374426442198455156736
+32> py:round(0.666666667, 5).
+0.66667
+33> py:range(7, 42).
+{'$erlport.opaque',python,
+                   <<128,2,99,95,95,98,117,105,108,...>>}
+34> py:len(py:range(7, 42)).
+35
+35> py:pylist(py:range(7, 42)).
+[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,
+ 27,28,29,30,31,32,33,34,35|...]
+36> length(py:pylist(py:range(7, 42))).
+35
+```
+
+```erlang
+37> py:add(37, 5).
+42
+38> py:mul(7, 6).
+42
+39> py:sub(-108, -150).
+42
+40> py:truediv(462, 11).
+42.0
+41> py:floordiv(462, 11).
+42
+42> py:gt(7, 6).
+true
+43> py:le(7, 6).
+false
+44> py:eq(42, 42).
+true
+45> py:'and-'(60, 13).
+12
+46> py:'or-'(60, 13).
+61
+47> py:'xor'(60, 13).
+49
+48> py:inv(60).
+-61
+49> py:rshift(60, 2).
+15
+50> py:lshift(60, 2).
+240
+```
+
+```erlang
+51> py:pylist().
+[]
+52> py:pylist([1, 2, 3, 4]).
+[1,2,3,4]
+```
