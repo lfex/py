@@ -5,6 +5,17 @@
 <img src="resources/images/Python-logo-notext-small.png"/>
 
 
+## Table of Contents
+
+This is a long README, so we've added a ToC ;-)
+
+* [Introduction](#introduction)
+* [Requirements](#requirements)
+* [Setup](#setup)
+* [Usage](#usage)
+  * [Metadata](#metadata)
+
+
 ## Introduction
 
 This project provides an easier interface to Python, wrapping
@@ -64,7 +75,7 @@ separate section a list of docs are linked showing detailed usage of wrapped
 libraries.
 
 
-### Meta Data
+### Metadata
 
 First things first: let's make sure that you have the appropriate versions
 of things -- in particular, let's confirm that you're running Python 3:
