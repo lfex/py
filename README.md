@@ -257,6 +257,31 @@ LFE py actually provides wrappers for these, making such calls much easier.
 42
 ```
 
+More examples:
+
+```cl
+> (py:any '(true true false false false true))
+true
+> (py:all '(true true false false false true))
+false
+> (py:all '(true true true))
+true
+> (py:pow 6 42)
+481229803398374426442198455156736
+> (py:round 0.666666667 5)
+0.66667
+> (py:range 7 42)
+#($erlport.opaque python
+  #B(128 2 99 95 95 98 117 105 108 ...))
+> (py:len (py:range 7 42))
+35
+> (py:pylist (py:range 7 42))
+(7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+ 31 32 33 34 35 36 ...)
+> (erlang:length (py:pylist (py:range 7 42)))
+35
+```
+
 
 ### Operators
 
