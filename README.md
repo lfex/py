@@ -97,6 +97,25 @@ The following sections describe module-level operations.
 #("datetime" #(2014 12 23 16 57 11 693773 undefined))
 ```
 
+Note that strings in arguements need to be converted to binary:
+
+```cl
+> (py:func 'os.path 'isfile '(#b("/tmp")))
+false
+> (py:func 'os.path 'isdir '(#b("/tmp")))
+true
+```
+
+Keyword arguments are passed as proplists, e.g.,
+``'(#(key1 val1) #(key2 val2))``. In the next example we'll pass a string (as
+a binary) which represents a binary number. We'll give ``int`` the keyword of
+``base``, since we're not going to use the default decimal base (10):
+
+```cl
+(py:func 'builtins 'int '(#b("101010")) '(#(base 2)))
+42
+```
+
 
 #### Module Constants
 
@@ -140,24 +159,6 @@ With args:
 #("date" #(1923 4 1))
 ```
 
-Note that strings need to be converted to binary:
-
-```cl
-> (py:func 'os.path 'isfile '(#b("/tmp")))
-false
-> (py:func 'os.path 'isdir '(#b("/tmp")))
-true
-```
-
-Keyword arguments are passed as proplists, e.g.,
-``'(#(key1 val1) #(key2 val2))``. In the next example we'll pass a string (as
-a binary) which represents a binary number. We'll give ``int`` the keyword of
-``base``, since we're not going to use the default decimal base (10):
-
-```cl
-(py:func 'builtins 'int '(#b("101010")) '(#(base 2)))
-42
-```
 
 #### Calling Methods
 
@@ -229,7 +230,8 @@ to ErlPort, you may do so:
 #("datetime" #(1923 4 2 0 0 0 0 undefined))
 ```
 
-These make direct calls to ErlPort's ``python:call`` function, but supply the required Python server ``pid`` behind the scenes.
+These make direct calls to ErlPort's ``python:call`` function, but supply the
+required Python server ``pid`` behind the scenes.
 
 
 ### Builtins
@@ -237,10 +239,26 @@ These make direct calls to ErlPort's ``python:call`` function, but supply the re
 In several of the examples above, we made calls to the ``builtins`` module.
 LFE py actually provides wrappers for these, making such calls much easier.
 
-Examples:
+In the sections above, we saw usage like the following, which called to
+the builtin module:
 
 ```cl
+> (py:init 'builtins 'dict)
+#("dict" ())
+> (py:func 'builtins 'int '(#b("101010")) '(#(base 2)))
+42
+```
 
+These same calls can be more easily made via the wrapper functions provided
+in the LFE ``py`` module:
+
+```cl
+> (py:dict)
+#("dict" ())
+> (py:dict '(#("a" 1) #("b" 2)))
+#("dict" (#("b" 2) #("a" 1)))
+> (py:int #b("101010") '(#(base 2)))
+42
 ```
 
 
@@ -254,8 +272,71 @@ for your convenience in these cases.
 Examples:
 
 ```cl
-
+> (py:add 37 5)
+42
+> (py:mul 7 6)
+42
+> (py:sub 108 66)
+42
+> (py:add 108 -66)
+42
 ```
+
+Equality:
+
+```cl
+> (py:gt 7 6)
+true
+> (py:le 7 6)
+false
+> (py:eq 42 42)
+true
+```
+
+Bitwise operations:
+
+```cl
+> (py:and- 60 13)
+12
+> (py:or- 60 13)
+61
+> (py:xor 60 13)
+49
+> (py:inv 60)
+-61
+> (py:rshift 60 2)
+15
+> (py:lshift 60 2)
+240
+```
+
+
+#### Non-Python Additions
+
+So as not to stomp on the LFE function ``(list ...)``, the Python ``list``
+builtin has been aliased to the ``pylist`` function, e.g.:
+
+```cl
+> (py:pylist)
+()
+> (py:pylist '(1 2 3 4))
+(1 2 3 4)
+```
+
+``(py:dir ...)`` and ``(py:vars ...)`` return elided lists, so you won't see
+complete results that are longer than 28 elements. If you wish to see
+everything, you may call ``(py:pdir)`` and ``(py:pvars)``, respectively.
+
+``(py:repr)`` provides wrappingn for the Python builtin ``repr``. If you would
+like to see a representation of the pickeled Python data in LFE, you may use
+the ``(py:prepr)`` function.
+
+
+### Missing Functions
+
+Any Python function that does in-place modification of objects is not included.
+LFE py will eventually provide analogs for in-place functions that return a new
+data set or object.
 
 
 ### Erlang
