@@ -64,7 +64,8 @@ computing in Erlang/LFE.
 
 To use py, you need the following:
 
-* [lfetool](http://docs.lfe.io/quick-start/1.html)
+* [lfetool](http://docs.lfe.io/quick-start/1.html) (used by ``make`` targets
+  to automatically set ``ERL_LIBS`` for deps)
 * [Python 3](https://www.python.org/downloads/)
 
 
