@@ -10,7 +10,7 @@
 * [Introduction](#introduction-)
 * [Requirements](#requirements-)
 * [Setup](#setup-)
-* [Usage](#usage-)
+* [API Usage](#api-usage-)
   * [Metadata](#metadata-)
   * [Module Level](#module-level-)
     * [Calling Functions](#calling-functions-)
@@ -26,24 +26,40 @@
   * [Non-Python Additions](#non-python-additions-)
   * [Missing Functions](#missing-functions-)
   * [Erlang](#erlang-)
-
+* [Architecture](#architecture-)
+* [Controlling the Python Servers](#controlling-the-python-servers-)
+  * Start, Stop, and Restart
+  * Dynamically Adding More Python Servers
+  * Configuring Python Servers
+  * Automatic Restarts
+* [Distributed Python](#distributed-python-)
+  * Starting Remote Python Servers
+  * Executing Python on Remote Servers
+  * Executing Code in Parallel
 
 ## Introduction [&#x219F;](#table-of-contents)
 
-This project provides an easier interface to Python, wrapping
-[ErlPort](http://erlport.org/docs/python.html) calls. It was originally part of
-the [lsci project](git@github.com:lfex/lsci.git), but was split out due to it
-being generally useful.
+This project provides two key features:
 
-This project lets you do the following very easily:
-
-* Make module-level calls
-* Get module-level constants
-* Instantiate objects
-* Call object methods
-* Get object attributes
+1. An easier interface to Python, wrapping
+   [ErlPort](http://erlport.org/docs/python.html) calls. This lets you do the
+   following very easily:
+    * Make module-level calls
+    * Get module-level constants
+    * Instantiate objects
+    * Call object methods
+    * Get object attributes
+    * Call builtins and operators with convenient wrappers
+1. A means of running Python in a distributed framework using all the
+   well-known strengths of Erlang (fault-tolerance, scalability,
+   concurrency, soft real-time, etc.).
 
 It also provides easy access to Python builtins and operators.
+
+LFE py was originally part of the
+[lsci project](git@github.com:lfex/lsci.git), but was split out due to it
+being generally useful for all sorts of projects, not just scientific
+computing in Erlang/LFE.
 
 
 ## Requirements [&#x219F;](#table-of-contents)
@@ -80,7 +96,7 @@ $ lfetool repl lfe -s py
 ```
 
 
-## Usage [&#x219F;](#table-of-contents)
+## API Usage [&#x219F;](#table-of-contents)
 
 Below we show some basic usage of py from both LFE and Erlang. In a
 separate section a list of docs are linked showing detailed usage of wrapped
@@ -525,3 +541,19 @@ true
 52> py:pylist([1, 2, 3, 4]).
 [1,2,3,4]
 ```
+
+
+## Architecture [&#x219F;](#table-of-contents)
+
+TBD
+
+
+## Controlling the Python Servers [&#x219F;](#table-of-contents)
+
+TBD
+
+
+## Distributed Python [&#x219F;](#table-of-contents)
+
+TBD
+
