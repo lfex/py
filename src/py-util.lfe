@@ -1,6 +1,9 @@
 (defmodule py-util
   (export all))
 
+(defun get-erlport-version ()
+  (lutil:get-app-src-version "deps/erlport/ebin/erlport.app"))
+
 (defun get-py-version ()
   (lutil:get-app-src-version "src/py.app.src"))
 
@@ -11,7 +14,8 @@
 
 (defun get-versions ()
   (++ (lutil:get-version)
-      `(#(lfe-py ,(get-py-version))
+      `(#(erlport ,(get-erlport-version))
+        #(py ,(get-py-version))
         #(python ,(get-python-version)))))
 
 (defun proplist->binary (proplist)

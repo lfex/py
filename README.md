@@ -109,14 +109,14 @@ of things -- in particular, let's confirm that you're running Python 3:
 ```cl
 > (py-util:get-versions)
 (#(erlang "17")
- #(emulator "6.3")
+ #(emulator "6.2")
  #(driver-version "3.1")
  #(lfe "0.9.0")
- #(lfe-py "0.0.1")
+ #(erlport "0.9.8")
+ #(py "0.0.1")
  #(python
    ("3.4.2 (v3.4.2:ab2c023a9432, Oct  5 2014, 20:42:22)"
     "[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]")))
->
 ```
 
 
