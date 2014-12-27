@@ -1,6 +1,6 @@
 # py
 
-*Python from Erlang/LFE: An ErlPort Wrapper with Convenience Functions*
+*Distributed Python for Erlang/LFE*
 
 <img src="resources/images/Python-logo-notext-small.png"/>
 
