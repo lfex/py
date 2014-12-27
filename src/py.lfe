@@ -34,8 +34,8 @@
   (start)
   #(ok restarted))
 
-(defun get-pid ()
-  (erlang:whereis 'py))
+(defun get-pids ()
+  `(,(erlang:whereis 'py)))
 
 (defun get-sup-pid ()
   (erlang:whereis 'py-sup))
@@ -50,7 +50,7 @@
   (pycall mod func '()))
 
 (defun pycall (mod func args)
-  (python:call (get-pid) mod func args))
+  (python:call (py-sched:get-next-pid) mod func args))
 
 ;; Creating Python class instances
 ;;
@@ -67,7 +67,7 @@
 ;;
 (defun const
   ((mod attr-name) (when (is_atom mod))
-    (let* ((pid (get-pid))
+    (let* ((pid (py-sched:get-next-pid))
            (attr (atom_to_binary attr-name 'latin1)))
       ;; Now call to the 'const' function in the Python module 'lfe.obj'
       (pycall 'lfe 'obj.const `(,mod ,attr))))
@@ -90,7 +90,7 @@
   ((obj attr-name) (when (is_list attr-name))
     (attr obj (list_to_atom attr-name)))
   ((obj attr-name) (when (is_atom attr-name))
-    (let* ((pid (get-pid))
+    (let* ((pid (py-sched:get-next-pid))
            (attr (atom_to_binary attr-name 'latin1)))
       ;; Now call to the 'attr' function in the Python module 'lfe.obj'
       (pycall 'lfe 'obj.attr `(,obj ,attr)))))
