@@ -1,10 +1,22 @@
 (defmodule py-sup
-  (behaviour e2_task_supervisor)
+  (behaviour supervisor)
   (export all))
 
 (defun start_link ()
-  (e2_task_supervisor:start_link
-    (MODULE) 'mydb-client-handler '(registered)))
+  (let* ((python-path (py-config:get-python-path))
+         (options `(#(python_path ,python-path))))
+    (supervisor:start_link
+      `#(local ,(MODULE))
+      (MODULE)
+      `(,options))))
 
-(defun start_handler (socket)
-  (e2_task_supervisor:start_task (MODULE) `(,socket)))
+(defun init (options)
+  `#(ok #(,(get-supervisor-spec)
+          (,(get-child-spec)))))
+
+(defun get-supervisor-spec ()
+  #(one_for_one 1 1))
+
+(defun get-child-spec ()
+  `#(py #(py start_link ())
+        permanent 2000 worker (py)))

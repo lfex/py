@@ -5,14 +5,13 @@
 (include-lib "py/include/operators.lfe")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Application functions
+;;; Python server functions
 ;;;
-(defun start ()
-  (let* ((python-path (py-config:get-python-path))
-         (`#(ok ,pid) (python:start `(#(python_path ,python-path)))))
+(defun start_link (options)
+  (let (((= `#(ok ,pid) result) (python:start options)))
     (erlang:register (py-config:get-server-pid-name) pid)
     (pycall 'lfe 'init.setup)
-    #(ok started)))
+    result))
 
 (defun stop ()
   (python:stop (pid))
