@@ -3,20 +3,24 @@
   (export all))
 
 (defun start_link ()
-  (let* ((python-path (py-config:get-python-path))
-         (options `(#(python_path ,python-path))))
-    (supervisor:start_link
-      `#(local ,(MODULE))
-      (MODULE)
-      `(,options))))
+  (supervisor:start_link
+    `#(local ,(MODULE))
+    (MODULE)
+    '()))
 
-(defun init (options)
+(defun init (_)
   `#(ok #(,(get-supervisor-spec)
-          (,(get-child-spec)))))
+          ,(get-children-specs))))
 
 (defun get-supervisor-spec ()
-  #(one_for_one 1 1))
+  '#(one_for_one 3 1))
+
+(defun get-children-specs ()
+  `(,(get-child-spec)))
 
 (defun get-child-spec ()
-  `#(py #(py start_link ())
-        permanent 2000 worker (py)))
+  '#(py #(py start_link ())
+        permanent
+        2000
+        worker
+        (py)))
