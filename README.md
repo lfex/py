@@ -54,8 +54,6 @@ This project provides two key features:
    well-known strengths of Erlang (fault-tolerance, scalability,
    concurrency, soft real-time, etc.).
 
-It also provides easy access to Python builtins and operators.
-
 LFE py was originally part of the
 [lsci project](git@github.com:lfex/lsci.git), but was split out due to it
 being generally useful for all sorts of projects, not just scientific
