@@ -34,11 +34,14 @@
   (start)
   #(ok restarted))
 
-(defun get-pids ()
-  `(,(erlang:whereis 'py)))
-
 (defun get-sup-pid ()
   (erlang:whereis 'py-sup))
+
+(defun get-pids ()
+  (lists:map
+    (lambda (x)
+      (element 2 x))
+    (supervisor:which_children (get-sup-pid))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Call functions
