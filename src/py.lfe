@@ -1,4 +1,5 @@
 (defmodule py
+  (behaviour gen_server)
   (export all))
 
 (include-lib "py/include/builtins.lfe")
@@ -7,15 +8,29 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python server functions
 ;;;
-(defun start_link (options)
-  (let (((= `#(ok ,pid) result) (python:start options)))
-    (erlang:register (py-config:get-server-pid-name) pid)
+(defun init (_)
+  '#(ok ()))
+
+(defun start_link ()
+  (start_link '()))
+
+(defun start_link (_)
+  (let* ((python-path (py-config:get-python-path))
+         (options `(#(python_path ,python-path)))
+         (result (python:start_link `#(local ,(py-config:get-pid-name))
+                                    options)))
     (pycall 'lfe 'init.setup)
     result))
 
+(defun terminate (_reason _state)
+  (python:stop (pid)))
+
+(defun start ()
+  (application:start 'py)
+  #(ok started))
+
 (defun stop ()
-  (python:stop (pid))
-  (erlang:unregister (py-config:get-server-pid-name))
+  (application:stop 'py)
   #(ok stopped))
 
 (defun restart ()
@@ -24,7 +39,7 @@
   #(ok restarted))
 
 (defun pid ()
-  (erlang:whereis (py-config:get-server-pid-name)))
+  (erlang:whereis (py-config:get-pid-name)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Call functions

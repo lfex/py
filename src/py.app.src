@@ -9,19 +9,21 @@
 
   %% All modules used by the application.
   {modules,
-   [
-    'py',
+   ['py',
+    'py-app',
+    'py-config',
+    'py-util',
     'py-sup'
    ]},
 
   %% All of the registered names the application uses. This can be ignored.
-  {registered, []},
+  {registered, ['py-sup']},
 
   %% Applications that are to be started prior to this one. This can be ignored
   %% leave it alone unless you understand it well and let the .rel files in
   %% your release handle this.
   {applications, [kernel, stdlib]},
-
+  {mod, {'py-app', []}},
   %% OTP application loader will load, but not start, included apps. Again
   %% this can be ignored as well.  To load but not start an application it
   %% is easier to include it in the .rel file followed by the atom 'none'
@@ -29,7 +31,7 @@
 
   %% configuration parameters similar to those in the config file specified
   %% on the command line. can be fetched with gas:get_env
-  {env, [{'server-pid-name', 'erlport-server'},
+  {env, [{'pid-name', 'py'},
          {'python-path', "./python:./deps/erlport/priv/python3"}]}
  ]
 }.
