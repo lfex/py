@@ -3,7 +3,6 @@ RUN_DIR=./run
 LOG_DIR=./log
 
 compile: get-deps clean-ebin proj-compile
-	@cd deps/e2 && make
 
 run-dir:
 	@mkdir -p $(RUN_DIR)
