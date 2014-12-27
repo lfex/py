@@ -25,8 +25,5 @@
         data)
       (_ result))))
 
-(defun get-pid-name ()
-  (get 'pid-name))
-
 (defun get-python-path ()
   (get 'python-path))

@@ -17,13 +17,9 @@
 (defun start_link (_)
   (let* ((python-path (py-config:get-python-path))
          (options `(#(python_path ,python-path)))
-         (result (python:start_link `#(local ,(py-config:get-pid-name))
-                                    options)))
+         (result (python:start_link `#(local py) options)))
     (pycall 'lfe 'init.setup)
     result))
-
-(defun terminate (_reason _state)
-  (python:stop (pid)))
 
 (defun start ()
   (application:start 'py)
@@ -38,8 +34,11 @@
   (start)
   #(ok restarted))
 
-(defun pid ()
-  (erlang:whereis (py-config:get-pid-name)))
+(defun get-pid ()
+  (erlang:whereis 'py))
+
+(defun get-sup-pid ()
+  (erlang:whereis 'py-sup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Call functions
@@ -51,7 +50,7 @@
   (pycall mod func '()))
 
 (defun pycall (mod func args)
-  (python:call (pid) mod func args))
+  (python:call (get-pid) mod func args))
 
 ;; Creating Python class instances
 ;;
@@ -68,7 +67,7 @@
 ;;
 (defun const
   ((mod attr-name) (when (is_atom mod))
-    (let* ((pid (pid))
+    (let* ((pid (get-pid))
            (attr (atom_to_binary attr-name 'latin1)))
       ;; Now call to the 'const' function in the Python module 'lfe.obj'
       (pycall 'lfe 'obj.const `(,mod ,attr))))
@@ -91,7 +90,7 @@
   ((obj attr-name) (when (is_list attr-name))
     (attr obj (list_to_atom attr-name)))
   ((obj attr-name) (when (is_atom attr-name))
-    (let* ((pid (pid))
+    (let* ((pid (get-pid))
            (attr (atom_to_binary attr-name 'latin1)))
       ;; Now call to the 'attr' function in the Python module 'lfe.obj'
       (pycall 'lfe 'obj.attr `(,obj ,attr)))))

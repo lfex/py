@@ -31,7 +31,6 @@
 
   %% configuration parameters similar to those in the config file specified
   %% on the command line. can be fetched with gas:get_env
-  {env, [{'pid-name', 'py'},
-         {'python-path', "./python:./deps/erlport/priv/python3"}]}
+  {env, [{'python-path', "./python:./deps/erlport/priv/python3"}]}
  ]
 }.
