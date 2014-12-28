@@ -38,6 +38,8 @@
          {'erlport-max-restarts', 3},
          {'erlport-restart-threshold', 1},
          {'erlport-shutdown-timeout', 2000},
+         %% Python Server Configuration
+         {'worker-count', 3},
          %% Python Server Scheduler Configuration
          {'scheduler-mod', 'py-sched'},
          {'scheduler-func', 'get-first'}]}

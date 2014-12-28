@@ -39,3 +39,6 @@
 
 (defun call-scheduler ()
   (call (get 'scheduler-mod) (get 'scheduler-func)))
+
+(defun get-worker-count ()
+  (get 'worker-count))
