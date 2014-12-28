@@ -1,6 +1,6 @@
 # py
 
-*Distributed Python the Erlang Ecosystem*
+*Distributed Python for the Erlang Ecosystem*
 
 <img src="resources/images/Python-logo-notext-small.png"/>
 
