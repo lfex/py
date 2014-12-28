@@ -2,4 +2,4 @@
   (export all))
 
 (defun get-next-pid ()
-  (car (py:get-pids)))
+  (car (py:get-python-pids)))

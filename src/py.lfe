@@ -1,5 +1,4 @@
 (defmodule py
-  (behaviour gen_server)
   (export all))
 
 (include-lib "py/include/builtins.lfe")
@@ -8,9 +7,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python server functions
 ;;;
-(defun init (_)
-  '#(ok ()))
-
 (defun start_link ()
   (start_link '()))
 
@@ -37,11 +33,12 @@
 (defun get-sup-pid ()
   (erlang:whereis 'py-sup))
 
-(defun get-pids ()
-  (lists:map
-    (lambda (x)
-      (element 2 x))
-    (supervisor:which_children (get-sup-pid))))
+(defun get-python-pids ()
+  `(,(erlang:whereis 'py)))
+  ; (lists:map
+  ;   (lambda (x)
+  ;     (element 2 x))
+  ;   (supervisor:which_children (get-sup-pid))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Call functions
