@@ -8,13 +8,15 @@
 ;;; Python server functions
 ;;;
 (defun start_link ()
-  (start_link '()))
+  (start_link '(py)))
 
-(defun start_link (_)
+(defun start_link (child-id)
   (let* ((python-path (py-config:get-python-path))
          (options `(#(python_path ,python-path)))
-         (result (python:start_link `#(local py) options)))
-    (pycall 'lfe 'init.setup)
+         (result (python:start_link `#(local ,child-id) options)))
+    ;; Initialize the Python components, but don't use the scheduler
+    ;; tp get the pid, since the supervisor hasn't finished yet.
+    (python:call (erlang:whereis 'py) 'lfe 'init.setup '())
     result))
 
 (defun start ()
@@ -31,14 +33,14 @@
   #(ok restarted))
 
 (defun get-sup-pid ()
-  (erlang:whereis 'py-sup))
+  (py-sup:get-pid))
 
 (defun get-python-pids ()
-  `(,(erlang:whereis 'py)))
-  ; (lists:map
-  ;   (lambda (x)
-  ;     (element 2 x))
-  ;   (supervisor:which_children (get-sup-pid))))
+  (py-sup:get-children-pids))
+
+(defun add-server (child-id)
+  "Add another Python ErlPort server to the supervision tree."
+  (py-sup:add-server (get-sup-pid) child-id))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Call functions

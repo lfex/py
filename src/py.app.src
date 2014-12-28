@@ -2,18 +2,19 @@
 {application, 'py',
  [
   %% A quick description of the application.
-  {description, "Python from Erlang/LFE: A Wrapper for ErlPort with Convenience Functions"},
+  {description, "Distributed Python for the Erlang Ecosystem"},
 
   %% The version of the application
   {vsn, "0.0.1"},
 
   %% All modules used by the application.
   {modules,
-   ['py',
-    'py-app',
+   ['py-app',
     'py-config',
+    'py-sched',
+    'py-sup',
     'py-util',
-    'py-sup'
+    'py'
    ]},
 
   %% All of the registered names the application uses. This can be ignored.
@@ -30,10 +31,15 @@
   {included_applications, []},
 
   %% configuration parameters similar to those in the config file specified
-  %% on the command line. can be fetched with gas:get_env
-  {env, [{'python-path', "./python:./deps/erlport/priv/python3"},
+  %% on the command line. can be fetched with application:get_env
+  {env, [%% ErlPort Configuration
+         {'python-path', "./python:./deps/erlport/priv/python3"},
+         %% Supervisor Configuration
          {'erlport-max-restarts', 3},
          {'erlport-restart-threshold', 1},
-         {'erlport-shutdown-timeout', 2000}]}
+         {'erlport-shutdown-timeout', 2000},
+         %% Python Server Scheduler Configuration
+         {'scheduler-mod', 'py-sched'},
+         {'scheduler-func', 'get-first'}]}
  ]
 }.

@@ -36,3 +36,6 @@
 
 (defun get-shutdown-timeout ()
   (get 'erlport-shutdown-timeout))
+
+(defun call-scheduler ()
+  (call (get 'scheduler-mod) (get 'scheduler-func)))
