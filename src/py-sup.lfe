@@ -12,17 +12,16 @@
   `#(ok #(,(get-supervisor-spec)
           ,(get-children-specs))))
 
-;; XXX move restart numbers to config
 (defun get-supervisor-spec ()
-  '#(one_for_one 3 1))
+  `#(one_for_one ,(py-config:get-max-restarts)
+                 ,(py-config:get-restart-threshold)))
 
 (defun get-children-specs ()
   `(,(get-child-spec)))
 
-;; XXX move timeout to config
 (defun get-child-spec ()
-  '#(py #(py start_link ())
+  `#(py #(py start_link ())
         permanent
-        2000
+        ,(py-config:get-shutdown-timeout)
         worker
         (py)))

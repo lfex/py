@@ -31,6 +31,9 @@
 
   %% configuration parameters similar to those in the config file specified
   %% on the command line. can be fetched with gas:get_env
-  {env, [{'python-path', "./python:./deps/erlport/priv/python3"}]}
+  {env, [{'python-path', "./python:./deps/erlport/priv/python3"},
+         {'erlport-max-restarts', 3},
+         {'erlport-restart-threshold', 1},
+         {'erlport-shutdown-timeout', 2000}]}
  ]
 }.

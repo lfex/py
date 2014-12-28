@@ -27,3 +27,12 @@
 
 (defun get-python-path ()
   (get 'python-path))
+
+(defun get-max-restarts ()
+  (get 'erlport-max-restarts))
+
+(defun get-restart-threshold ()
+  (get 'erlport-restart-threshold))
+
+(defun get-shutdown-timeout ()
+  (get 'erlport-shutdown-timeout))
