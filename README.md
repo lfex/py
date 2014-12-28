@@ -27,6 +27,11 @@
   * [Missing Functions](#missing-functions-)
   * [Erlang](#erlang-)
 * [Architecture](#architecture-)
+  * ErlPort
+  * OTP for LFE py
+  * Configuration
+  * Erlang/OTP components of LFE py
+  * Python components of LFE py
 * [Controlling the Python Servers](#controlling-the-python-servers-)
   * Start, Stop, and Restart
   * Dynamically Adding More Python Servers
@@ -544,12 +549,26 @@ true
 
 ## Architecture [&#x219F;](#table-of-contents)
 
-TBD
+### ErlPort
+
+### OTP for LFE py
+
+### Configuration
+
+### Erlang/OTP components of LFE py
+
+### Python components of LFE py
 
 
 ## Controlling the Python Servers [&#x219F;](#table-of-contents)
 
-TBD
+###  Start, Stop, and Restart
+
+###  Dynamically Adding More Python Servers
+
+###  Configuring Python Servers
+
+###  Automatic Restarts
 
 
 ## Distributed Python [&#x219F;](#table-of-contents)
