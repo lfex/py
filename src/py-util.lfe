@@ -40,3 +40,9 @@
     (lambda (x)
       (make-func x mod))
     func-list))
+
+(defun get-worker-names ()
+  (lists:map
+    (lambda (x)
+      (list_to_atom (++ "py-" (integer_to_list x))))
+    (lists:seq 1 (py-config:get-worker-count))))

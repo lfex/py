@@ -17,7 +17,7 @@
                  ,(py-config:get-restart-threshold)))
 
 (defun get-children-specs ()
-  `(,(get-child-spec)))
+  (lists:map #'get-child-spec/1 (py-util:get-worker-names)))
 
 (defun get-child-spec ()
   (get-child-spec 'py))
