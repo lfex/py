@@ -10,6 +10,10 @@
   Always get the first PID. Don't even bother with the others. Ever."
   (car (py-sup:get-children-pids)))
 
+(defun random ()
+  (let ((index (random:uniform (py-config:get-worker-count))))
+    (lists:nth index (py-sup:get-children-pids))))
+
 (defun round-robin ()
   'noop)
 

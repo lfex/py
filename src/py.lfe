@@ -53,7 +53,9 @@
   (pycall mod func '()))
 
 (defun pycall (mod func args)
-  (python:call (py-sched:get-next-pid) mod func args))
+  (let ((pid (py-sched:get-next-pid)))
+    ;; XXX add a lager DEBUG call here for sanity-checking schedulers
+    (python:call pid mod func args)))
 
 ;; Creating Python class instances
 ;;
