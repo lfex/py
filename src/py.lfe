@@ -13,11 +13,10 @@
 (defun start_link (child-id)
   (let* ((python-path (py-config:get-python-path))
          (options `(#(python_path ,python-path)))
-         (result (python:start_link `#(local ,child-id) options))
-         (first-worker (car (py-util:get-worker-names))))
+         (result (python:start_link `#(local ,child-id) options)))
     ;; Initialize the Python components, but don't use the scheduler
     ;; tp get the pid, since the supervisor hasn't finished yet.
-    (python:call (erlang:whereis first-worker) 'lfe 'init.setup '())
+    (python:call (erlang:whereis child-id) 'lfe 'init.setup '())
     result))
 
 (defun start ()
