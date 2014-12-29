@@ -64,8 +64,8 @@ What LFE py is not:
 
 * A PaaS; if that's what you're interested in, please take a look at
   [CloudI](http://cloudi.org/).
-* A framework for pipelining distributed jobs (e.g., mapreduce). For that,
-  see the [Disco project](http://discoproject.org/).
+* A framework for pipelining jobs across distributed data (e.g., mapreduce).
+  For that, see the [Disco project](http://discoproject.org/).
 * A language-agnostic, general-purpose ports server. LFE py is, in fact,
   built on one of those: [ErlPort](http://erlport.org/)!
 
