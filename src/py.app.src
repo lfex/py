@@ -42,6 +42,6 @@
          {'worker-count', 3},
          %% Python Server Scheduler Configuration
          {'scheduler-mod', 'py-sched'},
-         {'scheduler-func', 'random'}]}
+         {'scheduler-func', 'least-reductions'}]}
  ]
 }.

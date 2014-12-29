@@ -37,11 +37,11 @@
   (py-sup:get-pid))
 
 (defun get-python-pids ()
-  (py-sup:get-children-pids))
+  (py-sup:get-child-pids))
 
 (defun add-server (child-id)
   "Add another Python ErlPort server to the supervision tree."
-  (py-sup:add-server (get-sup-pid) child-id))
+  (py-sup:add-server child-id))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Call functions
