@@ -100,14 +100,15 @@ $ cd py
 $ make
 ```
 
-Activate your Python virtualenv and then start up the LFE REPL:
+Activate the Python virtualenv that was created by the ``make`` command you
+just ran. Then start up the LFE REPL:
 
 ```bash
 $ . ./python/.venv/bin/activate
 $ make repl-no-deps
 ```
 
-Note that the ``repl`` and ``repl-no-deps`` targets automatically start up
+Note that the ``repl`` and ``repl-no-deps`` make targets automatically start up
 the py (and thus ErlPort) Erlang Python server. If you run the REPL without
 these ``make`` targets, you'll need to manually start things:
 
