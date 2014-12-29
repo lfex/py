@@ -29,20 +29,21 @@
   * [Erlang](#erlang-)
 * [Architecture](#architecture-)
   * [Overview](#overview-)
-  * OTP for LFE py
-  * Configuration
-  * Erlang/OTP components of LFE py
-  * Python components of LFE py
+  * [Erlang Components](#erlang-components-)
+  * [Python Components](#python-components-)
 * [Controlling the Python Servers](#controlling-the-python-servers-)
   * Start, Stop, and Restart
   * Dynamically Adding More Python Servers
   * Automatic Restarts
   * Python Server Schedulers
-  * Configuring Python Servers
+  * Erlang Configuration
+  * Python Configuration
+* [Executing Code in Parallel](#executing-code-in-parallel-)
+  * Identical Calls
+  * Scatter/Gather
 * [Distributed Python](#distributed-python-)
   * Starting Remote Python Servers
   * Executing Python on Remote Servers
-  * Executing Code in Parallel
 
 ## Introduction [&#x219F;](#table-of-contents)
 
@@ -613,7 +614,8 @@ true
 
 ## Architecture [&#x219F;](#table-of-contents)
 
-### Overview
+
+### Overview [&#x219F;](#table-of-contents)
 
 Here is a high-level diagram of the LFE py architecture:
 
@@ -645,7 +647,10 @@ Here is a high-level diagram of the LFE py architecture:
 +-------------------------------------------+
 ```
 
-Each py Worker is actually an ErlPort Python server:
+Each py Worker is actually a wrapper for an ErlPort ``gen_server`` which starts
+up Python interpreter. LFE py is only designed to work with Python 3. Both
+ErlPort and it provide Python 3 modules for use in the interpreters started
+by the workers. They have the following conceptual structure:
 
 ```
 +----------------+
@@ -671,7 +676,7 @@ ErlPort so that the custom encoder, decoder, and object helper Python modules
 are available for use by all Python calls issued to the workers.
 
 
-### Erlang Components
+### Erlang Components [&#x219F;](#table-of-contents)
 
 Working our way up from the digram, here are references for Erlang/OTP
 components of LFE py:
@@ -684,7 +689,8 @@ components of LFE py:
 * [py-app](https://github.com/lfex/py/blob/master/src/py-sup.lfe)
 * [py Workers](https://github.com/lfex/py/blob/master/src/py.lfe#L7)
 
-### Python Components
+
+### Python Components [&#x219F;](#table-of-contents)
 
 And here are references for the Python components in LFE py:
 
@@ -695,33 +701,30 @@ And here are references for the Python components in LFE py:
 * [py Decoders](https://github.com/lfex/py/blob/master/python/lfe/decoders.py)
 
 
-### OTP for LFE py
-
-### Configuration
-
-### Erlang/OTP components of LFE py
-
-### Python components of LFE py
-
-
-* ErlPort
-  * OTP for LFE py
-  * Configuration
-  * Erlang/OTP components of LFE py
-  * Python components of LFE py
-
 ## Controlling the Python Servers [&#x219F;](#table-of-contents)
 
-###  Start, Stop, and Restart
+### Start, Stop, and Restart [&#x219F;](#table-of-contents)
 
-###  Dynamically Adding More Python Servers
+### Dynamically Adding More Python Servers [&#x219F;](#table-of-contents)
 
-###  Configuring Python Servers
+### Automatic Restarts [&#x219F;](#table-of-contents)
 
-###  Automatic Restarts
+### Python Server Schedulers [&#x219F;](#table-of-contents)
+
+### Erlang Configuration [&#x219F;](#table-of-contents)
+
+### Python Configuration [&#x219F;](#table-of-contents)
+
+
+## Executing Code in Parallel [&#x219F;](#table-of-contents)
+
+### Identical Calls [&#x219F;](#table-of-contents)
+
+### Scatter/Gather [&#x219F;](#table-of-contents)
 
 
 ## Distributed Python [&#x219F;](#table-of-contents)
 
-TBD
+### Starting Remote Python Servers [&#x219F;](#table-of-contents)
 
+### Executing Python on Remote Servers [&#x219F;](#table-of-contents)
