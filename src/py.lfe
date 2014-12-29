@@ -147,32 +147,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Wrappers for Builtins
 ;;;
-(defun compile (source filename mode kwargs)
-  (func 'builtins 'compile `(,source ,filename ,mode) kwargs))
-
 (defun dict (proplist)
   (func 'builtins 'dict '() proplist))
-
-(defun int (integer kwargs)
-  (func 'builtins 'int `(,integer) kwargs))
-
-(defun open (file kwargs)
-  (func 'builtins 'open `(,file) kwargs))
-
-(defun print (objects kwargs)
-  (func 'builtins 'open `(,objects) kwargs))
-
-(defun property (kwargs)
-  (func 'builtins 'property '() kwargs))
 
 (defun pylist ()
   (pycall 'builtins 'list '()))
 
 (defun pylist (data)
   (pycall 'builtins 'list `(,data)))
-
-(defun str (object kwargs)
-  (func 'builtins 'str `(,object) kwargs))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Convenience Functions

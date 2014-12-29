@@ -64,12 +64,24 @@
       (tuple 0) (tuple 1)
       (type 1) (type 3)
       (vars 0) (vars 1)
-      (zip 1))))
+      (zip 1)))
+
+  (defun get-kwarg-builtin-funcs ()
+    '((compile 4)
+      (int 2)
+      (open 2)
+      (print 2)
+      (property 1)
+      (str 2))))
 
 (defmacro generate-builtins-api ()
   `(progn ,@(py-util:make-funcs (get-builtin-funcs) 'builtins)))
 
+(defmacro generate-kwarg-builtins-api ()
+  `(progn ,@(py-util:make-kwarg-funcs (get-kwarg-builtin-funcs) 'builtins)))
+
 (generate-builtins-api)
+(generate-kwarg-builtins-api)
 
 (defun loaded-builtins ()
   "This is just a dummy function for display purposes when including from the

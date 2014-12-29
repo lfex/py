@@ -41,6 +41,23 @@
       (make-func x mod))
     func-list))
 
+(defun make-kwarg-func
+  ((`(,lfe-func-name ,func-arity) mod)
+    (let* ((py-func-name (kla:replace-dash lfe-func-name))
+           (func-args (kla:make-args func-arity))
+           (`#(,args (,kwargs)) (kwargs-split func-args)))
+      `(defun ,lfe-func-name ,func-args
+        (py:func ',mod ',py-func-name (list ,@args) ,kwargs)))))
+
+(defun make-kwarg-funcs (func-list mod)
+  (lists:map
+    (lambda (x)
+      (make-kwarg-func x mod))
+    func-list))
+
+(defun kwargs-split (all-args)
+  (lists:split (- (length all-args) 1) all-args))
+
 (defun get-worker-names ()
   (lists:map
     (lambda (x)
