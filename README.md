@@ -20,6 +20,7 @@
     * [Calling Methods](#calling-methods-)
     * [Attribute Values](#attribute-values-)
     * [Operations on Objects](#operations-on-objects-)
+  * [Experimental Dotted Name Support](#experimental-dotted-name-support-)
   * [ErlPort Pass-Through](#erlport-pass-through-)
   * [Builtins](#builtins-)
   * [Operators](#operators-)
@@ -276,7 +277,7 @@ We can get that in minutes in LFE/Erlang:
 ```
 
 
-### Experimental Dotted Name Supprt [&#x219F;](#table-of-contents)
+### Experimental Dotted Name Support [&#x219F;](#table-of-contents)
 
 There is currently tentative support for dotted names in the following
 calls:
