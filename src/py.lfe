@@ -60,17 +60,31 @@
 
 ;; Creating Python class instances
 ;;
-(defun init (module class)
-  (init module class '() '()))
+(defun init (mod-class)
+  (apply #'init/2 (py-util:split-dotted mod-class)))
 
-(defun init (module class args)
-  (init module class args '()))
+(defun init
+  ((mod-class args) (when (is_list args))
+    (apply #'init/4 (++ (py-util:split-dotted mod-class)
+                        `(,args ()))))
+  ((module class)
+    (init module class '() '())))
+
+(defun init
+  ((mod-class args kwargs) (when (is_list args))
+    (apply #'init/4 (++ (py-util:split-dotted mod-class)
+                        `(,args ,kwargs))))
+  ((module class args)
+    (init module class args '())))
 
 (defun init (module class args kwargs)
   (func module class args kwargs))
 
 ;; Python object and module constants
 ;;
+(defun const (mod-attr)
+  (apply #'const/2 (py-util:split-dotted mod-attr)))
+
 (defun const
   ((mod attr-name) (when (is_atom mod))
     (let ((attr (atom_to_binary attr-name 'latin1)))
@@ -114,22 +128,30 @@
 ;; Python module function and function object calls
 ;;
 (defun func (func-name)
-    (func func-name '() '()))
+  (if (py-util:dotted? func-name)
+    (apply #'func/2 (py-util:split-dotted func-name))
+    (func func-name '() '())))
 
 (defun func
-  ((module func-name) (when (is_atom module))
-    (func module func-name '() '()))
   ((func-name args) (when (is_list args))
-    (func func-name args '())))
+    (if (py-util:dotted? func-name)
+      (apply #'func/4 (++ (py-util:split-dotted func-name)
+                          `(,args ())))
+      (func func-name args '())))
+  ((module func-name)
+    (func module func-name '() '())))
 
 (defun func
-  ((module func-name args) (when (is_atom module))
-    (func module func-name args '()))
   ((func-name args raw-kwargs) (when (is_list args))
-    (let ((kwargs (py-util:proplist->binary raw-kwargs)))
-      ;; Now call to the 'call_callable' function in the Python
-      ;; module 'lfe.obj'
-      (pycall 'lfe 'obj.call_callable `(,func-name ,args ,kwargs)))))
+    (if (py-util:dotted? func-name)
+      (apply #'func/4 (++ (py-util:split-dotted func-name)
+                          `(,args ,raw-kwargs)))
+      (let ((kwargs (py-util:proplist->binary raw-kwargs)))
+        ;; Now call to the 'call_callable' function in the Python
+        ;; module 'lfe.obj'
+        (pycall 'lfe 'obj.call_callable `(,func-name ,args ,kwargs)))))
+  ((module func-name args)
+    (func module func-name args '())))
 
 (defun func (module func-name args kwargs)
   ;; Now call to the 'call_func' function in the Python module 'lfe.obj'

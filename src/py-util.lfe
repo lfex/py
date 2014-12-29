@@ -45,7 +45,7 @@
   ((`(,lfe-func-name ,func-arity) mod)
     (let* ((py-func-name (kla:replace-dash lfe-func-name))
            (func-args (kla:make-args func-arity))
-           (`#(,args (,kwargs)) (kwargs-split func-args)))
+           (`#(,args (,kwargs)) (split-last func-args)))
       `(defun ,lfe-func-name ,func-args
         (py:func ',mod ',py-func-name (list ,@args) ,kwargs)))))
 
@@ -55,7 +55,7 @@
       (make-kwarg-func x mod))
     func-list))
 
-(defun kwargs-split (all-args)
+(defun split-last (all-args)
   (lists:split (- (length all-args) 1) all-args))
 
 (defun get-worker-names ()
@@ -63,3 +63,16 @@
     (lambda (x)
       (list_to_atom (++ "py-" (integer_to_list x))))
     (lists:seq 1 (py-config:get-worker-count))))
+
+(defun split-dotted (dotted-name)
+  (let* ((parts (string:tokens (atom_to_list dotted-name) "."))
+         (`#(,first (,last)) (split-last parts)))
+    (lists:map
+      #'list_to_atom/1
+      `(,(string:join first ".")
+        ,last))))
+
+(defun dotted? (name)
+  (if (> (length (string:tokens (atom_to_list name) ".")) 1)
+    'true
+    'false))

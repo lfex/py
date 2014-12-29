@@ -276,6 +276,52 @@ We can get that in minutes in LFE/Erlang:
 ```
 
 
+### Experimental Dotted Name Supprt [&#x219F;](#table-of-contents)
+
+There is currently tentative support for dotted names in the following
+calls:
+
+ * ``(py:const ...)``
+ * ``(py:func ...)``
+ * ``(py:init ...)``
+
+Examples:
+
+```cl
+> (py:const 'math.pi)
+3.141592653589793
+```
+
+```cl
+> (py:func 'math.pi.__float__)
+3.141592653589793
+> (py:func 'math.pow '(2 16))
+65536.0
+> (py:func 'builtins.int '(#b("101010")) '(#(base 2)))
+42
+```
+
+```cl
+> (py:init 'collections.UserDict)
+#("UserDict" ())
+> (py:init 'collections.UserDict '() '(#("a" 1) #("b" 2)))
+#("UserDict" (#("b" 2) #("a" 1)))
+```
+
+Though this is offered, it isn't really encouraged, since there will
+necessarily be inconsistencies in usage. Dotted notation can be used with
+``const``, ``func``, and ``init`` but not with objects (i.e., not with
+``method`` and ``attr``). This mixing of styles could get confusing and
+you may think you have a bug in your code when, in fact, you just can't use
+dotted names with instantiated objects (since in LFE it's just a variable
+name, not an actual object).
+
+Finally, with this code in place, many more function calls are incurred
+regardless of whether dotted notation is used. For this and the discouragement
+against use above, this feature is on the short list for getting axed. Don't
+count on it being around ...
+
+
 ### ErlPort Pass-Through [&#x219F;](#table-of-contents)
 
 If for any reason you would like to skip the LFE py wrappers and call directly
