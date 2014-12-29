@@ -235,8 +235,8 @@ The tuple representing a date time object has been saved as the ``now``
 variable in the REPL. Let's call some methods:
 
 ```cl
-> (py:method now 'strftime '(#b("%Y.%m.d %H:%M:%S")))
-"2014.12.d 23:14:37"
+> (py:method now 'strftime '(#b("%Y.%m.%d %H:%M:%S")))
+"2014.12.23 23:14:37"
 ```
 
 #### Attribute Values [&#x219F;](#table-of-contents)
