@@ -58,7 +58,7 @@ This project provides two key features:
     * Call object methods
     * Get object attributes
     * Call builtins and operators with convenient wrappers
-1. A means of running Python in a simnple distributed context using all the
+1. A means of running Python in a simple distributed context using all the
    well-known strengths of Erlang (fault-tolerance, scalability,
    concurrency, soft real-time, etc.).
 
@@ -159,7 +159,7 @@ The following sub-sections describe module-level operations.
 #("datetime" #(2014 12 23 16 57 11 693773 undefined))
 ```
 
-Note that strings in arguements need to be converted to binary:
+Note that strings in arguments need to be converted to binary:
 
 ```cl
 > (py:func 'os.path 'isfile '(#b("/tmp")))
@@ -186,7 +186,7 @@ a binary) which represents a binary number. We'll give ``int`` the keyword of
 3.141592653589793
 ```
 
-Optionaly, you may provide a type:
+Optionally, you may provide a type:
 
 ```cl
 > (py:const 'math 'pi 'float)
@@ -458,8 +458,8 @@ builtin has been aliased to the ``pylist`` function, e.g.:
 complete results that are longer than 28 elements. If you wish to see
 everything, you may call ``(py:pdir)`` and ``(py:pvars)``, respectively.
 
-``(py:repr)`` provides wrappingn for the Python builtin ``repr``. If you would
-like to see a representation of the pickeled Python data in LFE, you may use
+``(py:repr)`` provides wrapping for the Python builtin ``repr``. If you would
+like to see a representation of the pickled Python data in LFE, you may use
 the ``(py:prepr)`` function.
 
 
@@ -670,7 +670,7 @@ by the workers. They have the following conceptual structure:
 +----------------+
 ```
 
-As depcited above, when the LFE py/ErlPort Python server starts, it brings up
+As depicted above, when the LFE py/ErlPort Python server starts, it brings up
 a Python 3 interpreter. LFE py configures the ``PYTHONPATH`` for
 ErlPort so that the custom encoder, decoder, and object helper Python modules
 are available for use by all Python calls issued to the workers.
@@ -678,7 +678,7 @@ are available for use by all Python calls issued to the workers.
 
 ### Erlang Components [&#x219F;](#table-of-contents)
 
-Working our way up from the digram, here are references for Erlang/OTP
+Working our way up from the diagram, here are references for Erlang/OTP
 components of LFE py:
 
 * [Erlang/OTP](http://learnyousomeerlang.com/what-is-otp)
