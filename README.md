@@ -76,7 +76,7 @@ ErlPort/Python-wrapping code being generally useful for all sorts of projects,
 not just scientific computing in Erlang/LFE.
 This bit of background should give further insight
 into the use cases LFE py was intended to address: scientific and (more
-recently) general computing in Python from the Erlang VM, with a focuse on
+recently) general computing in Python from the Erlang VM, with a focus on
 interactive workflows common in academic, research, and startup R&D
 environments. Just the sort of thing that
 [IPython](http://ipython.org/) excels at, minus the GUIs :-)
