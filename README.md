@@ -35,8 +35,9 @@
 * [Controlling the Python Servers](#controlling-the-python-servers-)
   * Start, Stop, and Restart
   * Dynamically Adding More Python Servers
-  * Configuring Python Servers
   * Automatic Restarts
+  * Python Server Schedulers
+  * Configuring Python Servers
 * [Distributed Python](#distributed-python-)
   * Starting Remote Python Servers
   * Executing Python on Remote Servers
@@ -55,14 +56,28 @@ This project provides two key features:
     * Call object methods
     * Get object attributes
     * Call builtins and operators with convenient wrappers
-1. A means of running Python in a distributed framework using all the
+1. A means of running Python in a simnple distributed context using all the
    well-known strengths of Erlang (fault-tolerance, scalability,
    concurrency, soft real-time, etc.).
+
+What LFE py is not:
+
+* A PaaS; if that's what you're interested in, please take a look at
+  [CloudI](http://cloudi.org/).
+* A framework for pipelining distributed jobs (e.g., mapreduce). For that,
+  see the [Disco project](http://discoproject.org/).
+* A language-agnostic, general-purpose ports server. LFE py is, in fact,
+  built on one of those: [ErlPort](http://erlport.org/)!
 
 LFE py was originally part of the
 [lsci project](git@github.com:lfex/lsci.git), but was split out due to it
 being generally useful for all sorts of projects, not just scientific
-computing in Erlang/LFE.
+computing in Erlang/LFE. This bit of background should give further insight
+into the use cases LFE py was intended to address: scientific and (more
+recently) general computing in Python from the Erlang VM, with a focuse on
+interactive workflows common in academic, research, and startup R&D
+environments. Just the sort of thing that
+[IPython](http://ipython.org/) excels at, minus the GUIs :-)
 
 
 ## Requirements [&#x219F;](#table-of-contents)
