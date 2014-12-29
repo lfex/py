@@ -15,7 +15,7 @@
          (options `(#(python_path ,python-path)))
          (result (python:start_link `#(local ,child-id) options)))
     ;; Initialize the Python components, but don't use the scheduler
-    ;; tp get the pid, since the supervisor hasn't finished yet.
+    ;; to get the pid, since the supervisor hasn't finished yet.
     (python:call (erlang:whereis child-id) 'lfe 'init.setup '())
     result))
 
