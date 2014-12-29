@@ -28,7 +28,7 @@
   * [Missing Functions](#missing-functions-)
   * [Erlang](#erlang-)
 * [Architecture](#architecture-)
-  * ErlPort
+  * [Overview](#overview-)
   * OTP for LFE py
   * Configuration
   * Erlang/OTP components of LFE py
@@ -613,7 +613,87 @@ true
 
 ## Architecture [&#x219F;](#table-of-contents)
 
-### ErlPort
+### Overview
+
+Here is a high-level diagram of the LFE py architecture:
+
+```
++-------------------------------------------+
+|                                           |
+| +-----------+ +-----------+ +-----------+ |
+| | py Worker | | py Worker | | py Worker | |
+| +------+----+ +-----+-----+ +-----+-----+ |
+|        |            |             |       |
+|        |            |             |       |
+|        |       +----+---+         |       |
+|        |       |        |         |       |
+|        +-------+ py+sup +---------+       |
+|                |        |                 |
+|                +----+---+                 |
+|                     |                     |
+|                +----+---+                 |
+|                |        |                 |
+|                | py+app |                 |
+|                |        |                 |
+|                +--------+                 |
+|                                           |
+|                  LFE py                   |
++---------------------+---------------------+
+|        LFE          |       ErlPort       |
++---------------------+---------------------+
+|                 Erlang/OTP                |
++-------------------------------------------+
+```
+
+Each py Worker is actually an ErlPort Python server:
+
+```
++----------------+
+|                |
+|  +----------+  |
+|  | Encoders |  |
+|  +----------+  |
+|  +----------+  |
+|  | Decoders |  |
+|  +----------+  |
+|                |
+|   LFE py lib   |
++----------------+
+|   ErlPort lib  |
++----------------+
+|    Python 3    |
++----------------+
+```
+
+As depcited above, when the LFE py/ErlPort Python server starts, it brings up
+a Python 3 interpreter. LFE py configures the ``PYTHONPATH`` for
+ErlPort so that the custom encoder, decoder, and object helper Python modules
+are available for use by all Python calls issued to the workers.
+
+
+### Erlang Components
+
+Working our way up from the digram, here are references for Erlang/OTP
+components of LFE py:
+
+* [Erlang/OTP](http://learnyousomeerlang.com/what-is-otp)
+* [Erlang/OTP apps](http://learnyousomeerlang.com/building-applications-with-otp)
+* [How ErlPort works](http://erlport.org/docs/#id3)
+* [LFE](http://en.wikipedia.org/wiki/LFE_%28programming_language%29)
+* [py-app](https://github.com/lfex/py/blob/master/src/py-app.lfe)
+* [py-app](https://github.com/lfex/py/blob/master/src/py-sup.lfe)
+* [py Workers](https://github.com/lfex/py/blob/master/src/py.lfe#L7)
+
+### Python Components
+
+And here are references for the Python components in LFE py:
+
+* [Python 3](https://docs.python.org/3/)
+* [ErlPort Python library](https://github.com/hdima/erlport/tree/master/priv/python3/erlport)
+* [LFE py Python library](https://github.com/lfex/py/tree/master/python/lfe)
+* [py Encoders](https://github.com/lfex/py/blob/master/python/lfe/encoders.py)
+* [py Decoders](https://github.com/lfex/py/blob/master/python/lfe/decoders.py)
+
 
 ### OTP for LFE py
 
@@ -623,6 +703,12 @@ true
 
 ### Python components of LFE py
 
+
+* ErlPort
+  * OTP for LFE py
+  * Configuration
+  * Erlang/OTP components of LFE py
+  * Python components of LFE py
 
 ## Controlling the Python Servers [&#x219F;](#table-of-contents)
 
