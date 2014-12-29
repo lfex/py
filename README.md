@@ -32,12 +32,12 @@
   * [Erlang Components](#erlang-components-)
   * [Python Components](#python-components-)
 * [Controlling the Python Servers](#controlling-the-python-servers-)
+  * Erlang Configuration
+  * Python Configuration
   * Start, Stop, and Restart
   * Dynamically Adding More Python Servers
   * Automatic Restarts
   * Python Server Schedulers
-  * Erlang Configuration
-  * Python Configuration
 * [Executing Code in Parallel](#executing-code-in-parallel-)
   * Identical Calls
   * Scatter/Gather
@@ -703,6 +703,10 @@ And here are references for the Python components in LFE py:
 
 ## Controlling the Python Servers [&#x219F;](#table-of-contents)
 
+### Erlang Configuration [&#x219F;](#table-of-contents)
+
+### Python Configuration [&#x219F;](#table-of-contents)
+
 ### Start, Stop, and Restart [&#x219F;](#table-of-contents)
 
 ### Dynamically Adding More Python Servers [&#x219F;](#table-of-contents)
@@ -710,10 +714,6 @@ And here are references for the Python components in LFE py:
 ### Automatic Restarts [&#x219F;](#table-of-contents)
 
 ### Python Server Schedulers [&#x219F;](#table-of-contents)
-
-### Erlang Configuration [&#x219F;](#table-of-contents)
-
-### Python Configuration [&#x219F;](#table-of-contents)
 
 
 ## Executing Code in Parallel [&#x219F;](#table-of-contents)
