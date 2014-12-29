@@ -36,7 +36,7 @@
   {env, [%% LFE py Configuration
          {'log-level', error},
          %% ErlPort Configuration
-         {'python-path', "./python:./deps/py/python:./deps/erlport/priv/python3"},
+         {'python-path', "./python:./deps/erlport/priv/python3"},
          %% Supervisor Configuration
          {'erlport-max-restarts', 3},
          {'erlport-restart-threshold', 1},
