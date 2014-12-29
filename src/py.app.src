@@ -11,6 +11,7 @@
   {modules,
    ['py-app',
     'py-config',
+    'py-logger',
     'py-sched',
     'py-sup',
     'py-util',
@@ -32,7 +33,9 @@
 
   %% configuration parameters similar to those in the config file specified
   %% on the command line. can be fetched with application:get_env
-  {env, [%% ErlPort Configuration
+  {env, [%% LFE py Configuration
+         {'log-level', error},
+         %% ErlPort Configuration
          {'python-path', "./python:./deps/erlport/priv/python3"},
          %% Supervisor Configuration
          {'erlport-max-restarts', 3},
@@ -42,6 +45,7 @@
          {'worker-count', 3},
          %% Python Server Scheduler Configuration
          {'scheduler-mod', 'py-sched'},
-         {'scheduler-func', 'least-reductions'}]}
+         {'scheduler-func', 'least-reductions'}
+         ]}
  ]
 }.

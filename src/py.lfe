@@ -21,6 +21,7 @@
     result))
 
 (defun start ()
+  (py-logger:setup)
   (application:start 'py)
   #(ok started))
 
@@ -72,8 +73,7 @@
 ;;
 (defun const
   ((mod attr-name) (when (is_atom mod))
-    (let* ((pid (py-sched:get-next-pid))
-           (attr (atom_to_binary attr-name 'latin1)))
+    (let ((attr (atom_to_binary attr-name 'latin1)))
       ;; Now call to the 'const' function in the Python module 'lfe.obj'
       (pycall 'lfe 'obj.const `(,mod ,attr))))
   ((obj type)

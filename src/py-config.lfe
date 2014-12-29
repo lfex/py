@@ -42,3 +42,6 @@
 
 (defun get-worker-count ()
   (get 'worker-count))
+
+(defun get-log-level ()
+  (get 'log-level))

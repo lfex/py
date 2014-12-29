@@ -10,3 +10,4 @@ bin/expm
 .rebar
 python/.venv
 __pycache__
+log/*

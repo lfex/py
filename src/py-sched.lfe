@@ -23,7 +23,9 @@
   (export all))
 
 (defun get-next-pid ()
-  (whereis (py-config:call-scheduler)))
+  (let ((pid (py-config:call-scheduler)))
+    (py-logger:debug (MODULE) 'get-next-pid "Got pid: ~p" `(,pid))
+    (whereis pid)))
 
 (defun get-first ()
   "Always get the first PID.
