@@ -71,9 +71,10 @@ What LFE py is not:
   built on one of those: [ErlPort](http://erlport.org/)!
 
 LFE py was originally part of the
-[lsci project](https://github.com/lfex/lsci), but was split out due to it
-being generally useful for all sorts of projects, not just scientific
-computing in Erlang/LFE. This bit of background should give further insight
+[lsci project](https://github.com/lfex/lsci), but was split out due to the
+ErlPort/Python-wrapping code being generally useful for all sorts of projects,
+not just scientific computing in Erlang/LFE.
+This bit of background should give further insight
 into the use cases LFE py was intended to address: scientific and (more
 recently) general computing in Python from the Erlang VM, with a focuse on
 interactive workflows common in academic, research, and startup R&D
