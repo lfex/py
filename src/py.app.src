@@ -47,5 +47,4 @@
          {'scheduler-mod', 'py-sched'},
          {'scheduler-func', 'least-reductions'}
          ]}
- ]
-}.
+ ]}.
