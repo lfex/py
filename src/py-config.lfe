@@ -45,3 +45,6 @@
 
 (defun get-log-level ()
   (get 'log-level))
+
+(defun get-worker-on-start ()
+  (get 'worker-on-start))

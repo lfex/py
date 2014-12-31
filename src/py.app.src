@@ -43,6 +43,7 @@
          {'erlport-shutdown-timeout', 2000},
          %% Python Server Configuration
          {'worker-count', 3},
+         {'worker-on-start', {py, 'on-startworker'}},
          %% Python Server Scheduler Configuration
          {'scheduler-mod', 'py-sched'},
          {'scheduler-func', 'least-reductions'}

@@ -13,10 +13,9 @@
 (defun start_link (child-id)
   (let* ((python-path (py-config:get-python-path))
          (options `(#(python_path ,python-path)))
-         (result (python:start_link `#(local ,child-id) options)))
-    ;; Initialize the Python components, but don't use the scheduler
-    ;; to get the pid, since the supervisor hasn't finished yet.
-    (python:call (erlang:whereis child-id) 'lfe 'init.setup '())
+         (result (python:start_link `#(local ,child-id) options))
+         (`#(,mod ,func) (py-config:get-worker-on-start)))
+    (call mod func child-id)
     result))
 
 (defun start ()
@@ -32,6 +31,11 @@
   (stop)
   (start)
   #(ok restarted))
+
+(defun on-startworker (proc-name)
+  "Initialize the Python components, but don't use the scheduler
+  to get the pid, since the supervisor hasn't finished yet."
+  (python:call (erlang:whereis proc-name) 'lfe 'init.setup '()))
 
 (defun get-sup-pid ()
   (py-sup:get-pid))
