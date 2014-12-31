@@ -1,7 +1,6 @@
 %% -*- erlang -*-
 {application, 'py',
- [
-  %% A quick description of the application.
+ [%% A quick description of the application.
   {description, "Distributed Python for the Erlang Ecosystem"},
 
   %% The version of the application
