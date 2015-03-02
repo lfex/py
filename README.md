@@ -58,7 +58,7 @@ This project provides two key features:
     * Call object methods
     * Get object attributes
     * Call builtins and operators with convenient wrappers
-1. A means of running Python in a simnple distributed context using all the
+1. A means of running Python in a simple distributed context using all the
    well-known strengths of Erlang (fault-tolerance, scalability,
    concurrency, soft real-time, etc.).
 
