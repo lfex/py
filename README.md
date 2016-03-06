@@ -87,9 +87,10 @@ environments. Just the sort of thing that
 
 To use py, you need the following:
 
-* [lfetool](http://docs.lfe.io/quick-start/1.html) (used by ``make`` targets
-  to automatically set ``ERL_LIBS`` for deps)
+* [lfetool](http://docs.lfe.io/quick-start/1.html) and [rebar](https://github.com/rebar/rebar)
+  (used by ``make`` targets to automatically set ``ERL_LIBS`` for deps)
 * [Python 3](https://www.python.org/downloads/)
+* ``wget`` (used to download ``get-pip.py``)
 
 
 ## Setup [&#x219F;](#table-of-contents)
