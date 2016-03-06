@@ -5,7 +5,6 @@ deps
 .eunit
 debug-*
 ebin/*
-bin/expm
 *.dump
 .rebar
 python/.venv
