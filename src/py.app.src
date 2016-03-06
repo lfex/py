@@ -4,7 +4,7 @@
   {description, "Distributed Python for the Erlang Ecosystem"},
 
   %% The version of the application
-  {vsn, "0.0.2"},
+  {vsn, "0.0.3"},
 
   %% All modules used by the application.
   {modules,
