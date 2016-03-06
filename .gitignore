@@ -11,3 +11,4 @@ bin/expm
 python/.venv
 __pycache__
 log/*
+python/get-pip.py
