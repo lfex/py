@@ -1,10 +1,10 @@
 %% -*- erlang -*-
-{application, 'py',
+{application, py,
  [%% A quick description of the application.
   {description, "Distributed Python for the Erlang Ecosystem"},
 
   %% The version of the application
-  {vsn, "0.0.4"},
+  {vsn, "0.0.5"},
 
   %% All modules used by the application.
   {modules,
@@ -14,7 +14,7 @@
     'py-sched',
     'py-sup',
     'py-util',
-    'py'
+    py
    ]},
 
   %% All of the registered names the application uses. This can be ignored.
