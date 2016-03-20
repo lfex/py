@@ -24,7 +24,7 @@
 
 (defun get-next-pid ()
   (let ((pid (py-config:call-scheduler)))
-    (py-logger:debug (MODULE) 'get-next-pid "Got pid: ~p" `(,pid))
+    (logjam:debug (MODULE) 'get-next-pid "Got pid: ~p" `(,pid))
     (whereis pid)))
 
 (defun get-first ()

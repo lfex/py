@@ -2,10 +2,10 @@
   (export all))
 
 (defun get-erlport-version ()
-  (lutil:get-app-src-version "deps/erlport/ebin/erlport.app"))
+  (lutil:get-app-version 'erlport))
 
 (defun get-py-version ()
-  (lutil:get-app-src-version "src/py.app.src"))
+  (lutil:get-app-version 'py))
 
 (defun get-python-version ()
   (lists:map #'string:strip/1
@@ -13,7 +13,7 @@
                             "\n")))
 
 (defun get-versions ()
-  (++ (lutil:get-version)
+  (++ (lutil:get-versions)
       `(#(erlport ,(get-erlport-version))
         #(py ,(get-py-version))
         #(python ,(get-python-version)))))
