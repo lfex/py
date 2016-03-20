@@ -2,7 +2,7 @@ NODENAME=$(shell echo "$(PROJECT)"|sed -e 's/-//g')
 RUN_DIR=./run
 LOG_DIR=./log
 
-compile: get-deps clean-ebin proj-compile
+compile: proj-compile
 
 run-dir:
 	@mkdir -p $(RUN_DIR)
